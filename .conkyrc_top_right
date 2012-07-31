@@ -1,0 +1,37 @@
+alignment top_right
+background yes
+border_width 0
+#default_color ffe8a0
+default_color 0054ce
+double_buffer yes
+draw_borders no
+draw_outline no
+draw_shades no
+gap_x 25
+gap_y 40
+maximum_width 470
+minimum_size 470 250
+own_window yes
+own_window_transparent yes
+own_window_type desktop
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+own_window_argb_visual yes
+own_window_argb_value 100
+update_interval 1.0
+uppercase no
+
+use_xft yes
+xftalpha 0.8
+#xftfont Zapfino:size=10
+xftfont FreeSerif:size=11
+
+mpd_host 127.0.0.1
+
+TEXT
+
+${alignr}Aktuelles Lied:
+
+${alignr}${mpd_elapsed} ${mpd_bar 10,200} ${mpd_length}
+${alignr}„${mpd_title}“ von ${mpd_artist}
+${alignr}Vom Album „${mpd_album}“
+${alignr}${image /home/malte/.music.cover -p 0,0}
