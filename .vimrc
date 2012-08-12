@@ -1,6 +1,18 @@
 "
-" ~/.vimrc
-" configuration for VIM
+" My tiny .vimrc
+"
+" inspired by (inter alia):
+"  - http://www.youtube.com/watch?gl=DE&v=YhqsjUUHj6g
+"  - http://vim.wikia.com/wiki/Change_vimrc_with_auto_reload
+"
+" in git at https://github.com/malte70/dotfiles
+
+" auto-reload .vimrc
+autocmd! bufwritepost .vimrc source %
+
+" paste behaviour like excepted from other gui applications
+set pastetoggle=<F2>
+set clipboard=unnamed
 
 " Set filetype stuff to on
 filetype on
@@ -45,6 +57,17 @@ set number
 
 " use the mouse
 set mouse=a
+set bs=2
+
+" remove highlight of last search with ^N
+noremap <C-n> :nohl<CR>
+vnoremap <C-n> :nohl<CR>
+inoremap <C-n> :nohl<CR>
+
+" allow using ^S
+noremap <C-S> :update<CR>
+vnoremap <C-S> <C-C>:update<CR>
+inoremap <C-S> <C-O>:update><CR>
 
 " turn on syntax highlighting
 syntax on
@@ -88,4 +111,5 @@ if has("gui_running")
     winsize 195 80
   endif
 endif
+
 " vim:  set ts=2 sw=2 et:
