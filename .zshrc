@@ -124,7 +124,7 @@ alias -s xls==libreoffice
 alias -s xlsx==libreoffice
 
 # map STOP to ^W (START is ^Q, and also, ^S is free to be used by vim)
-stty stop ^W
+stty stop ^A
 
 # prompt theme
 
