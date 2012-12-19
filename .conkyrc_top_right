@@ -1,8 +1,7 @@
 alignment top_right
 background yes
 border_width 0
-#default_color ffe8a0
-default_color 0054ce
+default_color 6b645c
 double_buffer yes
 draw_borders no
 draw_outline no
@@ -35,3 +34,4 @@ ${alignr}${mpd_elapsed} ${mpd_bar 10,200} ${mpd_length}
 ${alignr}„${mpd_title}“ von ${mpd_artist}
 ${alignr}Vom Album „${mpd_album}“
 ${alignr}${image /home/malte/.music.cover -p 0,0}
+

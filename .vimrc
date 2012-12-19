@@ -62,7 +62,7 @@ set bs=2
 " remove highlight of last search with ^N
 noremap <C-n> :nohl<CR>
 vnoremap <C-n> :nohl<CR>
-inoremap <C-n> :nohl<CR>
+inoremap <C-n> <ESC>:nohl<CR>
 
 " allow using ^S
 noremap <C-S> :update<CR>
@@ -111,5 +111,13 @@ if has("gui_running")
     winsize 195 80
   endif
 endif
+
+" Taglist
+let Tlist_Ctags_Cmd = "/usr/bin/ctags"
+let Tlist_WinWidth = 50
+map <F4> :TlistToggle<cr>
+
+" Spell checking
+set spelllang=de
 
 " vim:  set ts=2 sw=2 et:

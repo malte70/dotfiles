@@ -1,15 +1,15 @@
 alignment top_left
 background yes
 border_width 0
-default_color 0054ce
+default_color 6b645c
 double_buffer yes
 draw_borders no
 draw_outline no
 draw_shades no
 gap_x 5
 gap_y 35 
-maximum_width 200
-minimum_size 400 10
+maximum_width 250
+minimum_size 450 10
 own_window yes
 own_window_transparent yes
 own_window_type desktop
@@ -24,15 +24,15 @@ xftalpha 0.8
 xftfont FreeSerif:size=11
 
 TEXT
-${color #003e99}File systems:
- ${color #003e99}/$alignr$color${fs_used /}
- ${color #003e99}/boot$alignr$color${fs_used /boot}
- ${color #003e99}/srv $alignr$color${fs_used /srv}
- ${color #003e99}/usr $alignr$color${fs_used /usr}
- ${color #003e99}/var $alignr$color${fs_used /var}
- ${color #003e99}/home $alignr$color${fs_used /home}
-# ${color #003e99}Pool::Images $alignr$color${fs_used /var/lib/libvirt/images}
- ${color #003e99}/mnt/musik $alignr$color${fs_used /mnt/musik}
- ${if_mounted /mnt/windows}${color #003e99}Windows (C:) $alignr$color${fs_used /mnt/windows}$endif
- ${if_mounted /media/dvd}${color #003e99}DVD $alignr$color${fs_used /media/dvd}$endif
+Mount:${alignr}Belegt:
+ /$alignr${fs_used /} [${fs_used_perc /}%]
+ /boot$alignr${fs_used /boot} [${fs_used_perc /boot}%]
+ /home $alignr${fs_used /home} [${fs_used_perc /home}%]
+ /mnt/musik $alignr${fs_used /mnt/musik} [${fs_used_perc /mnt/musik}%]
+ /srv $alignr${fs_used /srv} [${fs_used_perc /srv}%]
+ /usr $alignr${fs_used /usr} [${fs_used_perc /usr}%]
+ /var $alignr${fs_used /var} [${fs_used_perc /var}%]
+ libvirt-HDDs $alignr${fs_used /var/lib/libvirt/images} [${fs_used_perc /var/lib/libvirt/images}%]
+ ${if_mounted /mnt/windows}Windows (C:) $alignr${fs_used /mnt/windows} [${fs_used_perc /mnt/windows}%]$endif
+ ${if_mounted /media/dvd}DVD $alignr${fs_used /media/dvd} [${fs_used_perc /media/dvd}%]$endif
 
