@@ -128,29 +128,18 @@ alias -s xlsx==libreoffice
 stty stop ^A
 
 # prompt theme
-
-export __CURRENT_GIT_BRANCH=
-parse_git_branch() {
-	git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1) -- /'
-}
-zsh_preexec_update_git_vars() {
-	case "$(history $HISTCMD)" in
-		*git*)
-			export __CURRENT_GIT_BRANCH="$(parse_git_branch)"
-			;;
-	esac
-}
-preexec_functions+='zsh_preexec_update_git_vars'
-chpwd_functions+='zsh_chpwd_update_git_vars'
-zsh_chpwd_update_git_vars() {
-	export __CURRENT_GIT_BRANCH="$(parse_git_branch)"
-}
 get_git_prompt_info() {
-	echo $__CURRENT_GIT_BRANCH
+	UPSTREAM=$(git remote show origin 2>/dev/null | head -n2 | tail -n1 | cut -d\  -f 6 | cut -d/ -f5 | cut -d\. -f1 | tr -d '\n')
+	if [ -z $UPSTREAM ]
+	then
+		echo -n "no git"
+	else
+		echo -n "git:$UPSTREAM"
+	fi
 }
-
-PROMPT="%F{cyan}[%F{green}%B`uname -m`%b%F{cyan}|%F{green}%B`uname -o`%b%F{cyan}|%F{green}%B`uname -r`%b%F{cyan}] %B%F{white}$(get_git_prompt_info)%F{yellow}%~%b%F{white}
-%F{green}%m%F{white}$ "
+setopt prompt_subst
+PROMPT="%F{cyan}[%F{green}%B`uname -m`%b%F{cyan}|%F{green}%B`uname -o`%b%F{cyan}|%F{green}%B`uname -r`%b%F{cyan}] %F{cyan}[%B%F{white}"'$(get_git_prompt_info)'"%b%F{cyan}] %F{yellow}%~%b%F{white}
+%F{white}%n@%F{green}%m%F{white}$ "
 #%F{green}`hostname -f`%F{white}$ "
 RPROMPT="%B%F{yellow}%D{[%R] %a %Y-%m-%d}%b%F{white}"
 
