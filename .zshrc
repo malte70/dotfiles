@@ -136,9 +136,10 @@ get_git_prompt_info() {
 	else
 		if [[ "$UPSTREAM" == "dotfiles" ]]
 		then
-			[[ "$PWD" == "$HOME" ]] || UPSTREAM="no git"
+			[[ "$PWD" == "$HOME" ]] || echo -n "no git"
+		else
+			echo -n "git:$UPSTREAM"
 		fi
-		echo -n "git:$UPSTREAM"
 	fi
 }
 setopt prompt_subst
