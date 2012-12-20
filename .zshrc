@@ -134,6 +134,10 @@ get_git_prompt_info() {
 	then
 		echo -n "no git"
 	else
+		if [[ "$UPSTREAM" == "dotfiles" ]]
+		then
+			[[ "$PWD" == "$HOME" ]] || UPSTREAM="no git"
+		fi
 		echo -n "git:$UPSTREAM"
 	fi
 }
