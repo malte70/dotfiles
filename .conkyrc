@@ -1,7 +1,7 @@
 alignment top_left
 background yes
 border_width 0
-default_color 6b645c
+default_color aaaaaa
 double_buffer yes
 draw_borders no
 draw_outline no
