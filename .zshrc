@@ -147,7 +147,8 @@ get_git_prompt_info() {
 	fi
 }
 setopt prompt_subst
-PROMPT="%F{cyan}[%F{green}%B`uname -m`%b%F{cyan}|%F{green}%B`uname -o`%b%F{cyan}|%F{green}%B`uname -r`%b%F{cyan}] %F{cyan}[%B%F{white}"'$(get_git_prompt_info)'"%b%F{cyan}] %F{yellow}%~%b%F{white}
+#PROMPT="%F{cyan}[%F{green}%B`uname -m`%b%F{cyan}|%F{green}%B`uname -o`%b%F{cyan}|%F{green}%B`uname -r`%b%F{cyan}] %F{cyan}[%B%F{white}"'$(get_git_prompt_info)'"%b%F{cyan}] %F{yellow}%~%b%F{white}
+PROMPT="%F{cyan}[%F{green}%B`uname -m`%b%F{cyan}|%F{green}%B`uname -o`%b%F{cyan}|%F{green}%B`uname -r`%b%F{cyan}] %F{yellow}%~%b%F{white}
 %F{white}%n@%F{green}%m%F{white}$ "
 #%F{green}`hostname -f`%F{white}$ "
 RPROMPT="%B%F{yellow}%D{[%R] %a %Y-%m-%d}%b%F{white}"
