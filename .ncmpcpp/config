@@ -1,0 +1,30 @@
+#
+# ~/.ncmpcpp/config
+#
+
+#########################################
+# directories
+
+ncmpcpp_directory = "~/.ncmpcpp"
+lyrics_directory = "~/.lyrics"
+mpd_host = "localhost"
+mpd_port = "6600"
+mpd_music_dir = "/mnt/musik"
+mpd_connection_timeout = "5"
+mpd_crossfade_time = "5"
+mpd_communication_mode = "notifications" (polling/notifications)
+
+#########################################
+
+song_columns_list_format = "(8)[white]{l} (28)[cyan]{a} (28)[white]{b} (50)[cyan]{t}"
+playlist_display_mode = "columns" (classic/columns)
+autocenter_mode = "yes"
+header_visibility = "no"
+colors_enabled = "yes"
+
+visualizer_fifo_path = "/tmp/mpd.fifo"
+visualizer_output_name = "FIFO"
+visualizer_sync_interval = "1"
+#visualizer_type = "wave" (spectrum/wave)
+visualizer_type = "spectrum" (spectrum/wave)
+
