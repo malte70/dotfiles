@@ -87,7 +87,7 @@ endfunction
 map <F11> :call RunShebang()<CR>
 
 set background=dark
-colorscheme wombat
+colorscheme torte
 
 " ignore whitespaces in diff
 set diffopt+=iwhite
