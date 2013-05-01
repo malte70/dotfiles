@@ -178,7 +178,7 @@ get_global_todo_prompt_info() {
 	echo -n " items"
 }
 setopt prompt_subst
-PROMPT="%F{cyan}[%F{green}%B`uname -m`%b%F{cyan}|%F{green}%B`uname -o`%b%F{cyan}|%F{green}%B`uname -r`%b%F{cyan}] %(?..%F{cyan}[%F{red}%?%F{cyan}]) %F{yellow}%~%b%F{white}
+PROMPT="%F{cyan}[%F{green}%B`uname -m`%b%F{cyan}|%F{green}%B`uname -o`%b%F{cyan}|%F{green}%B`uname -r`%b%F{cyan}]%(?.. %F{cyan}[%F{red}%?%F{cyan}]) %F{yellow}%~%b%F{white}
 %F{cyan}[%B%F{white}"'$(get_git_prompt_info)'"%b%F{cyan}] [%B%F{white}"'$(get_todo_prompt_info)'"%b%F{cyan}] [%B%F{white}"'$(get_global_todo_prompt_info)'"%b%F{cyan}]
 %F{white}%n@%F{green}%m%F{white}$ "
 #%F{green}`hostname -f`%F{white}$ "
@@ -193,3 +193,4 @@ fi
 
 # for mc:
 [[ ! -z "$MC_SID" ]] && { PROMPT="%n@%m$ "; RPROMPT="" }
+true
