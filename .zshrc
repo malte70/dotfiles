@@ -42,7 +42,7 @@ zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}
 zstyle ':completion:*' menu select=0
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 my_accounts=(
-	malte@{deepthought,sauron,nal-hutta,inferi,nebuchadnezzar}{,.malte-bublitz.de}
+	malte@{deepthought.malte-bublitz.de,khaos.khaos-miners.de,ovis.flying-sheep.de}
 )
 zstyle ':completion:*:my-accounts' users-hosts $my_accounts
 autoload -Uz compinit
@@ -95,6 +95,7 @@ alias ySyu="yaourt -Syu"
 alias yQdt="yaourt -Qdt"
 alias ls='/bin/ls --color=auto --escape -l --file-type -h --time-style=long-iso'
 alias mem="free -m"
+alias t="/home/malte/bin/todo.txt/todo.sh"
 # SSH aliases
 alias shdeep="ssh deepthought.malte-bublitz.de"
 alias shnalh="ssh nal-hutta.malte-bublitz.de"
@@ -129,26 +130,56 @@ stty stop ^A
 
 # prompt theme
 get_git_prompt_info() {
-	UPSTREAM=$(git remote show origin 2>/dev/null | head -n2 | tail -n1 | cut -d\  -f 6 | cut -d/ -f5 | cut -d\. -f1 | tr -d '\n')
-	if [ -z $UPSTREAM ]
-	then
-		echo -n "no git"
+	ping -c1 -W 1 91.194.91.73 &>/dev/null
+	if [ $? -eq 1 ]; then
+		UPSTREAM="!fail!"
 	else
-		if [[ "$UPSTREAM" == "dotfiles" ]]
-		then
-			if [[ "$PWD" == "$HOME" ]]; then
-				echo -n "git:$UPSTREAM"
-			else
-				echo -n "no git"
-			fi
+		CACHEFILE=~/.cache/git-info/`pwd | tr '/' '='`
+		if [ -f $CACHEFILE ]; then
+			UPSTREAM=`cat $CACHEFILE`
 		else
-			echo -n "git:$UPSTREAM"
+			UPSTREAM=$(git remote show origin 2>/dev/null | head -n2 | tail -n1 | cut -d\  -f 6 | cut -d/ -f5 | cut -d\. -f1 | tr -d '\n')
+			if [ -z $UPSTREAM ]
+			then
+				UPSTREAM="no git"
+			else
+				if [[ "$UPSTREAM" == "dotfiles" ]]
+				then
+					if [[ "$PWD" == "$HOME" ]]; then
+						UPSTREAM="git:$UPSTREAM"
+					else
+						UPSTREAM="no git"
+					fi
+				else
+					UPSTREAM="git:$UPSTREAM"
+				fi
+			fi
+			echo -n $UPSTREAM > $CACHEFILE
 		fi
 	fi
+	echo -n $UPSTREAM
+}
+get_return_prompt_info() {
+	RET=$?
+	if [ ! $RET -eq 0 ]; then
+		echo -n "%F{cyan}[%F{red}$RET%F{cyan}]"
+	fi
+}
+get_todo_prompt_info() {
+	if [ -f TODO.md ]; then
+		echo -n "local TODO: $(grep " \* " TODO.md | wc -l | tr -d '\n') items"
+	else
+		echo -n 'no local TODO'
+	fi
+}
+get_global_todo_prompt_info() {
+	echo -n "global TODO: "
+	t list | tail -n1 | cut -d\  -f4 | tr -d '\n'
+	echo -n " items"
 }
 setopt prompt_subst
-#PROMPT="%F{cyan}[%F{green}%B`uname -m`%b%F{cyan}|%F{green}%B`uname -o`%b%F{cyan}|%F{green}%B`uname -r`%b%F{cyan}] %F{cyan}[%B%F{white}"'$(get_git_prompt_info)'"%b%F{cyan}] %F{yellow}%~%b%F{white}
-PROMPT="%F{cyan}[%F{green}%B`uname -m`%b%F{cyan}|%F{green}%B`uname -o`%b%F{cyan}|%F{green}%B`uname -r`%b%F{cyan}] %F{yellow}%~%b%F{white}
+PROMPT="%F{cyan}[%F{green}%B`uname -m`%b%F{cyan}|%F{green}%B`uname -o`%b%F{cyan}|%F{green}%B`uname -r`%b%F{cyan}] %(?..%F{cyan}[%F{red}%?%F{cyan}]) %F{yellow}%~%b%F{white}
+%F{cyan}[%B%F{white}"'$(get_git_prompt_info)'"%b%F{cyan}] [%B%F{white}"'$(get_todo_prompt_info)'"%b%F{cyan}] [%B%F{white}"'$(get_global_todo_prompt_info)'"%b%F{cyan}]
 %F{white}%n@%F{green}%m%F{white}$ "
 #%F{green}`hostname -f`%F{white}$ "
 RPROMPT="%B%F{yellow}%D{[%R] %a %Y-%m-%d}%b%F{white}"
