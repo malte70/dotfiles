@@ -22,8 +22,7 @@ PATH=${PATH}/usr/local/bin:
 PATH=${PATH}/usr/local/sbin:
 PATH=${PATH}/usr/bin/vendor_perl:
 PATH=${PATH}/opt/java/jre/bin:
-PATH=${PATH}$(ruby -rubygems -e "puts Gem.user_dir")/bin":
-PATH=${PATH}/home/malte/bin"
+PATH=${PATH}/home/malte/bin
 export PATH
 
 # vi keybindings
@@ -91,16 +90,12 @@ export EDITOR PAGER BROWSER MAIL
 # 
 # command aliases:
 alias y=yaourt
-alias ySyu="yaourt -Syu"
-alias yQdt="yaourt -Qdt"
-alias ls='/bin/ls --color=auto --escape -l --file-type -h --time-style=long-iso'
+alias y-Syu="yaourt -Syu"
+alias y-Qdt="yaourt -Qdt"
+alias ls='/usr/bin/ls --color=auto --escape -l --file-type -h --time-style=long-iso'
 alias mem="free -m"
 alias t="/home/malte/bin/todo.txt/todo.sh"
-# SSH aliases
-alias shdeep="ssh deepthought.malte-bublitz.de"
-alias shnalh="ssh nal-hutta.malte-bublitz.de"
-alias shnebu="ssh nebuchadnezzar.malte-bublitz.de"
-alias shifri="ssh inferi.malte-bublitz.de"
+alias g-c="git clone"
 # global aliases:
 alias -g L='|most'
 alias -g G='|grep'
@@ -194,3 +189,9 @@ fi
 # for mc:
 [[ ! -z "$MC_SID" ]] && { PROMPT="%n@%m$ "; RPROMPT="" }
 true
+
+# show todo
+echo "-= TODO =-"
+t list | head -n-2
+echo
+
