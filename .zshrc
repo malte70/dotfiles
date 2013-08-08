@@ -2,6 +2,19 @@
 # ~/.zshrc
 #
 
+# my network setup. used to adjust behaviour to specific host
+LOCAL_DOMAIN="malte-bublitz.de"
+SERVERS=(
+	"ovis.flying-sheep.de"
+	"khaos.kaos-miners.de"
+	"deepthought.malte-bublitz.de"
+)
+DESKTOPS=(
+	"sauron"    # main desktop
+	"gallifrey" # notebook
+	"placente"  # MacBook
+)
+
 # History: 10,000 lines in ~/.histfile
 HISTFILE=~/.histfile
 HISTSIZE=10000
@@ -27,8 +40,44 @@ export PATH
 
 # vi keybindings
 bindkey -v
-# convert ~/.inputrc into bindkey calls to get keys like [Home] working as expected
-eval "$(sed -n 's/^/bindkey /; s/: / /p' ~/.inputrc)"
+# basic key bindings (portable, based on zsh article in the Official Arch Wiki)
+typeset -A key
+key[Home]=${terminfo[khome]}
+key[End]=${terminfo[kend]}
+key[Insert]=${terminfo[kich1]}
+key[Delete]=${terminfo[kdch1]}
+key[Up]=${terminfo[kcuu1]}
+key[Down]=${terminfo[kcud1]}
+key[Left]=${terminfo[kcub1]}
+key[Right]=${terminfo[kcuf1]}
+key[PageUp]=${terminfo[kpp]}
+key[PageDown]=${terminfo[knp]}
+
+# setup key accordingly
+[[ -n "${key[Home]}"     ]]  && bindkey  "${key[Home]}"     beginning-of-line
+[[ -n "${key[End]}"      ]]  && bindkey  "${key[End]}"      end-of-line
+[[ -n "${key[Insert]}"   ]]  && bindkey  "${key[Insert]}"   overwrite-mode
+[[ -n "${key[Delete]}"   ]]  && bindkey  "${key[Delete]}"   delete-char
+[[ -n "${key[Up]}"       ]]  && bindkey  "${key[Up]}"       up-line-or-history
+[[ -n "${key[Down]}"     ]]  && bindkey  "${key[Down]}"     down-line-or-history
+[[ -n "${key[Left]}"     ]]  && bindkey  "${key[Left]}"     backward-char
+[[ -n "${key[Right]}"    ]]  && bindkey  "${key[Right]}"    forward-char
+[[ -n "${key[PageUp]}"   ]]  && bindkey  "${key[PageUp]}"   beginning-of-buffer-or-history
+[[ -n "${key[PageDown]}" ]]  && bindkey  "${key[PageDown]}" end-of-buffer-or-history
+
+# Finally, make sure the terminal is in application mode, when zle is
+# active. Only then are the values from $terminfo valid.
+if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
+    function zle-line-init () {
+        printf '%s' "${terminfo[smkx]}"
+    }
+    function zle-line-finish () {
+        printf '%s' "${terminfo[rmkx]}"
+    }
+    zle -N zle-line-init
+    zle -N zle-line-finish
+fi
+
 # allow backward history search including regexp using ^R (like known from GNU bash)
 bindkey "^R" history-incremental-pattern-search-backward
 
@@ -81,7 +130,13 @@ setopt interactivecomments
 # default browser and editor
 EDITOR==vim
 PAGER==most
-BROWSER==chromium
+# set browser to elinks on servers, everywhere else to firefox.
+node=`hostname -s`
+if (( ${SERVERS[(i)$node]} <= ${#SERVERS} )); then
+	BROWSER==elinks
+else
+	BROWSER==firefox
+fi
 MAIL=~/Mail
 export EDITOR PAGER BROWSER MAIL
 
@@ -92,7 +147,7 @@ export EDITOR PAGER BROWSER MAIL
 alias y=yaourt
 alias y-Syu="yaourt -Syu"
 alias y-Qdt="yaourt -Qdt"
-alias ls='/usr/bin/ls --color=auto --escape -l --file-type -h --time-style=long-iso'
+alias ls="/usr/bin/ls --color=auto --escape -l --file-type -h --time-style=long-iso"
 alias mem="free -m"
 alias t="/home/malte/bin/todo.txt/todo.sh"
 alias g-c="git clone"
@@ -103,22 +158,6 @@ alias -g Gi='|grep -i'
 alias -g H='|head'
 alias -g T='|tail'
 alias -g W='|wc -l'
-# suffix aliases:
-alias -s html=$BROWSER
-alias -s org=$BROWSER
-alias -s com=$BROWSER
-alias -s net=$BROWSER
-alias -s de=$BROWSER
-alias -s png==gpicview
-alias -s jpg==gpicview
-alias -s jpeg==gpicview
-alias -s gif==gpicview
-alias -s odt==libreoffice
-alias -s ods==libreoffice
-alias -s doc==libreoffice
-alias -s docx==libreoffice
-alias -s xls==libreoffice
-alias -s xlsx==libreoffice
 
 # map STOP to ^W (START is ^Q, and also, ^S is free to be used by vim)
 stty stop ^A
@@ -178,13 +217,6 @@ PROMPT="%F{cyan}[%F{green}%B`uname -m`%b%F{cyan}|%F{green}%B`uname -o`%b%F{cyan}
 %F{white}%n@%F{green}%m%F{white}$ "
 #%F{green}`hostname -f`%F{white}$ "
 RPROMPT="%B%F{yellow}%D{[%R] %a %Y-%m-%d}%b%F{white}"
-
-
-# start ssh-agent
-if [ "x${SSH_AGENT_PID}" = "x" ] #-a "x${SSH_TTY}" != "x" ]
-then
-	eval `ssh-agent` >/dev/null
-fi
 
 # for mc:
 [[ ! -z "$MC_SID" ]] && { PROMPT="%n@%m$ "; RPROMPT="" }
