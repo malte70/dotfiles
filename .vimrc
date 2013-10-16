@@ -12,7 +12,7 @@ autocmd! bufwritepost .vimrc source %
 
 " paste behaviour like excepted from other gui applications
 set pastetoggle=<F2>
-set clipboard=unnamed
+set clipboard=unnamedplus
 
 " Set filetype stuff to on
 filetype on
@@ -73,7 +73,7 @@ inoremap <C-S> <C-O>:update><CR>
 syntax on
 
 " set status line
-set stl=%f\ %y\ %m\ %r\ Line:%l.%c/%L[%p%%]\ Buf:%n
+set stl=%f\ %y\ %m\ %r\ Line:%l.%c/%L[%p%%]\ [0x%B]
 set laststatus=2 "and always show it
 
 " let <F11> execute current file
@@ -87,7 +87,7 @@ endfunction
 map <F11> :call RunShebang()<CR>
 
 set background=dark
-colorscheme torte
+colorscheme default
 
 " ignore whitespaces in diff
 set diffopt+=iwhite
@@ -119,5 +119,8 @@ map <F4> :TlistToggle<cr>
 
 " Spell checking
 set spelllang=de
+
+" *.md files are markdown, not Modula!
+au BufRead,BufNewFile *.md set filetype=markdown
 
 " vim:  set ts=2 sw=2 et:
