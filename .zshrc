@@ -216,7 +216,7 @@ PROMPT="%F{cyan}[%F{green}%B`uname -m`%b%F{cyan}|%F{green}%B`uname -o`%b%F{cyan}
 %F{cyan}[%B%F{white}"'$(get_git_prompt_info)'"%b%F{cyan}] [%B%F{white}"'$(get_todo_prompt_info)'"%b%F{cyan}] [%B%F{white}"'$(get_global_todo_prompt_info)'"%b%F{cyan}]
 %F{white}%n@%F{green}%m%F{white}$ "
 #%F{green}`hostname -f`%F{white}$ "
-RPROMPT="%B%F{yellow}%D{[%R] %a %Y-%m-%d}%b%F{white}"
+#RPROMPT="%B%F{yellow}%D{[%R] %a %Y-%m-%d}%b%F{white}"
 
 # for mc:
 [[ ! -z "$MC_SID" ]] && { PROMPT="%n@%m$ "; RPROMPT="" }
