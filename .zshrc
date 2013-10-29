@@ -222,6 +222,38 @@ PROMPT="%F{cyan}[%F{green}%B`uname -m`%b%F{cyan}|%F{green}%B`uname -o`%b%F{cyan}
 [[ ! -z "$MC_SID" ]] && { PROMPT="%n@%m$ "; RPROMPT="" }
 true
 
+start_autossh() {
+	autossh -M 0 -q -f -N -o "ServerAliveInterval 60" -o "ServerAliveCountMax 3" -D 8081 sshtunnel@abyss.malte-bublitz.de
+}
+set_proxy() {
+	case $1 in
+		"sshtunnel")
+			unset http_proxy
+			unset https_proxy
+			unset ftp_poxy
+			export all_proxy=socks://127.0.0.1:8081
+			;;
+		*)
+			unset http_proxy
+			unset https_proxy
+			unset ftp_poxy
+			unset all_proxy
+			;;
+	esac
+}
+if iwconfig 2>&1 G -E 'ESSID:"ism_wpa"' >/dev/null; then
+	if [ ! -f /tmp/.sshtunnel_running ]; then
+		echo -n "Starting SSH tunnel... "
+		start_autossh
+		echo "done."
+		touch /tmp/.sshtunnel_running
+	fi
+	set_proxy "sshtunnel"
+else
+	[ -f /tmp/.sshtunnel_running ] && rm /tmp/.sshtunnel_running
+	set_proxy "none"
+fi
+
 # show todo
 echo "-= TODO =-"
 t list | head -n-2
