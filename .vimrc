@@ -87,7 +87,6 @@ endfunction
 map <F11> :call RunShebang()<CR>
 
 set background=dark
-colorscheme default
 
 " ignore whitespaces in diff
 set diffopt+=iwhite
@@ -103,13 +102,10 @@ map <F7> :source ~/.vim_session <cr>     " And load session with F7
 imap <F2> <ESC>:w<CR>a
 
 if has("gui_running")
-"  set guifont=inconsolata:h12
-"  set background=light
-  if ! &diff
-    winsize 100 80
-  else
-    winsize 195 80
-  endif
+  set guifont="Inconsolata Medium 12"
+  set background=dark
+  colorscheme desert
+  winsize 110 30
 endif
 
 " Taglist
@@ -120,7 +116,7 @@ map <F4> :TlistToggle<cr>
 " Spell checking
 set spelllang=de
 
-" *.md files are markdown, not Modula!
+" Correct Syntax highlighting for Markdown files in github repos (*.md)
 au BufRead,BufNewFile *.md set filetype=markdown
 
 " vim:  set ts=2 sw=2 et:
