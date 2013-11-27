@@ -90,7 +90,8 @@ zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}
 zstyle ':completion:*' menu select=0
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 my_accounts=(
-	malte@{deepthought.malte-bublitz.de,khaos.khaos-miners.de,ovis.flying-sheep.de}
+	malte@{deepthought.malte-bublitz.de,ovis.flying-sheep.de}
+	malte70@{abyss.malte-bublitz.de,khaos.malte70.de}
 )
 zstyle ':completion:*:my-accounts' users-hosts $my_accounts
 autoload -Uz compinit
@@ -164,7 +165,7 @@ stty stop ^A
 
 # prompt theme
 get_git_prompt_info() {
-	ping -c1 -W 1 91.194.91.73 &>/dev/null
+	ping -c1 -W 1 178.63.11.250 &>/dev/null
 	if [ $? -eq 1 ]; then
 		UPSTREAM="!fail!"
 	else
@@ -172,20 +173,23 @@ get_git_prompt_info() {
 		if [ -f $CACHEFILE ]; then
 			UPSTREAM=`cat $CACHEFILE`
 		else
-			UPSTREAM=$(git remote show origin 2>/dev/null | head -n2 | tail -n1 | cut -d\  -f 6 | cut -d/ -f5 | cut -d\. -f1 | tr -d '\n')
-			if [ -z $UPSTREAM ]
-			then
+			if [ ! -d .git ]; then
 				UPSTREAM="no git"
 			else
-				if [[ "$UPSTREAM" == "dotfiles" ]]
+				if [[ "`git remote show origin 2>/dev/null | head -n2 | tail -n1 | cut -d\  -f 6 | cut -d: -f1`" == "git@github.com" ]]
 				then
-					if [[ "$PWD" == "$HOME" ]]; then
-						UPSTREAM="git:$UPSTREAM"
-					else
+					IS_GITHUB="yes"
+				else
+					IS_GITHUB="no"
+				fi
+				if [[ $IS_GITHUB == "yes" ]]; then
+					UPSTREAM="git:$(git remote show origin 2>/dev/null | head -n2 | tail -n1 | cut -d\  -f 6 | cut -d: -f2 | cut -d/ -f2 | cut -d\. -f1 | tr -d '\n')"
+				else
+					UPSTREAM=$(git remote show origin 2>/dev/null | head -n2 | tail -n1 | cut -d\  -f 6)
+					if [ -z $UPSTREAM ]
+					then
 						UPSTREAM="no git"
 					fi
-				else
-					UPSTREAM="git:$UPSTREAM"
 				fi
 			fi
 			echo -n $UPSTREAM > $CACHEFILE
@@ -253,9 +257,12 @@ else
 	[ -f /tmp/.sshtunnel_running ] && rm /tmp/.sshtunnel_running
 	set_proxy "none"
 fi
-
-# show todo
-echo "-= TODO =-"
-t list | head -n-2
-echo
-
+# show todo, if logging in
+# i know, this code is terrible...
+[ -z $SHOW_TODO ] && SHOW_TODO="yes"
+if [ $SHOW_TODO != "no" ]; then
+	echo "-= TODO =-"
+	t list | head -n-2 | sort
+	echo
+fi
+SHOW_TODO="no"
