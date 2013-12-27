@@ -27,6 +27,7 @@ unsetopt beep notify
 
 # path
 PATH=""
+PATH=${PATH}${HOME}/bin:  # allow me to overwrite scripts installed by packages
 PATH=${PATH}/bin:
 PATH=${PATH}/sbin:
 PATH=${PATH}/usr/bin:
@@ -35,7 +36,6 @@ PATH=${PATH}/usr/local/bin:
 PATH=${PATH}/usr/local/sbin:
 PATH=${PATH}/usr/bin/vendor_perl:
 PATH=${PATH}/opt/java/jre/bin:
-PATH=${PATH}/home/malte/bin
 export PATH
 
 # vi keybindings
@@ -90,8 +90,11 @@ zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}
 zstyle ':completion:*' menu select=0
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 my_accounts=(
-	malte@{deepthought.malte-bublitz.de,ovis.flying-sheep.de}
-	malte70@{abyss.malte-bublitz.de,khaos.malte70.de}
+	malte@sauron.malte-bublitz.de
+	malte@ovis.flying-sheep.de
+	malte@deepthought.malte-bublitz.de
+	malte70@abyss.malte-bublitz.de
+	malte70@khaos.malte70.de
 )
 zstyle ':completion:*:my-accounts' users-hosts $my_accounts
 autoload -Uz compinit
@@ -147,10 +150,14 @@ export EDITOR PAGER BROWSER MAIL
 # command aliases:
 alias y=yaourt
 alias y-Syu="yaourt -Syu"
+alias y-Syuw="yaourt -Syuw"
 alias y-Qdt="yaourt -Qdt"
 alias ls="/usr/bin/ls --color=auto --escape -l --file-type -h --time-style=long-iso"
 alias mem="free -m"
-alias t="/home/malte/bin/todo.txt/todo.sh"
+if which todo.sh &>/dev/null
+then
+	alias t==todo.sh
+fi
 alias g-c="git clone"
 # global aliases:
 alias -g L='|most'
@@ -165,62 +172,14 @@ stty stop ^A
 
 # prompt theme
 get_git_prompt_info() {
-	ping -c1 -W 1 178.63.11.250 &>/dev/null
-	if [ $? -eq 1 ]; then
-		UPSTREAM="!fail!"
-	else
-		CACHEFILE=~/.cache/git-info/`pwd | tr '/' '='`
-		if [ -f $CACHEFILE ]; then
-			UPSTREAM=`cat $CACHEFILE`
-		else
-			if [ ! -d .git ]; then
-				UPSTREAM="no git"
-			else
-				if [[ "`git remote show origin 2>/dev/null | head -n2 | tail -n1 | cut -d\  -f 6 | cut -d: -f1`" == "git@github.com" ]]
-				then
-					IS_GITHUB="yes"
-				else
-					IS_GITHUB="no"
-				fi
-				if [[ $IS_GITHUB == "yes" ]]; then
-					UPSTREAM="git:$(git remote show origin 2>/dev/null | head -n2 | tail -n1 | cut -d\  -f 6 | cut -d: -f2 | cut -d/ -f2 | cut -d\. -f1 | tr -d '\n')"
-				else
-					UPSTREAM=$(git remote show origin 2>/dev/null | head -n2 | tail -n1 | cut -d\  -f 6)
-					if [ -z $UPSTREAM ]
-					then
-						UPSTREAM="no git"
-					fi
-				fi
-			fi
-			echo -n $UPSTREAM > $CACHEFILE
-		fi
+	UPSTREAM=`gitinfo`
+	if [[ $UPSTREAM != "no git" ]]; then
+		echo -n "%F{cyan}[%B%F{white}${UPSTREAM}%b%F{cyan}] "
 	fi
-	echo -n $UPSTREAM
-}
-get_return_prompt_info() {
-	RET=$?
-	if [ ! $RET -eq 0 ]; then
-		echo -n "%F{cyan}[%F{red}$RET%F{cyan}]"
-	fi
-}
-get_todo_prompt_info() {
-	if [ -f TODO.md ]; then
-		echo -n "local TODO: $(grep " \* " TODO.md | wc -l | tr -d '\n') items"
-	else
-		echo -n 'no local TODO'
-	fi
-}
-get_global_todo_prompt_info() {
-	echo -n "global TODO: "
-	t list | tail -n1 | cut -d\  -f4 | tr -d '\n'
-	echo -n " items"
 }
 setopt prompt_subst
-PROMPT="%F{cyan}[%F{green}%B`uname -m`%b%F{cyan}|%F{green}%B`uname -o`%b%F{cyan}|%F{green}%B`uname -r`%b%F{cyan}]%(?.. %F{cyan}[%F{red}%?%F{cyan}]) %F{yellow}%~%b%F{white}
-%F{cyan}[%B%F{white}"'$(get_git_prompt_info)'"%b%F{cyan}] [%B%F{white}"'$(get_todo_prompt_info)'"%b%F{cyan}] [%B%F{white}"'$(get_global_todo_prompt_info)'"%b%F{cyan}]
+PROMPT="%F{cyan}[%F{green}%B`uname -m`%b%F{cyan}|%F{green}%B`uname -o`%b%F{cyan}|%F{green}%B`uname -r`%b%F{cyan}]%(?.. %F{cyan}[%F{red}%?%F{cyan}]) "'$(get_git_prompt_info)'"%F{yellow}%~%b%F{white}
 %F{white}%n@%F{green}%m%F{white}$ "
-#%F{green}`hostname -f`%F{white}$ "
-#RPROMPT="%B%F{yellow}%D{[%R] %a %Y-%m-%d}%b%F{white}"
 
 # for mc:
 [[ ! -z "$MC_SID" ]] && { PROMPT="%n@%m$ "; RPROMPT="" }
