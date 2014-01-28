@@ -194,7 +194,13 @@ set_proxy() {
 			unset http_proxy
 			unset https_proxy
 			unset ftp_poxy
-			export all_proxy=socks://127.0.0.1:8081
+			export all_proxy=socks://127.0.0.1:1080
+			;;
+		"sshtunnel8080")
+			unset http_proxy
+			unset https_proxy
+			unset ftp_poxy
+			export all_proxy=socks://127.0.0.1:8080
 			;;
 		*)
 			unset http_proxy
@@ -204,24 +210,15 @@ set_proxy() {
 			;;
 	esac
 }
-if iwconfig 2>&1 G -E 'ESSID:"ism_wpa"' >/dev/null; then
-	if [ ! -f /tmp/.sshtunnel_running ]; then
-		echo -n "Starting SSH tunnel... "
-		start_autossh
-		echo "done."
-		touch /tmp/.sshtunnel_running
-	fi
-	set_proxy "sshtunnel"
-else
-	[ -f /tmp/.sshtunnel_running ] && rm /tmp/.sshtunnel_running
-	set_proxy "none"
-fi
 # show todo, if logging in
 # i know, this code is terrible...
-[ -z $SHOW_TODO ] && SHOW_TODO="yes"
-if [ $SHOW_TODO != "no" ]; then
+if which todo.sh &>/dev/null
+then
+	[ -z $SHOW_TODO ] && SHOW_TODO="yes"
+	if [ $SHOW_TODO != "no" -a "$(t list | wc -l)" -ne 2 ]; then
 	echo "-= TODO =-"
 	t list | head -n-2 | sort
 	echo
+	fi
+	SHOW_TODO="no"
 fi
-SHOW_TODO="no"
