@@ -1,0 +1,8 @@
+*
+!.abcde.conf
+!.gitignore
+!.ncmpcpp/config
+!.vimrc
+!.zshrc
+!.Xmodmap
+!README.md
