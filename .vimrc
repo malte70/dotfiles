@@ -4,35 +4,58 @@
 " inspired by (inter alia):
 "  - http://www.youtube.com/watch?gl=DE&v=YhqsjUUHj6g
 "  - http://vim.wikia.com/wiki/Change_vimrc_with_auto_reload
+"  - https://github.com/yannicklm/vimconf
 "
 " in git at https://github.com/malte70/dotfiles
+
+set nocompatible
 
 " auto-reload .vimrc
 autocmd! bufwritepost .vimrc source %
 
-" paste behaviour like excepted from other gui applications
-set pastetoggle=<F2>
-set clipboard=unnamedplus
+" basic settings {
+syntax on
+filetype plugin indent on
+set mouse=a
 
-" Set filetype stuff to on
-filetype on
-filetype plugin on
-filetype indent on
+" paste behaviour like excepted from other gui applications
+if has("X11")
+  set clipboard=unnamedplus
+else
+  set clipboard=unnamed
+endif
+
+" persistend undo
+" written by yanniklm
+set backup
+let g:dotvim_backups=expand('$HOME') . '/.vim/backups'
+if ! isdirectory(g:dotvim_backups)
+  call mkdir(g:dotvim_backups, "p")
+endif
+exec "set backupdir=" . g:dotvim_backups
+if has('persistent_undo')
+  set undofile
+  set undolevels=1000
+  set undoreload=10000
+  exec "set undodir=" . g:dotvim_backups
+endif
 
 " set Tab behavior
 set tabstop=3
 set shiftwidth=3
+set smarttab
+set smartindent
 
 " smart search: ignore case when search is all lower case,
 " but recognize uppercase if specified
 set ignorecase
 set smartcase
 
+" default split behavior sucks.
+set splitbelow
+
 " make command line two lines high
 set ch=2
-
-" I don't want Backups every time I save!
-set nobackup
 
 " show row and column number
 set ruler
@@ -64,14 +87,6 @@ noremap <C-n> :nohl<CR>
 vnoremap <C-n> :nohl<CR>
 inoremap <C-n> <ESC>:nohl<CR>
 
-" allow using ^S
-noremap <C-S> :update<CR>
-vnoremap <C-S> <C-C>:update<CR>
-inoremap <C-S> <C-O>:update><CR>
-
-" turn on syntax highlighting
-syntax on
-
 " set status line
 set stl=%f\ %y\ %m\ %r\ Line:%l.%c/%L[%p%%]\ [0x%B]
 set laststatus=2 "and always show it
@@ -86,7 +101,16 @@ function! RunShebang()
 endfunction
 map <F11> :call RunShebang()<CR>
 
+" automatically add executable permission to scripts
+" written by yanniklm
+function! MakeScriptExecuteable()
+  if getline(1) =~ "^#!.*/bin/"
+    silent !chmod +x <afile>
+  endif
+endfunction
+
 set background=dark
+colorscheme default
 
 " ignore whitespaces in diff
 set diffopt+=iwhite
@@ -102,21 +126,37 @@ map <F7> :source ~/.vim_session <cr>     " And load session with F7
 imap <F2> <ESC>:w<CR>a
 
 if has("gui_running")
-  set guifont="Inconsolata Medium 12"
-  set background=dark
-  colorscheme desert
-  winsize 110 30
+  set guifont=inconsolata-g:h12
+  set background=light
+  if ! &diff
+    winsize 100 80
+  else
+    winsize 195 80
+  endif
 endif
 
 " Taglist
 let Tlist_Ctags_Cmd = "/usr/bin/ctags"
 let Tlist_WinWidth = 50
+let Tlist_Use_Right_Window = 1
 map <F4> :TlistToggle<cr>
+
+" Syntastic
+let g:syntastic_always_populate_loc_list = 1
 
 " Spell checking
 set spelllang=de
 
-" Correct Syntax highlighting for Markdown files in github repos (*.md)
+" *.md files are markdown, not Modula!
 au BufRead,BufNewFile *.md set filetype=markdown
 
+" open NerdTree and Taglist for PHP, Python and Java files
+au BufRead,BufNewFile *.php TlistOpen
+au BufRead,BufNewFile *.py TlistOpen
+au BufRead,BufNewFile *.java TlistOpen
+au BufRead,BufNewFile *.php NERDTree
+au BufRead,BufNewFile *.py NERDTree
+au BufRead,BufNewFile *.java NERDTree
+
+set background=dark
 " vim:  set ts=2 sw=2 et:
