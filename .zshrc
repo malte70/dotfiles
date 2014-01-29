@@ -15,12 +15,25 @@ DESKTOPS=(
 	"placente"  # MacBook
 )
 
+OS=`uname -s`
+OSVERSION=`uname -r`
+if [[ "$OS" == "Darwin" ]]; then
+	OS="OS X"
+	OSXVersion=`python -c 'import platform; print platform.mac_ver()[0],'`
+	OSVERSION=$OSXVersion
+else
+	OS=`uname -o`
+fi
+
 # History: 10,000 lines in ~/.histfile
 HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=10000
 
-eval `dircolors -b`
+if which dircolors &>/dev/null; then
+	# On OS X, there is no dircolors, but it is not needed
+	eval `dircolors -b`
+fi
 setopt autocd
 setopt noclobber
 unsetopt beep notify
@@ -133,26 +146,45 @@ setopt interactivecomments
 
 # default browser and editor
 EDITOR==vim
-PAGER==most
+if which most &>/dev/null; then
+	PAGER==most
+else
+	PAGER==less
+fi
 # set browser to elinks on servers, everywhere else to firefox.
 node=`hostname -s`
 if (( ${SERVERS[(i)$node]} <= ${#SERVERS} )); then
 	BROWSER==elinks
-else
+elif [ $OS != "OS X" ]; then
 	BROWSER==firefox
+else
+	BROWSER="/Applications/Firefox.app/Contents/MacOS/firefox"
 fi
-MAIL=~/Mail
-export EDITOR PAGER BROWSER MAIL
+if [ -d $HOME/Mail ]; then
+	export MAIL=~/Mail
+fi
+export EDITOR PAGER BROWSER
 
 #
 # Aliases
 # 
 # command aliases:
-alias y=yaourt
-alias y-Syu="yaourt -Syu"
-alias y-Syuw="yaourt -Syuw"
-alias y-Qdt="yaourt -Qdt"
-alias ls="/usr/bin/ls --color=auto --escape -l --file-type -h --time-style=long-iso"
+if [[ "$OS" == "OS X" ]]; then
+	# On OS X, pacapt is used
+	alias y=pacman
+	alias y-Syu="pacman -Syu"
+	alias y-Syuw="pacman -Syuw"
+else
+	alias y=yaourt
+	alias y-Syu="yaourt -Syu"
+	alias y-Syuw="yaourt -Syuw"
+	alias y-Qdt="yaourt -Qdt"
+fi
+if [[ $OS != "OS X" ]]; then
+	alias ls="`print -n =ls` --color=auto --escape -l --file-type -h --time-style=long-iso"
+else
+	alias ls="ls -l -G -F -b -h"
+fi
 alias mem="free -m"
 if which todo.sh &>/dev/null
 then
@@ -160,7 +192,7 @@ then
 fi
 alias g-c="git clone"
 # global aliases:
-alias -g L='|most'
+alias -g L="|$PAGER"
 alias -g G='|grep'
 alias -g Gi='|grep -i'
 alias -g H='|head'
@@ -178,7 +210,19 @@ get_git_prompt_info() {
 	fi
 }
 setopt prompt_subst
-PROMPT="%F{cyan}[%F{green}%B`uname -m`%b%F{cyan}|%F{green}%B`uname -o`%b%F{cyan}|%F{green}%B`uname -r`%b%F{cyan}]%(?.. %F{cyan}[%F{red}%?%F{cyan}]) "'$(get_git_prompt_info)'"%F{yellow}%~%b%F{white}
+precmd() {
+	print -Pn "\e]0;%~ (%n@%m)\a"
+}
+preexec() {
+	CMD=`echo $1 | cut -d" " -f1`
+	print -Pn "\e]0;%~ (%n@%m) ($CMD)\a"
+}
+if [[ $OS == "OS X" ]]; then
+	PROMPT="]0;$HOST: $PWD" # ^G = BEL
+else
+	PROMPT=""
+fi
+PROMPT="%F{cyan}[%F{green}%B`uname -m`%b%F{cyan}|%F{green}%B$OS%b%F{cyan}|%F{green}%B`uname -r`%b%F{cyan}]%(?.. %F{cyan}[%F{red}%?%F{cyan}]) "'$(get_git_prompt_info)'"%F{yellow}%~%b%F{white}
 %F{white}%n@%F{green}%m%F{white}$ "
 
 # for mc:
