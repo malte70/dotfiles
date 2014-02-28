@@ -18,11 +18,12 @@ DESKTOPS=(
 OS=`uname -s`
 OSVERSION=`uname -r`
 if [[ "$OS" == "Darwin" ]]; then
-	OS="OS X"
+	OS="Mac OS X"
 	OSXVersion=`python -c 'import platform; print platform.mac_ver()[0],'`
 	OSVERSION=$OSXVersion
 else
 	OS=`uname -o`
+	OSVERSION=`uname -r`
 fi
 
 # History: 10,000 lines in ~/.histfile
@@ -155,7 +156,7 @@ fi
 node=`hostname -s`
 if (( ${SERVERS[(i)$node]} <= ${#SERVERS} )); then
 	BROWSER==elinks
-elif [ $OS != "OS X" ]; then
+elif [ $OS != "Mac OS X" ]; then
 	BROWSER==firefox
 else
 	BROWSER="/Applications/Firefox.app/Contents/MacOS/firefox"
@@ -169,7 +170,7 @@ export EDITOR PAGER BROWSER
 # Aliases
 # 
 # command aliases:
-if [[ "$OS" == "OS X" ]]; then
+if [[ "$OS" == "Mac OS X" ]]; then
 	# On OS X, pacapt is used
 	alias y=pacman
 	alias y-Syu="pacman -Syu"
@@ -180,7 +181,7 @@ else
 	alias y-Syuw="yaourt -Syuw"
 	alias y-Qdt="yaourt -Qdt"
 fi
-if [[ $OS != "OS X" ]]; then
+if [[ $OS != "Mac OS X" ]]; then
 	alias ls="`print -n =ls` --color=auto --escape -l --file-type -h --time-style=long-iso"
 else
 	alias ls="ls -l -G -F -b -h"
@@ -191,6 +192,7 @@ then
 	alias t==todo.sh
 fi
 alias g-c="git clone"
+alias tree="tree  -AC"
 # global aliases:
 alias -g L="|$PAGER"
 alias -g G='|grep'
@@ -215,19 +217,23 @@ precmd() {
 }
 preexec() {
 	CMD=`echo $1 | cut -d" " -f1`
-	print -Pn "\e]0;%~ (%n@%m) ($CMD)\a"
+	if [[ ! $CMD =~ "[^ ]+=" ]]; then
+		print -Pn "\e]0;%~ (%n@%m) ($CMD)\a"
+	fi
 }
-if [[ $OS == "OS X" ]]; then
+if [[ $OS == "Mac OS X" ]]; then
 	PROMPT="]0;$HOST: $PWD" # ^G = BEL
 else
 	PROMPT=""
 fi
-PROMPT="%F{cyan}[%F{green}%B`uname -m`%b%F{cyan}|%F{green}%B$OS%b%F{cyan}|%F{green}%B`uname -r`%b%F{cyan}]%(?.. %F{cyan}[%F{red}%?%F{cyan}]) "'$(get_git_prompt_info)'"%F{yellow}%~%b%F{white}
+PROMPT="%F{cyan}[%F{green}%B`uname -m`%b%F{cyan}|%F{green}%B$OS%b%F{cyan}|%F{green}%B$OSVERSION%b%F{cyan}]%(?.. %F{cyan}[%F{red}%?%F{cyan}]) "'$(get_git_prompt_info)'"%F{yellow}%~%b%F{white}
 %F{white}%n@%F{green}%m%F{white}$ "
 
 # for mc:
 [[ ! -z "$MC_SID" ]] && { PROMPT="%n@%m$ "; RPROMPT="" }
 true
+
+[ -f $HOME/.mc/solarized.ini ] && export MC_SKIN=$HOME/.mc/solarized.ini
 
 start_autossh() {
 	autossh -M 0 -q -f -N -o "ServerAliveInterval 60" -o "ServerAliveCountMax 3" -D 8081 sshtunnel@abyss.malte-bublitz.de
