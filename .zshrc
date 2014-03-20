@@ -192,6 +192,7 @@ if which todo.sh &>/dev/null
 then
 	alias t==todo.sh
 fi
+alias g="git"
 alias g-c="git clone"
 alias tree="tree  -AC"
 # global aliases:
