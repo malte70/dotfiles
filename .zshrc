@@ -50,6 +50,7 @@ PATH=${PATH}/usr/local/bin:
 PATH=${PATH}/usr/local/sbin:
 PATH=${PATH}/usr/bin/vendor_perl:
 PATH=${PATH}/opt/java/jre/bin:
+[ -d "/opt/android-sdk/platform-tools" ] && PATH=${PATH}/opt/android-sdk/platform-tools:
 export PATH
 
 # vi keybindings
