@@ -220,7 +220,7 @@ precmd() {
 }
 preexec() {
 	CMD=`echo $1 | cut -d" " -f1`
-	if [[ ! $CMD =~ "[^ ]+=" ]]; then
+	if [[ ! $CMD =~ "[^ ]+=" && $TERM != "linux" ]]; then
 		print -Pn "\e]0;%~ (%n@%m) ($CMD)\a"
 	fi
 }
