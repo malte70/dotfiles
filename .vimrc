@@ -41,10 +41,10 @@ if has('persistent_undo')
 endif
 
 " set Tab behavior
-set tabstop=3
-set shiftwidth=3
-set smarttab
 set smartindent
+set noexpandtab
+set tabstop=4
+set shiftwidth=4
 
 " smart search: ignore case when search is all lower case,
 " but recognize uppercase if specified
