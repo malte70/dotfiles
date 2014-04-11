@@ -150,6 +150,9 @@ set spelllang=de
 " *.md files are markdown, not Modula!
 au BufRead,BufNewFile *.md set filetype=markdown
 
+" Ignore some file types in NERDTree
+let NERDTreeIgnore = [ '\.o$', '\~$', '\.class$', '\.pyc$' ]
+
 " open NerdTree and Taglist for PHP, Python and Java files
 au BufRead,BufNewFile *.php TlistOpen
 au BufRead,BufNewFile *.py TlistOpen
