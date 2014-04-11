@@ -159,4 +159,8 @@ au BufRead,BufNewFile *.py NERDTree
 au BufRead,BufNewFile *.java NERDTree
 
 set background=dark
+
+" Printing
+map <C-F12> :TOhtml<cr>
+
 " vim:  set ts=2 sw=2 et:
