@@ -49,6 +49,7 @@ unsetopt beep notify
 # path
 PATH=""
 PATH=${PATH}${HOME}/bin:  # allow me to overwrite scripts installed by packages
+[ -d "${HOME}/scripts" ] && PATH=${PATH}${HOME}/scripts: # on some hosts, ~/bin is not my github repository malte70/scripts, it is in ~/scripts.
 PATH=${PATH}/bin:
 PATH=${PATH}/sbin:
 PATH=${PATH}/usr/bin:
