@@ -3,7 +3,8 @@
 #
 
 # my network setup. used to adjust behaviour to specific host
-LOCAL_DOMAIN="malte-bublitz.de"
+DOMAIN="malte-bublitz.de"
+LOCAL_DOMAIN="tardis.$DOMAIN"
 SERVERS=(
 	"ovis.flying-sheep.de"
 	"khaos.kaos-miners.de"
@@ -11,9 +12,9 @@ SERVERS=(
 	"khaos.malte70.de"
 )
 DESKTOPS=(
-	"sauron"    # main desktop
-	"gallifrey" # notebook
-	"placente"  # MacBook
+	"sauron.$LOCAL_DOMAIN"    # main desktop
+	"gallifrey.$LOCAL_DOMAIN" # notebook
+	"placente.$LOCAL_DOMAIN"  # MacBook
 )
 
 OS=`uname -s`
@@ -163,7 +164,7 @@ else
 	PAGER==less
 fi
 # set browser to elinks on servers, everywhere else to firefox.
-node=`hostname -s`
+node=`hostname -f`
 if (( ${SERVERS[(i)$node]} <= ${#SERVERS} )); then
 	BROWSER==elinks
 elif [ $OS != "Mac OS X" ]; then
