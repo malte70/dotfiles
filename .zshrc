@@ -8,6 +8,7 @@ SERVERS=(
 	"ovis.flying-sheep.de"
 	"khaos.kaos-miners.de"
 	"deepthought.malte-bublitz.de"
+	"khaos.malte70.de"
 )
 DESKTOPS=(
 	"sauron"    # main desktop
