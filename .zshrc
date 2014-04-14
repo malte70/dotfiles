@@ -19,10 +19,16 @@ OS=`uname -s`
 OSVERSION=`uname -r`
 if [[ "$OS" == "Darwin" ]]; then
 	OS="Mac OS X"
+	OSVARIANT=$OS
 	OSXVersion=`python -c 'import platform; print platform.mac_ver()[0],'`
 	OSVERSION=$OSXVersion
 else
 	OS=`uname -o`
+	if which lsb_release &>/dev/null; then
+		OSVARIANT=`lsb_release -s -i`
+	else
+		OSVARIANT=$OS
+	fi
 	OSVERSION=`uname -r`
 fi
 
@@ -177,7 +183,7 @@ if [[ "$OS" == "Mac OS X" ]]; then
 	alias y=pacman
 	alias y-Syu="pacman -Syu"
 	alias y-Syuw="pacman -Syuw"
-else
+elif [[ "$OSVARIANT" == "Arch" ]]; then
 	alias y=yaourt
 	alias y-Syu="yaourt -Syu"
 	alias y-Syuw="yaourt -Syuw"
