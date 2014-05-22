@@ -10,6 +10,7 @@ SERVERS=(
 	"khaos.kaos-miners.de"
 	"deepthought.malte-bublitz.de"
 	"khaos.malte70.de"
+	"gimli.mcbx.de"
 )
 DESKTOPS=(
 	"sauron.$LOCAL_DOMAIN"    # main desktop
