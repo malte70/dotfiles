@@ -3,26 +3,35 @@
 #
 
 # my network setup. used to adjust behaviour to specific host
-LOCAL_DOMAIN="malte-bublitz.de"
+DOMAIN="malte-bublitz.de"
+LOCAL_DOMAIN="tardis.$DOMAIN"
 SERVERS=(
 	"ovis.flying-sheep.de"
 	"khaos.kaos-miners.de"
 	"deepthought.malte-bublitz.de"
+	"khaos.malte70.de"
+	"gimli.mcbx.de"
 )
 DESKTOPS=(
-	"sauron"    # main desktop
-	"gallifrey" # notebook
-	"placente"  # MacBook
+	"sauron.$LOCAL_DOMAIN"    # main desktop
+	"gallifrey.$LOCAL_DOMAIN" # notebook
+	"placente.$LOCAL_DOMAIN"  # MacBook
 )
 
 OS=`uname -s`
 OSVERSION=`uname -r`
 if [[ "$OS" == "Darwin" ]]; then
 	OS="Mac OS X"
+	OSVARIANT=$OS
 	OSXVersion=`python -c 'import platform; print platform.mac_ver()[0],'`
 	OSVERSION=$OSXVersion
 else
 	OS=`uname -o`
+	if which lsb_release &>/dev/null; then
+		OSVARIANT=`lsb_release -s -i`
+	else
+		OSVARIANT=$OS
+	fi
 	OSVERSION=`uname -r`
 fi
 
@@ -42,6 +51,7 @@ unsetopt beep notify
 # path
 PATH=""
 PATH=${PATH}${HOME}/bin:  # allow me to overwrite scripts installed by packages
+[ -d "${HOME}/scripts" ] && PATH=${PATH}${HOME}/scripts: # on some hosts, ~/bin is not my github repository malte70/scripts, it is in ~/scripts.
 PATH=${PATH}/bin:
 PATH=${PATH}/sbin:
 PATH=${PATH}/usr/bin:
@@ -156,7 +166,7 @@ else
 	PAGER==less
 fi
 # set browser to elinks on servers, everywhere else to firefox.
-node=`hostname -s`
+node=`hostname -f`
 if (( ${SERVERS[(i)$node]} <= ${#SERVERS} )); then
 	BROWSER==elinks
 elif [ $OS != "Mac OS X" ]; then
@@ -178,7 +188,7 @@ if [[ "$OS" == "Mac OS X" ]]; then
 	alias y=pacman
 	alias y-Syu="pacman -Syu"
 	alias y-Syuw="pacman -Syuw"
-else
+elif [[ "$OSVARIANT" == "Arch" ]]; then
 	alias y=yaourt
 	alias y-Syu="yaourt -Syu"
 	alias y-Syuw="yaourt -Syuw"
