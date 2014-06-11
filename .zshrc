@@ -199,10 +199,14 @@ alias tree="tree  -AC"
 # global aliases:
 alias -g L="|$PAGER"
 alias -g G='|grep'
+alias -g Gv='|grep -v'
 alias -g Gi='|grep -i'
+alias -g GE='|grep -E'
+alias -g GEi='|grep -E -i'
 alias -g H='|head'
 alias -g T='|tail'
 alias -g W='|wc -l'
+alias -g S='|stripwhite'
 
 # map STOP to ^W (START is ^Q, and also, ^S is free to be used by vim)
 stty stop ^A
@@ -220,6 +224,9 @@ precmd() {
 }
 preexec() {
 	CMD=`echo $1 | cut -d" " -f1`
+	if [[ CMD == "pycalc" ]]; then
+		exit 0
+	fi
 	if [[ ! $CMD =~ "[^ ]+=" && $TERM != "linux" ]]; then
 		print -Pn "\e]0;%~ (%n@%m) ($CMD)\a"
 	fi
