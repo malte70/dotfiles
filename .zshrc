@@ -111,6 +111,7 @@ my_accounts=(
 	malte@deepthought.malte-bublitz.de
 	malte70@abyss.malte-bublitz.de
 	malte70@khaos.malte70.de
+	malte70@gimli.mcbx.de
 )
 zstyle ':completion:*:my-accounts' users-hosts $my_accounts
 autoload -Uz compinit
