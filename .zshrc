@@ -293,3 +293,5 @@ then
 	fi
 	SHOW_TODO="no"
 fi
+
+[ -f $HOME/.zshrc.local ] && . $HOME/.zshrc.local; true
