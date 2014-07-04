@@ -10,6 +10,7 @@ SERVERS=(
 	"khaos.kaos-miners.de"
 	"deepthought.malte-bublitz.de"
 	"khaos.malte70.de"
+	"gimli.mcbx.de"
 )
 DESKTOPS=(
 	"sauron.$LOCAL_DOMAIN"    # main desktop
@@ -120,6 +121,7 @@ my_accounts=(
 	malte@deepthought.malte-bublitz.de
 	malte70@abyss.malte-bublitz.de
 	malte70@khaos.malte70.de
+	malte70@gimli.mcbx.de
 )
 zstyle ':completion:*:my-accounts' users-hosts $my_accounts
 autoload -Uz compinit
@@ -208,10 +210,14 @@ alias tree="tree  -AC"
 # global aliases:
 alias -g L="|$PAGER"
 alias -g G='|grep'
+alias -g Gv='|grep -v'
 alias -g Gi='|grep -i'
+alias -g GE='|grep -E'
+alias -g GEi='|grep -E -i'
 alias -g H='|head'
 alias -g T='|tail'
 alias -g W='|wc -l'
+alias -g S='|stripwhite'
 
 # map STOP to ^W (START is ^Q, and also, ^S is free to be used by vim)
 stty stop ^A
@@ -229,6 +235,9 @@ precmd() {
 }
 preexec() {
 	CMD=`echo $1 | cut -d" " -f1`
+	if [[ CMD == "pycalc" ]]; then
+		exit 0
+	fi
 	if [[ ! $CMD =~ "[^ ]+=" && $TERM != "linux" ]]; then
 		print -Pn "\e]0;%~ (%n@%m) ($CMD)\a"
 	fi
@@ -284,3 +293,5 @@ then
 	fi
 	SHOW_TODO="no"
 fi
+
+[ -f $HOME/.zshrc.local ] && . $HOME/.zshrc.local; true

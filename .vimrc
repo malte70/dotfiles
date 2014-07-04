@@ -166,4 +166,7 @@ set background=dark
 " Printing
 map <C-F12> :TOhtml<cr>
 
+set tabstop=4
+set shiftwidth=4
+set noexpandtab
 " vim:  set ts=2 sw=2 et:
