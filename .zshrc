@@ -197,7 +197,11 @@ fi
 if [[ $OS != "Mac OS X" ]]; then
 	alias ls="`print -n =ls` --color=auto --escape -l --file-type -h --time-style=long-iso"
 else
-	alias ls="ls -l -G -F -b -h"
+	if which gls &>/dev/null; then
+		alias ls="`print -n =gls` --color=auto --escape -l --file-type -h --time-style=long-iso"
+	else
+		alias ls="ls -l -G -F -b -h"
+	fi
 fi
 alias mem="free -m"
 if which todo.sh &>/dev/null
