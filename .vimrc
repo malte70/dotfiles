@@ -136,7 +136,14 @@ if has("gui_running")
 endif
 
 " Taglist
-let Tlist_Ctags_Cmd = "/usr/bin/ctags"
+let hostname = substitute(system('hostname -f'), '\n', '', '')
+if hostname == "dma-bublitz.local"
+	" Use ctags provided by homebrew, not the Xcode one, since it doesn't
+	" work.
+	let Tlist_Ctags_Cmd = "/usr/local/bin/ctags"
+else
+	let Tlist_Ctags_Cmd = "/usr/bin/ctags"
+endif
 let Tlist_WinWidth = 50
 let Tlist_Use_Right_Window = 1
 map <F4> :TlistToggle<cr>
