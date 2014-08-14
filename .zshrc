@@ -186,9 +186,10 @@ export EDITOR PAGER BROWSER
 # command aliases:
 if [[ "$OS" == "Mac OS X" ]]; then
 	# On OS X, pacapt is used
-	alias y=pacman
-	alias y-Syu="pacman -Syu"
-	alias y-Syuw="pacman -Syuw"
+	alias yaourt="pacapt"
+	alias y="pacapt"
+	alias y-Syu="pacapt -Syu"
+	alias y-Syuw="pacapt -Syuw"
 elif [[ "$OSVARIANT" == "Arch" ]]; then
 	alias y=yaourt
 	alias y-Syu="yaourt -Syu"
@@ -197,11 +198,15 @@ elif [[ "$OSVARIANT" == "Arch" ]]; then
 fi
 if [[ $OS != "Mac OS X" ]]; then
 	alias ls="`print -n =ls` --color=auto --escape -l --file-type -h --time-style=long-iso"
+	alias df="`print -n =df` --human-readable --print-type"
 else
 	if which gls &>/dev/null; then
+		# If gls is available, all other coreutils should be too.
 		alias ls="`print -n =gls` --color=auto --escape -l --file-type -h --time-style=long-iso"
+		alias df="`print -n =gdf` --human-readable --print-type"
 	else
-		alias ls="ls -l -G -F -b -h"
+		alias ls="/bin/ls -l -G -F -b -h"
+		alias df="/bin/df -h"
 	fi
 fi
 alias mem="free -m"
