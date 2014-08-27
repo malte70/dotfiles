@@ -232,6 +232,18 @@ alias -g T='|tail'
 alias -g W='|wc -l'
 alias -g S='|stripwhite'
 
+if [[ $OS == "Mac OS X" ]]; then
+	show_desktop() {
+		doOrDont=$1
+		if [[ $doOrDont == "yes" ]]; then
+			doOrDont="true"
+		elif [[ $doOrDont == "no" ]]; then
+			doOrDont="false"
+		fi
+		defaults write com.apple.finder CreateDesktop -bool $doOrDont && killall -SIGHUP Finder
+	}
+fi
+
 # map STOP to ^W (START is ^Q, and also, ^S is free to be used by vim)
 stty stop ^A
 
