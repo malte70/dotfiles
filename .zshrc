@@ -8,9 +8,9 @@ LOCAL_DOMAIN="tardis.$DOMAIN"
 SERVERS=(
 	"ovis.flying-sheep.de"
 	"khaos.kaos-miners.de"
-	"deepthought.malte-bublitz.de"
 	"khaos.malte70.de"
 	"gimli.mcbx.de"
+	"web0.malte-bublitz.de"
 )
 DESKTOPS=(
 	"sauron.$LOCAL_DOMAIN"    # main desktop
