@@ -198,7 +198,7 @@ elif [[ "$OSVARIANT" == "Arch" ]]; then
 	alias y-Syuw="yaourt -Syuw"
 	alias y-Qdt="yaourt -Qdt"
 fi
-if [[ $OS != "Mac OS X" ]]; then
+if [[ $OS != "Mac OS X" && $OS != "FreeBSD" ]]; then
 	alias ls="`print -n =ls` --color=auto --escape -l --file-type -h --time-style=long-iso"
 	alias df="`print -n =df` --human-readable --print-type"
 	alias d=`print -n =date`' --rfc-3339=seconds | tr " " "T"'
