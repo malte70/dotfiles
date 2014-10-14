@@ -9,7 +9,7 @@ SERVERS=(
 	"ovis.flying-sheep.de"
 	"khaos.kaos-miners.de"
 	"khaos.malte70.de"
-	"abyss.malte-bublitz.de"
+	"abyss.mcbx.de"
 	"gimli.mcbx.de"
 	"web0.malte-bublitz.de"
 )
