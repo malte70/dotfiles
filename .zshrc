@@ -119,12 +119,18 @@ zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}
 zstyle ':completion:*' menu select=0
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 my_accounts=(
-	malte@sauron.malte-bublitz.de
+	# LAN Desktops
+	malte70@sauron.tardis.mcbx.de
+	malte70@gallifrey.tardis.mcbx.de
+	# Old Server
 	malte@ovis.flying-sheep.de
-	malte@deepthought.malte-bublitz.de
-	malte70@abyss.malte-bublitz.de
-	malte70@khaos.malte70.de
+	# Root Servers
+	malte70@abyss.mcbx.de
 	malte70@gimli.mcbx.de
+	# Virtual Servers
+	malte70@khaos.malte70.de
+	malte70@minecraft.mcbx.de
+	malte70@web0.mcbx.de
 )
 zstyle ':completion:*:my-accounts' users-hosts $my_accounts
 autoload -Uz compinit
