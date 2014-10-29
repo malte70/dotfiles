@@ -214,6 +214,7 @@ else
 		alias ls="`print -n =gls` --color=auto --escape -l --file-type -h --time-style=long-iso"
 		alias df="`print -n =gdf` --human-readable --print-type"
 		alias d=`print -n =gdate`' --rfc-3339=seconds | tr " " "T"'
+		alias sed="`print -n =gsed`"
 	else
 		alias ls="/bin/ls -l -G -F -b -h"
 		alias df="/bin/df -h"
