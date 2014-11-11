@@ -12,7 +12,6 @@ mpd_port = "6600"
 mpd_music_dir = "/home/malte70/Musik"
 mpd_connection_timeout = "5"
 mpd_crossfade_time = "5"
-mpd_communication_mode = "notifications" (polling/notifications)
 
 #########################################
 
