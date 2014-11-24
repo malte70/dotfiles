@@ -3,15 +3,13 @@
 #
 
 # my network setup. used to adjust behaviour to specific host
-DOMAIN="malte-bublitz.de"
+DOMAIN="mcbx.de"
 LOCAL_DOMAIN="tardis.$DOMAIN"
 SERVERS=(
-	"ovis.flying-sheep.de"
-	"khaos.kaos-miners.de"
-	"khaos.malte70.de"
-	"abyss.mcbx.de"
-	"gimli.mcbx.de"
-	"web0.malte-bublitz.de"
+	"abyss.$DOMAIN"           # primary server
+	"gimli.$DOMAIN"           # secondary server
+	"web0.$DOMAIN"            # primary web server
+	"khaos.malte70.de"        # test server / application server
 )
 DESKTOPS=(
 	"sauron.$LOCAL_DOMAIN"    # main desktop
