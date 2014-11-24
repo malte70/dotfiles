@@ -136,12 +136,12 @@ if has("gui_running")
 endif
 
 " Taglist
-let hostname = substitute(system('hostname -f'), '\n', '', '')
-if hostname == "dma-bublitz.local"
-	" Use ctags provided by homebrew, not the Xcode one, since it doesn't
-	" work.
+let sysname = substitute(system('uname -s'), '\n', '', '')
+if sysname == "Darwin"
+	" On OS X, use ctags provided by homebrew
 	let Tlist_Ctags_Cmd = "/usr/local/bin/ctags"
 else
+	" On other systems, use the regular ctags.
 	let Tlist_Ctags_Cmd = "/usr/bin/ctags"
 endif
 let Tlist_WinWidth = 50
