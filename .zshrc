@@ -51,13 +51,13 @@ unsetopt beep notify
 PATH=""
 PATH=${PATH}${HOME}/bin:  # allow me to overwrite scripts installed by packages
 [ -d "${HOME}/scripts" ] && PATH=${PATH}${HOME}/scripts: # on some hosts, ~/bin is not my github repository malte70/scripts, it is in ~/scripts.
-[ $OS = "Mac OS X" ] && PATH=${PATH}/usr/local/opt/php55/bin:
+#[ $OS = "Mac OS X" ] && PATH=${PATH}/usr/local/opt/php55/bin:
+PATH=${PATH}/usr/local/bin:
+PATH=${PATH}/usr/local/sbin:
 PATH=${PATH}/bin:
 PATH=${PATH}/sbin:
 PATH=${PATH}/usr/bin:
 PATH=${PATH}/usr/sbin:
-PATH=${PATH}/usr/local/bin:
-PATH=${PATH}/usr/local/sbin:
 PATH=${PATH}/usr/bin/core_perl:
 PATH=${PATH}/usr/bin/vendor_perl:
 PATH=${PATH}/opt/java/jre/bin:
