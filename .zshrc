@@ -179,7 +179,7 @@ fi
 node=`hostname -f`
 if (( ${SERVERS[(i)$node]} <= ${#SERVERS} )); then
 	BROWSER==elinks
-elif [ `uname -o` = "Cygwin" ]; then
+elif [ $OS = "Cygwin" ]; then
 	BROWSER="/cygdrive/c/Program Files (x86)/Google/Chrome/Application/chrome.exe"
 elif [ $OS != "Mac OS X" ]; then
 	BROWSER==firefox
