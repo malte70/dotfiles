@@ -26,6 +26,9 @@ if [[ "$OS" == "Darwin" ]]; then
 	OSVARIANT=$OS
 	OSXVersion=`python -c 'import platform; print platform.mac_ver()[0],'`
 	OSVERSION=$OSXVersion
+elif [[ `uname -o` == "Cygwin" ]]; then
+	OS="Windows NT"
+	OSVERSION=`python -c 'import OSDetect; _i = OSDetect.OSInfo(); print _i.GetInfo()["OSVersion"]'`
 else
 	OS=`uname -o`
 	if which lsb_release &>/dev/null; then
@@ -172,6 +175,8 @@ fi
 node=`hostname -f`
 if (( ${SERVERS[(i)$node]} <= ${#SERVERS} )); then
 	BROWSER==elinks
+elif [ `uname -o` = "Cygwin" ]; then
+	BROWSER="/cygdrive/c/Program Files (x86)/Google/Chrome/Application/chrome.exe"
 elif [ $OS != "Mac OS X" ]; then
 	BROWSER==firefox
 else
