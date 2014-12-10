@@ -3,15 +3,13 @@
 #
 
 # my network setup. used to adjust behaviour to specific host
-DOMAIN="malte-bublitz.de"
+DOMAIN="mcbx.de"
 LOCAL_DOMAIN="tardis.$DOMAIN"
 SERVERS=(
-	"ovis.flying-sheep.de"
-	"khaos.kaos-miners.de"
-	"khaos.malte70.de"
-	"abyss.mcbx.de"
-	"gimli.mcbx.de"
-	"web0.malte-bublitz.de"
+	"abyss.$DOMAIN"           # primary server
+	"gimli.$DOMAIN"           # secondary server
+	"web0.$DOMAIN"            # primary web server
+	"khaos.malte70.de"        # test server / application server
 )
 DESKTOPS=(
 	"sauron.$LOCAL_DOMAIN"    # main desktop
@@ -56,13 +54,13 @@ unsetopt beep notify
 PATH=""
 PATH=${PATH}${HOME}/bin:  # allow me to overwrite scripts installed by packages
 [ -d "${HOME}/scripts" ] && PATH=${PATH}${HOME}/scripts: # on some hosts, ~/bin is not my github repository malte70/scripts, it is in ~/scripts.
-[ $OS = "Mac OS X" ] && PATH=${PATH}/usr/local/opt/php55/bin:
+#[ $OS = "Mac OS X" ] && PATH=${PATH}/usr/local/opt/php55/bin:
+PATH=${PATH}/usr/local/bin:
+PATH=${PATH}/usr/local/sbin:
 PATH=${PATH}/bin:
 PATH=${PATH}/sbin:
 PATH=${PATH}/usr/bin:
 PATH=${PATH}/usr/sbin:
-PATH=${PATH}/usr/local/bin:
-PATH=${PATH}/usr/local/sbin:
 PATH=${PATH}/usr/bin/core_perl:
 PATH=${PATH}/usr/bin/vendor_perl:
 PATH=${PATH}/opt/java/jre/bin:
@@ -122,12 +120,18 @@ zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}
 zstyle ':completion:*' menu select=0
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 my_accounts=(
-	malte@sauron.malte-bublitz.de
+	# LAN Desktops
+	malte70@sauron.tardis.mcbx.de
+	malte70@gallifrey.tardis.mcbx.de
+	# Old Server
 	malte@ovis.flying-sheep.de
-	malte@deepthought.malte-bublitz.de
-	malte70@abyss.malte-bublitz.de
-	malte70@khaos.malte70.de
+	# Root Servers
+	malte70@abyss.mcbx.de
 	malte70@gimli.mcbx.de
+	# Virtual Servers
+	malte70@khaos.malte70.de
+	malte70@minecraft.mcbx.de
+	malte70@web0.mcbx.de
 )
 zstyle ':completion:*:my-accounts' users-hosts $my_accounts
 autoload -Uz compinit
@@ -213,6 +217,7 @@ else
 		alias ls="`print -n =gls` --color=auto --escape -l --file-type -h --time-style=long-iso"
 		alias df="`print -n =gdf` --human-readable --print-type"
 		alias d=`print -n =gdate`' --rfc-3339=seconds | tr " " "T"'
+		alias sed="`print -n =gsed`"
 	else
 		alias ls="/bin/ls -l -G -F -b -h"
 		alias df="/bin/df -h"
@@ -239,6 +244,23 @@ alias -g T='|tail'
 alias -g W='|wc -l'
 alias -g S='|stripwhite'
 
+# Make rmdir work with Folders containing special meta data files like .DS_Store
+RMDIR==rmdir
+rmdir() {
+	# Special system files for OS X, X11 desktops and Windows
+	SPECIALFILES=(.DS_Store Thumbs.db desktop.ini .desktop)
+	for dir in $@
+	do
+		for sf in $SPECIALFILES
+		do
+			rm -f ${dir}/${sf}
+		done
+		if [[ $(/bin/ls -1 -A ${dir} | wc -l) -eq 0 ]]
+		then
+			$RMDIR ${dir}
+		fi
+	done
+}
 if [[ $OS == "Mac OS X" ]]; then
 	show_desktop() {
 		doOrDont=$1
