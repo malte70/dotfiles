@@ -9,6 +9,7 @@ SERVERS=(
 	"abyss.$DOMAIN"           # primary server
 	"gimli.$DOMAIN"           # secondary server
 	"web0.$DOMAIN"            # primary web server
+	"minecraft.$DOMAIN"       # Minecraft server
 	"khaos.malte70.de"        # test server / application server
 )
 DESKTOPS=(
