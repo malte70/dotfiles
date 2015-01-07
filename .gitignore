@@ -4,6 +4,7 @@
 !.mc/solarized.ini
 !.ncmpcpp/config
 !.vimrc
+!.vim/*
 !.zshrc
 !.Xmodmap
 !README.md
