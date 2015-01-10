@@ -15,7 +15,8 @@ set nocompatible
 set noexrc
 
 " Pathogen
-execute pathogen#infect()
+call pathogen#infect()
+call pathogen#helptags()
 
 " basic configuration
 source ~/.vim/basic.vim

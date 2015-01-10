@@ -3,10 +3,11 @@
 "    basic settings
 " 
 
+let sysname = substitute(system('uname -s'), '\n', '', '')
 " auto-reload
 autocmd! bufwritepost ~/.vim/basic.vim source %
 
-syntax on
+syntax enable
 filetype plugin on
 filetype indent on
 
@@ -99,7 +100,9 @@ function! MakeScriptExecuteable()
 	endif
 endfunction
 
-let g:solarized_termcolors=256
+if sysname == "Darwin"
+	let g:solarized_termcolors=256
+endif
 set background=dark
 colorscheme solarized
 
@@ -127,7 +130,6 @@ if has("gui_running")
 endif
 
 " Taglist
-let sysname = substitute(system('uname -s'), '\n', '', '')
 if sysname == "Darwin"
 	" On OS X, use ctags provided by homebrew
 	let Tlist_Ctags_Cmd = "/usr/local/bin/ctags"
