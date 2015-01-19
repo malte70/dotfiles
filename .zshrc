@@ -303,7 +303,13 @@ else
 	PROMPT=""
 fi
 PROMPT="%F{cyan}[%F{green}%B`uname -m`%b%F{cyan}|%F{green}%B$OS%b%F{cyan}|%F{green}%B$OSVERSION%b%F{cyan}]%(?.. %F{cyan}[%F{red}%?%F{cyan}]) "'$(get_git_prompt_info)'"%F{yellow}%~%b%F{white}
-%F{white}%n@%F{green}%m%F{white}$ "
+%F{white}%n@"
+if [[ $UID -ne 0 ]]; then
+	PROMPT="$PROMPT%F{green}"
+else
+	PROMPT="$PROMPT%F{red}"
+fi
+PROMPT="$PROMPT%m%F{white}$ "
 
 # Display runtime of commands that run longer than 5 seconds (no need for time $command anymore)
 REPORTTIME=5
