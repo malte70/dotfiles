@@ -230,8 +230,8 @@ if which todo.sh &>/dev/null
 then
 	alias t==todo.sh
 fi
-alias g="git"
 alias g-c="git clone"
+alias g-p="git push --tags -u origin master"
 alias tree="tree  -AC"
 # global aliases:
 alias -g L="|$PAGER"
