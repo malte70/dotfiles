@@ -320,31 +320,6 @@ true
 
 [ -f $HOME/.mc/solarized.ini ] && export MC_SKIN=$HOME/.mc/solarized.ini
 
-start_autossh() {
-	autossh -M 0 -q -f -N -o "ServerAliveInterval 60" -o "ServerAliveCountMax 3" -D 8081 sshtunnel@abyss.malte-bublitz.de
-}
-set_proxy() {
-	case $1 in
-		"sshtunnel")
-			unset http_proxy
-			unset https_proxy
-			unset ftp_poxy
-			export all_proxy=socks://127.0.0.1:1080
-			;;
-		"sshtunnel8080")
-			unset http_proxy
-			unset https_proxy
-			unset ftp_poxy
-			export all_proxy=socks://127.0.0.1:8080
-			;;
-		*)
-			unset http_proxy
-			unset https_proxy
-			unset ftp_poxy
-			unset all_proxy
-			;;
-	esac
-}
 # show todo, if logging in
 # i know, this code is terrible...
 if which todo.sh &>/dev/null
