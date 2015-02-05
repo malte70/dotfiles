@@ -320,6 +320,19 @@ true
 
 [ -f $HOME/.mc/solarized.ini ] && export MC_SKIN=$HOME/.mc/solarized.ini
 
+if [[ $OS != "Darwin" ]]
+then
+	if [[ $OS == "Windows NT" ]] && [[ -e /dev/clipboard ]]
+	then
+		alias pbcopy="cat > /dev/clipboard"
+		alias pbpaste="cat /dev/clipboard"
+	elif which xsel &>/dev/null
+	then
+		alias pbcopy='xsel --clipboard --input'
+		alias pbpaste='xsel --clipboard --output'
+	fi
+fi
+
 # show todo, if logging in
 # i know, this code is terrible...
 if which todo.sh &>/dev/null
