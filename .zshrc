@@ -358,6 +358,12 @@ show_notes() {
 		cat "$NOTES"
 	fi
 }
+if [[ -x =${EDITOR} ]]
+then
+	edit_notes() {
+		$EDITOR "$NOTES"
+	}
+fi
 
 # Show notes when shell starts (but not if .zshrc is sourced again!)
 if [[ "$DID_SHOW_NOTES" != "yes" ]] && [[ -f "$NOTES" ]]
