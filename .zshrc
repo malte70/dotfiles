@@ -245,23 +245,6 @@ alias -g T='|tail'
 alias -g W='|wc -l'
 alias -g S='|stripwhite'
 
-# Make rmdir work with Folders containing special meta data files like .DS_Store
-RMDIR==rmdir
-rmdir() {
-	# Special system files for OS X, X11 desktops and Windows
-	SPECIALFILES=(.DS_Store Thumbs.db desktop.ini .desktop)
-	for dir in $@
-	do
-		for sf in $SPECIALFILES
-		do
-			rm -f ${dir}/${sf}
-		done
-		if [[ $(/bin/ls -1 -A ${dir} | wc -l) -eq 0 ]]
-		then
-			$RMDIR ${dir}
-		fi
-	done
-}
 if [[ $OS == "Mac OS X" ]]; then
 	show_desktop() {
 		doOrDont=$1
