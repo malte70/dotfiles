@@ -176,16 +176,34 @@ if which most &>/dev/null; then
 else
 	PAGER==less
 fi
-# set browser to elinks on servers, everywhere else to firefox.
-node=`hostname -f`
-if (( ${SERVERS[(i)$node]} <= ${#SERVERS} )); then
+if which elinks &>/dev/null
+then
+	# If elinks is installed, set it as a fallback, just to be sure $BROWSER is
+	# always set if no GUI browsers are available
 	BROWSER==elinks
-elif [ $OS = "Cygwin" ]; then
-	BROWSER="/cygdrive/c/Program Files (x86)/Google/Chrome/Application/chrome.exe"
-elif [ $OS != "Mac OS X" ]; then
-	BROWSER==firefox
 else
-	BROWSER="/Applications/Firefox.app/Contents/MacOS/firefox"
+	echo "WARNING: ELinks not found in PATH!" >&2
+fi
+if [[ -n $DISPLAY ]] && [[ $OS != "Mac OS X" ]]
+then
+	# X11 available (Either locally on a desktop or remote via VNC)
+	if which gvfs-open &>/dev/null
+	then
+		# First choice should be asking the DE (MATE in most cases for me)
+		BROWSER==gvfs-open
+	if which google-chrome-beta &>/dev/null
+	then
+		# If Chrome (Note: I'm always using Beta channel) is available, it is the default browser.
+		BROWSER==google-chrome-beta
+	elif which firefox &>/dev/null
+		# If Chrome isn't installed, firefox is.
+		BROWSER==firefox
+	else
+		echo "WARNUNG: No Browsers found?!?" >&2
+	fi
+elif [[ $OS == "Mac OS X" ]]; then
+	# On OS X, open <URL> always launches the user's default browser of choice.
+	BROWSER=open
 fi
 if [ -d $HOME/Mail ]; then
 	export MAIL=~/Mail
@@ -196,7 +214,7 @@ export EDITOR PAGER BROWSER
 # Aliases
 # 
 # command aliases:
-if [[ "$OS" == "Mac OS X" ]]; then
+if [[ "$OS" == "Mac OS X" ]] && which pacapt &>/dev/null; then
 	# On OS X, pacapt is used
 	alias yaourt="pacapt"
 	alias y="pacapt"
