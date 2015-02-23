@@ -389,4 +389,22 @@ if [[ -f ${ALSAEQUAL_PLUGIN_PATH} ]]
 then
 	alias alsaequal="alsamixer -D equal"
 fi
+
+# Battery status (if a battery is available)
+if which battery_status &>/dev/null
+then
+	# Check if a battery is available
+	if battery_status &>/dev/null
+	then
+		# Only show status if not charging
+		if [[ $(battery_status --get IS_CHARGING) == "False" ]]
+		then
+			BAT_REMAINING=$(battery_status --get CAPACITY_PERCENT)
+			BAT_HOURS=$(battery_status --get HOURS_REMAINING)
+			BAT_MINUTES=$(battery_status --get MINUTES_REMAINING)
+			echo "Battery discharging ($BAT_REMAINING %) - ${BAT_HOURS}h ${BAT_MINUTES}m remaining"
+			echo
+		fi
+	fi
+fi
 [ -f $HOME/.zshrc.local ] && . $HOME/.zshrc.local; true
