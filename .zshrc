@@ -383,4 +383,10 @@ EOF
 	fi
 fi
 
+# Alias for alsaequal (only if installed)
+ALSAEQUAL_PLUGIN_PATH="/usr/lib/alsa-lib/libasound_module_ctl_equal.so"
+if [[ -f ${ALSAEQUAL_PLUGIN_PATH} ]]
+then
+	alias alsaequal="alsamixer -D equal"
+fi
 [ -f $HOME/.zshrc.local ] && . $HOME/.zshrc.local; true
