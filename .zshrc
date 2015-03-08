@@ -275,7 +275,7 @@ if [[ $OS == "Mac OS X" ]]; then
 	}
 fi
 
-# map STOP to ^W (START is ^Q, and also, ^S is free to be used by vim)
+# map STOP to ^A (START is ^Q, and also, ^S is free to be used by vim)
 stty stop ^A
 
 # prompt theme
