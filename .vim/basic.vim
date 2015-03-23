@@ -101,7 +101,7 @@ function! MakeScriptExecuteable()
 endfunction
 
 set background=dark
-colorscheme solarized
+colorscheme desert
 
 " ignore whitespaces in diff
 set diffopt+=iwhite
