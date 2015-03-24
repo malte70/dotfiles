@@ -177,16 +177,34 @@ if which most &>/dev/null; then
 else
 	PAGER==less
 fi
-# set browser to elinks on servers, everywhere else to firefox.
-node=`hostname -f`
-if (( ${SERVERS[(i)$node]} <= ${#SERVERS} )); then
+if which elinks &>/dev/null
+then
+	# If elinks is installed, set it as a fallback, just to be sure $BROWSER is
+	# always set if no GUI browsers are available
 	BROWSER==elinks
-elif [ $OS = "Cygwin" ]; then
-	BROWSER="/cygdrive/c/Program Files (x86)/Google/Chrome/Application/chrome.exe"
-elif [ $OS != "Mac OS X" ]; then
-	BROWSER==firefox
 else
-	BROWSER="/Applications/Firefox.app/Contents/MacOS/firefox"
+	echo "WARNING: ELinks not found in PATH!" >&2
+fi
+if [[ -n $DISPLAY ]] && [[ $OS != "Mac OS X" ]]
+then
+	# X11 available (Either locally on a desktop or remote via VNC)
+	if which gvfs-open &>/dev/null
+	then
+		# First choice should be asking the DE (MATE in most cases for me)
+		BROWSER==gvfs-open
+	if which google-chrome-beta &>/dev/null
+	then
+		# If Chrome (Note: I'm always using Beta channel) is available, it is the default browser.
+		BROWSER==google-chrome-beta
+	elif which firefox &>/dev/null
+		# If Chrome isn't installed, firefox is.
+		BROWSER==firefox
+	else
+		echo "WARNUNG: No Browsers found?!?" >&2
+	fi
+elif [[ $OS == "Mac OS X" ]]; then
+	# On OS X, open <URL> always launches the user's default browser of choice.
+	BROWSER=open
 fi
 if [ -d $HOME/Mail ]; then
 	export MAIL=~/Mail
@@ -197,7 +215,7 @@ export EDITOR PAGER BROWSER
 # Aliases
 # 
 # command aliases:
-if [[ "$OS" == "Mac OS X" ]]; then
+if [[ "$OS" == "Mac OS X" ]] && which pacapt &>/dev/null; then
 	# On OS X, pacapt is used
 	alias yaourt="pacapt"
 	alias y="pacapt"
@@ -231,8 +249,8 @@ if which todo.sh &>/dev/null
 then
 	alias t==todo.sh
 fi
-alias g="git"
 alias g-c="git clone"
+alias g-p="git push --tags -u origin master"
 alias tree="tree  -AC"
 # global aliases:
 alias -g L="|$PAGER"
@@ -246,23 +264,6 @@ alias -g T='|tail'
 alias -g W='|wc -l'
 alias -g S='|stripwhite'
 
-# Make rmdir work with Folders containing special meta data files like .DS_Store
-RMDIR==rmdir
-rmdir() {
-	# Special system files for OS X, X11 desktops and Windows
-	SPECIALFILES=(.DS_Store Thumbs.db desktop.ini .desktop)
-	for dir in $@
-	do
-		for sf in $SPECIALFILES
-		do
-			rm -f ${dir}/${sf}
-		done
-		if [[ $(/bin/ls -1 -A ${dir} | wc -l) -eq 0 ]]
-		then
-			$RMDIR ${dir}
-		fi
-	done
-}
 if [[ $OS == "Mac OS X" ]]; then
 	show_desktop() {
 		doOrDont=$1
@@ -275,7 +276,7 @@ if [[ $OS == "Mac OS X" ]]; then
 	}
 fi
 
-# map STOP to ^W (START is ^Q, and also, ^S is free to be used by vim)
+# map STOP to ^A (START is ^Q, and also, ^S is free to be used by vim)
 stty stop ^A
 
 # prompt theme
@@ -304,7 +305,13 @@ else
 	PROMPT=""
 fi
 PROMPT="%F{cyan}[%F{green}%B`uname -m`%b%F{cyan}|%F{green}%B$OS%b%F{cyan}|%F{green}%B$OSVERSION%b%F{cyan}]%(?.. %F{cyan}[%F{red}%?%F{cyan}]) "'$(get_git_prompt_info)'"%F{yellow}%~%b%F{white}
-%F{white}%n@%F{green}%m%F{white}$ "
+%F{white}%n@"
+if [[ $UID -ne 0 ]]; then
+	PROMPT="$PROMPT%F{green}"
+else
+	PROMPT="$PROMPT%F{red}"
+fi
+PROMPT="$PROMPT%m%F{white}$ "
 
 # Display runtime of commands that run longer than 5 seconds (no need for time $command anymore)
 REPORTTIME=5
@@ -315,31 +322,19 @@ true
 
 [ -f $HOME/.mc/solarized.ini ] && export MC_SKIN=$HOME/.mc/solarized.ini
 
-start_autossh() {
-	autossh -M 0 -q -f -N -o "ServerAliveInterval 60" -o "ServerAliveCountMax 3" -D 8081 sshtunnel@abyss.malte-bublitz.de
-}
-set_proxy() {
-	case $1 in
-		"sshtunnel")
-			unset http_proxy
-			unset https_proxy
-			unset ftp_poxy
-			export all_proxy=socks://127.0.0.1:1080
-			;;
-		"sshtunnel8080")
-			unset http_proxy
-			unset https_proxy
-			unset ftp_poxy
-			export all_proxy=socks://127.0.0.1:8080
-			;;
-		*)
-			unset http_proxy
-			unset https_proxy
-			unset ftp_poxy
-			unset all_proxy
-			;;
-	esac
-}
+if [[ $OS != "Darwin" ]]
+then
+	if [[ $OS == "Windows NT" ]] && [[ -e /dev/clipboard ]]
+	then
+		alias pbcopy="cat > /dev/clipboard"
+		alias pbpaste="cat /dev/clipboard"
+	elif which xsel &>/dev/null
+	then
+		alias pbcopy='xsel --clipboard --input'
+		alias pbpaste='xsel --clipboard --output'
+	fi
+fi
+
 # show todo, if logging in
 # i know, this code is terrible...
 if which todo.sh &>/dev/null
@@ -353,4 +348,64 @@ then
 	SHOW_TODO="no"
 fi
 
+# Show notes
+NOTES="$HOME/.notes"
+show_notes() {
+	if [[ ! -f "$NOTES" ]]
+	then
+		echo "Notefile ~/.notes not found." >&2
+		exit 1
+	else
+		cat "$NOTES"
+	fi
+}
+if [[ -x =${EDITOR} ]]
+then
+	edit_notes() {
+		$EDITOR "$NOTES"
+	}
+fi
+
+# Show notes when shell starts (but not if .zshrc is sourced again!)
+if [[ "$DID_SHOW_NOTES" != "yes" ]] && [[ -f "$NOTES" ]]
+then
+	# Only show if 10 lines or less to not mess up the screen
+	if [[ $(wc -l "$NOTES" | cut -d" " -f1) -lt 12 ]]
+	then
+		show_notes
+		DID_SHOW_NOTES=yes
+	else
+		cat <<EOF
+
+Notefile to long to display automatically.
+To show it at any time, use \`show_notes\`
+
+EOF
+	fi
+fi
+
+# Alias for alsaequal (only if installed)
+ALSAEQUAL_PLUGIN_PATH="/usr/lib/alsa-lib/libasound_module_ctl_equal.so"
+if [[ -f ${ALSAEQUAL_PLUGIN_PATH} ]]
+then
+	alias alsaequal="alsamixer -D equal"
+fi
+
+# Battery status (if a battery is available)
+if which battery_status &>/dev/null
+then
+	# Check if a battery is available
+	if battery_status &>/dev/null
+	then
+		# Only show status if not charging
+		if [[ $(battery_status --get IS_CHARGING) == "False" ]]
+		then
+			BAT_REMAINING=$(battery_status --get CAPACITY_PERCENT)
+			BAT_HOURS=$(battery_status --get HOURS_REMAINING)
+			BAT_MINUTES=$(battery_status --get MINUTES_REMAINING)
+			echo "Battery discharging ($BAT_REMAINING %) - ${BAT_HOURS}h ${BAT_MINUTES}m remaining"
+			echo
+		fi
+	fi
+fi
 [ -f $HOME/.zshrc.local ] && . $HOME/.zshrc.local; true

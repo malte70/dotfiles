@@ -100,11 +100,8 @@ function! MakeScriptExecuteable()
 	endif
 endfunction
 
-if sysname == "Darwin"
-	let g:solarized_termcolors=256
-endif
 set background=dark
-colorscheme solarized
+colorscheme desert
 
 " ignore whitespaces in diff
 set diffopt+=iwhite
