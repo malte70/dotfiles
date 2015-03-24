@@ -10,6 +10,7 @@ SERVERS=(
 	"gimli.$DOMAIN"           # secondary server
 	"web0.$DOMAIN"            # primary web server
 	"minecraft.$DOMAIN"       # Minecraft server
+	"demeter.$DOMAIN"         # Datux's server / primary mail server
 	"khaos.malte70.de"        # test server / application server
 )
 DESKTOPS=(
