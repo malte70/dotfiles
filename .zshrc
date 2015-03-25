@@ -10,6 +10,7 @@ SERVERS=(
 	"gimli.$DOMAIN"             # secondary server
 	"web0.$DOMAIN"              # primary web server
 	"minecraft.$DOMAIN"         # Minecraft server
+	"demeter.$DOMAIN"           # Datux's server / primary mail server
 	"khaos.malte70.de"          # test server / application server
 	"deepthought.khaos.$DOMAIN" # Emulated System z on khaos
 )
@@ -276,7 +277,7 @@ if [[ $OS == "Mac OS X" ]]; then
 	}
 fi
 
-# map STOP to ^W (START is ^Q, and also, ^S is free to be used by vim)
+# map STOP to ^A (START is ^Q, and also, ^S is free to be used by vim)
 stty stop ^A
 
 # prompt theme
