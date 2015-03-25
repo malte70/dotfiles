@@ -6,16 +6,18 @@
 DOMAIN="mcbx.de"
 LOCAL_DOMAIN="tardis.$DOMAIN"
 SERVERS=(
-	"abyss.$DOMAIN"           # primary server
-	"gimli.$DOMAIN"           # secondary server
-	"web0.$DOMAIN"            # primary web server
-	"minecraft.$DOMAIN"       # Minecraft server
-	"khaos.malte70.de"        # test server / application server
+	"abyss.$DOMAIN"             # primary server
+	"gimli.$DOMAIN"             # secondary server
+	"web0.$DOMAIN"              # primary web server
+	"minecraft.$DOMAIN"         # Minecraft server
+	"demeter.$DOMAIN"           # Datux's server / primary mail server
+	"khaos.malte70.de"          # test server / application server
+	"deepthought.khaos.$DOMAIN" # Emulated System z on khaos
 )
 DESKTOPS=(
-	"sauron.$LOCAL_DOMAIN"    # main desktop
-	"gallifrey.$LOCAL_DOMAIN" # notebook
-	"placente.$LOCAL_DOMAIN"  # MacBook
+	"sauron.$LOCAL_DOMAIN"      # main desktop
+	"gallifrey.$LOCAL_DOMAIN"   # notebook
+	"placente.$LOCAL_DOMAIN"    # MacBook
 )
 
 OS=`uname -s`
