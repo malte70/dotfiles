@@ -17,7 +17,7 @@ SERVERS=(
 DESKTOPS=(
 	"sauron.$LOCAL_DOMAIN"      # main desktop
 	"gallifrey.$LOCAL_DOMAIN"   # notebook
-	"placente.$LOCAL_DOMAIN"    # MacBook
+	"placenta.$LOCAL_DOMAIN"    # MacBook
 )
 
 OS=`uname -s`
