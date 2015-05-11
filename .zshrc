@@ -207,7 +207,7 @@ export EDITOR PAGER BROWSER
 # command aliases:
 if [[ "$OS" == "Mac OS X" ]] && which pacapt &>/dev/null; then
 	# On OS X, pacapt is used
-	alias yaourt="pacapt"
+	alias yaourt==pacapt
 	alias y="pacapt"
 	alias y-Syu="pacapt -Syu"
 	alias y-Syuw="pacapt -Syuw"
