@@ -124,7 +124,7 @@ keycode 130 = Hangul NoSymbol Hangul
 keycode 131 = Hangul_Hanja NoSymbol Hangul_Hanja
 keycode 132 =
 keycode 133 = Super_L NoSymbol Super_L
-keycode 134 = Super_R NoSymbol Super_R
+keycode 134 = ISO_Level3_Shift
 keycode 135 = Multi_key Menu
 keycode 136 = Cancel NoSymbol Cancel
 keycode 137 = Redo NoSymbol Redo
@@ -246,3 +246,7 @@ keycode 252 =
 keycode 253 =
 keycode 254 =
 keycode 255 =
+
+
+clear Mod4
+add Mod4 = Super_L
