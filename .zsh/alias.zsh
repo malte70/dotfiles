@@ -72,3 +72,10 @@ if [[ $OS == "Mac OS X" ]]; then
 	}
 fi
 
+# GCC and G++ Wrapper with default options
+if [[ $OS == "GNU/Linux" ]]; then
+	CC=$(which gcc)
+	CXX=$(which g++)
+	alias gcc="$CC -std=c11 -D_POSIX_C_SOURCE=200809L -Wall -Wextra -pedantic-errors -march=native -O3"
+	alias g++="$CXX -std=c++11 -D_POSIX_C_SOURCE=200809L -Wall -Wextra -pedantic-errors -march=native -O3"
+fi
