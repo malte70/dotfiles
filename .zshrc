@@ -201,7 +201,6 @@ if [ -d $HOME/Mail ]; then
 fi
 export EDITOR PAGER BROWSER
 
-source $HOME/.zsh/alias.zsh
 
 # map STOP to ^A (START is ^Q, and also, ^S is free to be used by vim)
 stty stop ^A

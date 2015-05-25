@@ -53,6 +53,8 @@ alias -g H='|head'
 alias -g T='|tail'
 alias -g W='|wc -l'
 alias -g S='|stripwhite'
+alias -g 2null='2>/dev/null'
+
 # Alias for alsaequal (only if installed)
 ALSAEQUAL_PLUGIN_PATH="/usr/lib/alsa-lib/libasound_module_ctl_equal.so"
 if [[ -f ${ALSAEQUAL_PLUGIN_PATH} ]]
