@@ -1,5 +1,6 @@
 *
 !.abcde.conf
+!.config/uzbl/*
 !.gitignore
 !.mc/solarized.ini
 !.ncmpcpp/config
