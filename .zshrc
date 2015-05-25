@@ -253,6 +253,7 @@ alias -g H='|head'
 alias -g T='|tail'
 alias -g W='|wc -l'
 alias -g S='|stripwhite'
+alias -g 2null='2>/dev/null'
 
 if [[ $OS == "Mac OS X" ]]; then
 	show_desktop() {
