@@ -1,6 +1,13 @@
 #
-# ~/.zshrc
+# .zshrc
 #
+# Part of malte70's dotfiles
+#  https://github.com/malte70/dotfiles
+#
+# Copyright (c) 2012-2015 Malte Bublitz, http://malte-bublitz.de
+# 
+# Licensed under the terms of the 2-clause BSD license ("FreeBSD license"); see COPYING for details.
+# 
 
 # my network setup. used to adjust behaviour to specific host
 DOMAIN="mcbx.de"
