@@ -1,10 +1,46 @@
 # My dotfiles
 
-## Contents
-This repo contains configuration files for: abcde, conky, VIM, zsh and X11 keys.
-If you have ideas to extend this, just open an issue.
+## About
 
-## Features
+This repository contains my dotfiles, currently for the following applications:
+
+ * abcde (A Better CD Encoder)
+ * Solarized theme for Midnight Commander
+ * ncmpcpp
+ * Uzbl (A Browser for totally weird people)
+ * vim
+ * X11/Xmodmap
+ * zsh
+
+If you have ideas to extend this, just open an issue or directly make a pull
+request.
+
+See also: [dotfiles.github.com](https://dotfiles.github.com)
+
+## Requirements
+
+Especially the zsh configuration largely depends on the system and the
+applications installed. Currently, it is prooven to work without modifications
+on the following operating systems (and might work on many others, too):
+
+ * GNU/Linux
+    * ArchLinux
+    * Gentoo (on s390x a.k.a. System z)
+	* Debian
+ * OS X (10.6 should still be working, but only 10.10 is practically used)
+ * FreeBSD and GhostBSD (which is de facto the same)
+ * OpenIndiana (the Illuminos distribution, fork of OpenSolaris/SunOS)
+ * Windows NT with Cygwin
+
+### Software requirements of zsh configuration
+
+ * Vim (soft requirement using EDITOR variable)
+ * Elinks (Also a soft requirement for the BROWSER variable)
+ * My shell scripts (especially gitinfo) from
+   [malte70/scripts](https://github.com/malte70/scripts) in $PATH,
+   so cloned to either ~/bin or ~/scripts (If ~/bin is already existing)
+
+## Parts of this repository
 
 ### .Xmodmap
 
