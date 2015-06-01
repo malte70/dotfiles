@@ -1,5 +1,6 @@
 *
 !.abcde.conf
+!.bashrc
 !.config/uzbl/*
 !.gitignore
 !.mc/solarized.ini
