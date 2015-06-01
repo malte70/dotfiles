@@ -9,3 +9,6 @@
 [submodule ".vim/bundle/goyo"]
 	path = .vim/bundle/goyo
 	url = https://github.com/junegunn/goyo.vim
+[submodule ".vim/bundle/taglist.vim"]
+	path = .vim/bundle/taglist.vim
+	url = https://github.com/vim-scripts/taglist.vim.git
