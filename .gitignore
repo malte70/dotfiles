@@ -10,5 +10,6 @@
 !.zshrc
 !.zsh/*
 !.Xmodmap
+!.Xmodmap-macbook
 !COPYING
 !README.md
