@@ -213,4 +213,6 @@ then
 	fi
 fi
 
+source $HOME/.zsh/todo.zsh
+
 [ -f $HOME/.zshrc.local ] && . $HOME/.zshrc.local; true
