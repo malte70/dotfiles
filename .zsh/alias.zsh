@@ -39,7 +39,7 @@ then
 fi
 alias g-c="git clone"
 alias g-p="git push --tags -u origin master"
-alias tree="tree  -AC"
+alias tree="tree -AC"
 # global aliases:
 alias -g L="|$PAGER"
 alias -g G='|grep'
