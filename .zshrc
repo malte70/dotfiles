@@ -20,6 +20,7 @@ SERVERS=(
 	"demeter.$DOMAIN"           # Datux's server / primary mail server
 	"khaos.$DOMAIN"             # test server / application server
 	"deepthought.khaos.$DOMAIN" # Emulated System z on khaos
+	"mcp.$LOCAL_DOMAIN"         # Local VM host server
 )
 DESKTOPS=(
 	"sauron.$LOCAL_DOMAIN"      # main desktop
