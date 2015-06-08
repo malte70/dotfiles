@@ -34,6 +34,8 @@ case $OS in
 		echo "* Set a usable prompt"
 		
 		echo "* Defining aliases:"
+		alias ..="cd .."
+		echo "   * .."
 		alias ls="$(which ls) --color=auto --escape --file-type -h --time-style=long-iso"
 		echo "   * ls"
 		alias ll="$(which ls) --color=auto --escape -l --file-type -h --time-style=long-iso"
@@ -56,6 +58,8 @@ case $OS in
 		echo "* Set a usable prompt"
 		
 		echo "* Defining aliases:"
+		alias ..="cd .."
+		echo "   * .."
 		alias ls="/bin/ls -G -F -b -h"
 		echo "   * ls"
 		alias ll="/bin/ls -l -G -F -b -h"
