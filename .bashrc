@@ -15,8 +15,22 @@
 
 echo "Loading malte70's .bashrc ..."
 
-export PROMPT_LINUX="\u@\h:\w\\$ "
-export PROMPT_OSX="[\u@\h \w]\\$ "
+CLR0="\[\033[0m\]"
+CLR1="\[\033[0;36m\]"
+CLR2_root="\[\033[1;31m\]"
+CLR2_normal="\[\033[0;32m\]"
+if [ $UID -eq 0 ]; then
+	CLR2=$CLR2_root
+	PROMPT_END="#"
+else
+	CLR2=$CLR2_normal
+	PROMPT_END="$"
+fi
+CLR3="\[\033[1;32m\]"
+
+
+export PROMPT_LINUX="\u$CLR1@$CLR2\h$CLR0:$CLR3\w$CLR1$PROMPT_END $CLR0"
+export PROMPT_OSX="$CLR1[$CLR0\u@$CLR2\h$CLR0 $CLR3\w$CLR1]${PROMPT_END}${CLR0} "
 
 OS=$(uname -s)
 
