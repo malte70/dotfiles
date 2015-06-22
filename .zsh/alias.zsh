@@ -104,8 +104,8 @@ update () {
 		pushd $HOME/bin >/dev/null
 	fi
 	git pull
-	popd
-	popd
+	popd >/dev/null
+	popd >/dev/null
 	if [[ $OS == "GNU/Linux" ]]; then
 		if [[ $OSVARIANT == "Arch" ]]; then
 			yaourt -Syu --aur
@@ -119,5 +119,4 @@ update () {
 		brew update
 		brew upgrade --all
 	fi
-
 }
