@@ -90,3 +90,34 @@ if [[ $OS == "GNU/Linux" || $OS == "Mac OS X" ]]; then
 	alias gcc="$CC -std=c11 -D_POSIX_C_SOURCE=200809L -Wall -Wextra -pedantic-errors -march=native -O3"
 	alias g++="$CXX -std=c++11 -D_POSIX_C_SOURCE=200809L -Wall -Wextra -pedantic-errors -march=native -O3"
 fi
+
+# System update function
+update () {
+	pushd $HOME >/dev/null
+	git pull
+	git submodule init
+	git submodule sync
+	git submodule update
+	if [[ -d $HOME/scripts ]]; then
+		pushd $HOME/scripts >/dev/null
+	else
+		pushd $HOME/bin >/dev/null
+	fi
+	git pull
+	popd
+	popd
+	if [[ $OS == "GNU/Linux" ]]; then
+		if [[ $OSVARIANT == "Arch" ]]; then
+			yaourt -Syu --aur
+		elif [[ $OSVARIANT == "Debian" || $OSVARIANT == "Ubuntu" ]]; then
+			sudo apt-get update
+			sudo apt-get upgrade
+			sudo apt-get dist-upgrade
+			sudo apt-get autoremove
+		fi
+	elif [[ $OS == "Mac OS X" ]]; then
+		brew update
+		brew upgrade --all
+	fi
+
+}
