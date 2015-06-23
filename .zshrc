@@ -24,8 +24,8 @@ SERVERS=(
 )
 DESKTOPS=(
 	"sauron.$LOCAL_DOMAIN"      # main desktop
-	"gallifrey.$LOCAL_DOMAIN"   # notebook
-	"placenta.$LOCAL_DOMAIN"    # MacBook
+	"placenta.$LOCAL_DOMAIN"    # MacBook (OS X)
+	"applepie.$LOCAL_DOMAIN"    # MacBook (Arch Linux)
 )
 
 # OS detection
