@@ -108,7 +108,8 @@ update () {
 	popd >/dev/null
 	if [[ $OS == "GNU/Linux" ]]; then
 		if [[ $OSVARIANT == "Arch" ]]; then
-			yaourt -Syu --aur
+			y-Syu --aur
+			y -R $(y -Qqdt)
 		elif [[ $OSVARIANT == "Debian" || $OSVARIANT == "Ubuntu" ]]; then
 			sudo apt-get update
 			sudo apt-get upgrade
