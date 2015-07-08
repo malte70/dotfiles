@@ -147,7 +147,7 @@ set useragent         = Uzbl (Webkit @{WEBKIT_MAJOR}.@{WEBKIT_MINOR}) (@(+uname 
 # === SSL related configuration ==============================================
 
 # Set it to certificates store of your distribution, or your own CAfile.
-set ssl_ca_file = /etc/ssl/certs/ca-certificates.crt
+set ssl_ca_file = @config_home/uzbl/cacert.pem
 set ssl_verify = 1
 # Command to toggle ssl_verify value:
 @cbind  !ssl = chain 'toggle ssl_verify' 'reload'
@@ -312,7 +312,7 @@ set ebind     = @mode_bind global,-insert
 @bind   <Ctrl>i  = @set_mode insert
 
 # Hard-bound bookmarks
-@cbind  gh  = uri http://www.uzbl.org
+@cbind  gh  = uri http://malte70.start.twerminal.de
 
 # New window binds
 @cbind  gw  = event REQ_NEW_WINDOW
@@ -462,6 +462,6 @@ sync_spawn_exec @scripts_dir/load_cookies.sh
 sync_spawn_exec @scripts_dir/load_cookies.sh @data_home/uzbl/session-cookies.txt
 
 # Set the "home" page.
-set uri = uzbl.org/doesitwork/@COMMIT
+set uri = http://malte70.start.twerminal.de
 
 # vim: set fdm=syntax:
