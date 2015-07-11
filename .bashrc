@@ -40,7 +40,8 @@ case $OS in
 		OS="$(uname -o)"
 		OSVER="$(uname -r)"
 		DIST=$(grep DESCRIPTION /etc/lsb-release 2>/dev/null | cut -d\" -f2)
-		[ -z $DIST ] && DIST="Unknown"
+		[ "x" == "x$DIST" ] && DIST="Unknown"
+		echo
 		echo "* Kernel: ${OS}, version ${OSVER}"
 		echo "* Distribution: ${DIST}"
 		
@@ -65,6 +66,7 @@ case $OS in
 		OS="Darwin"
 		OSVER="$(uname -r)"
 		DIST="OS X $(/usr/bin/python -c 'import platform; print platform.mac_ver()[0]')"
+		echo
 		echo "* Kernel: ${OS}, version ${OSVER}"
 		echo "* Distribution: ${DIST}"
 		
