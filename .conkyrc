@@ -1,0 +1,34 @@
+alignment top_left
+background yes
+border_width 0
+default_color 111111
+double_buffer yes
+draw_borders no
+draw_outline no
+draw_shades no
+gap_x 5
+gap_y 35 
+maximum_width 250
+minimum_size 450 10
+own_window yes
+own_window_transparent yes
+own_window_type desktop
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+own_window_argb_visual yes
+own_window_argb_value 100
+update_interval 2.0
+uppercase no
+
+use_xft yes
+xftalpha 0.8
+xftfont FreeSerif:size=11
+
+TEXT
+Mount:${alignr}Belegt:
+ /$alignr${fs_used /} [${fs_used_perc /}%]
+ /boot$alignr${fs_used /boot} [${fs_used_perc /boot}%]
+ /home $alignr${fs_used /home} [${fs_used_perc /home}%]
+ /srv $alignr${fs_used /srv} [${fs_used_perc /srv}%]
+ /var $alignr${fs_used /var} [${fs_used_perc /var}%]
+ videos $alignr${fs_used /mnt/nas/video} [${fs_used_perc /mnt/nas/video}%]
+ pool/malte70 $alignr${fs_used /mnt/nas/backup} [${fs_used_perc /mnt/nas/backup}%]

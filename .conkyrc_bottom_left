@@ -1,0 +1,41 @@
+alignment bottom_right
+background yes
+border_width 0
+default_color 000000
+double_buffer yes
+draw_borders no
+draw_outline no
+draw_shades no
+gap_x 10
+gap_y 10
+#maximum_width 1650
+minimum_size 1800 15
+own_window yes
+own_window_transparent yes
+own_window_type desktop
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+own_window_argb_visual yes
+own_window_argb_value 100
+update_interval 2.0
+uppercase no
+
+use_xft yes
+xftalpha 0.8
+xftfont inconsolata-g:size=10
+
+TEXT
+$alignr $color \
+abyss.mcbx.de [${texeci 150 silentping.sh abyss.mcbx.de}]
+$alignr khaos.mcbx.de [${texeci 150 silentping.sh khaos.mcbx.de}]
+$alignr web0.mcbx.de [${texeci 150 silentping.sh web0.mcbx.de}]
+$alignr demeter.mcbx.de [${texeci 150 silentping.sh demeter.mcbx.de}]
+$alignr gimli.mcbx.de [${texeci 150 silentping.sh gimli.mcbx.de}]
+$alignr gw.twerminal.de [${texeci 150 silentping.sh gw.twerminal.de}]
+$alignr mcp.tardis.mcbx.de [${texeci 150 silentping.sh mcp.tardis.mcbx.de}]
+$alignr nas.tardis.mcbx.de [${texeci 150 silentping.sh nas.tardis.mcbx.de}]
+
+$alignr malte70@$nodename :: \
+Up: $uptime :: \
+CPU1: ${cpu cpu1}% :: \
+CPU2: ${cpu cpu2}% :: \
+RAM: $mem/$memmax ($memperc%)
