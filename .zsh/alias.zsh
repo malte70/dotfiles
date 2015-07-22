@@ -109,7 +109,7 @@ update () {
 	if [[ $OS == "GNU/Linux" ]]; then
 		if [[ $OSVARIANT == "Arch" ]]; then
 			y-Syu --aur
-			y -R $(y -Qqdt)
+			y -Qqdt &>/dev/null && y -R $(y -Qqdt)
 		elif [[ $OSVARIANT == "Debian" || $OSVARIANT == "Ubuntu" ]]; then
 			sudo apt-get update
 			sudo apt-get upgrade
