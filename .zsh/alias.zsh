@@ -120,4 +120,6 @@ update () {
 		brew update
 		brew upgrade --all
 	fi
+	# Make sure $? equals 0
+	true
 }
