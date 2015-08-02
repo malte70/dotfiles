@@ -42,21 +42,40 @@ on the following operating systems (and might work on many others, too):
 
 ## Parts of this repository
 
-### .Xmodmap
-
- * Mapped "∆" to Shift+AltGr+K (which is per default the same as AltGr+K)
-
 ### .abcde.conf
 
  * encode to flac
- * music directory on a separate partition
+ * music directory set according to platform (OS X/Linux)
 
-### .ncmpcpp
+### .bashrc
 
- * a nice theme
- * visualizer
+ * basic prompt (colored GNU/Linux resp. OS X default prompt)
+ * Basic aliases
 
-### .vimrc
+### .config/uzbl/config / .config/uzbl/cacert.pem
+
+ * Tabbing
+ * Personal home page
+ * Root CA Certificates from the cURL project plus my own (mcbx.de CA)
+
+### .conkyrc / .conkyrc\_bottom\_left / .conkyrc\_top\_right
+
+ * For my main desktop, sauron.tardis.mcbx.de, only, a huge screen (20 inch plus 22 inch monitors) is needed
+
+### .mc/solarized.ini
+
+ * Solarized theme for Midnight Commander
+
+### .ncmpcpp/config
+
+ * Custom layout
+ * Visualizer (needs additional settings in mpd.conf)
+
+### .vim/autoload/pathogen.vim
+
+ * Pathogen plugin loader
+
+### .vim/basic.vim
 
  * auto reload .vimrc when changed
  * syntax highlighting
@@ -69,17 +88,68 @@ on the following operating systems (and might work on many others, too):
  * Spell checking
  * \*.md files as markdown, not Modula2
 
+### .vim/bundle/goyo
+
+ * Vim-based full screen editor
+
+### .vim/bundle/html5.vim
+
+ * HTML5 syntax highlighting for html file type
+
+### .vim/bundle/nerdtree
+
+ * NERDtree file explorer
+
+### .vim/bundle/taglist.vim
+
+ * ctags based tag list sidebar
+
+### .vim/colors/solarized.vim
+
+ * Solarized color scheme
+
+### .Xmodmap / .Xmodmap-macbook
+
+ * Mapped "∆" to Shift+AltGr+K
+ * Mapped "♥" to AltGr+W
+ * Mapped "♬" to Shift+AltGr+E
+
 ### .zshrc
 
- * 10k lines of history
- * auto cd if command is a directory
- * autocomplete
- * type 'cd ...' to get 'cd ../..'
- * various useful aliases
- * advanced prompt
-    * node info (platform, kernel)
-    * git repository info
-    * local todo (in a TODO.md file)
-    * global todo (using todo.txt)
- * start a ssh tunnel if in my university's WiFi
+ * PATH adapted if specific paths exist
+ * Auto completion
+ * Environment settings ($EDITOR, $BROWSER)
+ * Everything in ~/.zsh/
+ * OS X's pbcopy/pbpaste on X11 with xsel and Cygwin
+
+### .zsh/alias.zsh
+
+ * Some short aliases for my most used pacman/yaourt/pacapt options
+ * Always used options for ls, df and date (adapted for GNU/Linux, OS X/FreeBSD and OS X with GNU core utilities)
+ * Global aliases for grep, head, tail etc.
+ * ALSA equalizer
+ * gcc with default options
+ * update function for dotfiles, ~/bin and package manager
+
+### .zsh/osdetect.zsh
+
+ * Operating system and distribution detection for OS-specific aliased etc.
+
+### .zsh/prompt.zsh
+
+ * Two column prompt
+    * Platform info
+    * Return code of last command if non-zero
+    * Git repository info (via gitinfo from malte70/scripts)
+    * Usual info a.k.a. working directory, user and hostname
+
+### .zsh/todo.zsh
+
+ * Show todo.txt list on shell launch
+ * Display notes from ~/.notes
+
+### .ncmpcpp
+
+ * a nice theme
+ * visualizer
 
