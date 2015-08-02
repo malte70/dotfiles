@@ -123,3 +123,5 @@ update () {
 	# Make sure $? equals 0
 	true
 }
+alias firefox-list-profiles="$(which find) ~/.mozilla/firefox/ -type d -mindepth 1 -maxdepth 1 2>/dev/null | cut -d. -f3"
+
