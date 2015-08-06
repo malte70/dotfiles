@@ -165,4 +165,7 @@ set tabstop=4
 set shiftwidth=4
 set noexpandtab
 
+" Functions for bootstrapping source code files (a.k.a. Boilerplates)
+source ~/.vim/boilerplates/_main.vim
+
 "vim: set ts=3 sw=4 noet:
