@@ -12,8 +12,6 @@ void help(char *prgname) {
 int main(int argc, char *argv[]) {
 	char message[200];
 	
-	//memset(message, '\0', sizeof(message));
-	
 	if (argc == 1) {
 		strcpy(message, "Hello world!\n");
 	} else if (argc == 2) {

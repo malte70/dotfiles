@@ -10,3 +10,7 @@ function! BoilerPlateShell()
 	r~/.vim/boilerplates/_bp.sh
 endfunction
 
+function! BoilerPlateC()
+	r~/.vim/boilerplates/_bp.c
+endfunction
+
