@@ -32,6 +32,7 @@ else
 		alias d='date "+%Y-%m-%dT%H:%M:%S%z"'
 	fi
 fi
+alias goyo="$(echo =vim) -c Goyo"
 alias mem="free -m"
 if which todo.sh &>/dev/null
 then
