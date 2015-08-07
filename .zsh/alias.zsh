@@ -135,3 +135,8 @@ if which qemu-system-i386 &>/dev/null && ! which qemu &>/dev/null; then
 	fi
 fi
 
+# Launch GUI applications detched (Inspired by Windows...)
+start() {
+	$@ </dev/null >/dev/null &|
+}
+
