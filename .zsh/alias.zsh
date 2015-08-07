@@ -126,3 +126,12 @@ update () {
 }
 alias firefox-list-profiles="$(which find) ~/.mozilla/firefox/ -type d -mindepth 1 -maxdepth 1 2>/dev/null | cut -d. -f3"
 
+# Launch QEMU using qemu command
+if which qemu-system-i386 &>/dev/null && ! which qemu &>/dev/null; then
+	if [[ $CPUTYPE == "x86_64" ]]; then
+		alias qemu==qemu-system-x86_64
+	else
+		alias qemu==qemu-system-i386
+	fi
+fi
+
