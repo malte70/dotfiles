@@ -9,32 +9,18 @@
 # Licensed under the terms of the 2-clause BSD license ("FreeBSD license"); see COPYING for details.
 # 
 
-# my network setup. used to adjust behaviour to specific host
-DOMAIN="mcbx.de"
-LOCAL_DOMAIN="tardis.$DOMAIN"
-SERVERS=(
-	"abyss.$DOMAIN"             # primary server
-	"gimli.$DOMAIN"             # secondary server
-	"web0.$DOMAIN"              # primary web server
-	"minecraft.$DOMAIN"         # Minecraft server
-	"demeter.$DOMAIN"           # Datux's server / primary mail server
-	"khaos.$DOMAIN"             # test server / application server
-	"deepthought.khaos.$DOMAIN" # Emulated System z on khaos
-	"mcp.$LOCAL_DOMAIN"         # Local VM host server
-)
-DESKTOPS=(
-	"sauron.$LOCAL_DOMAIN"      # main desktop
-	"placenta.$LOCAL_DOMAIN"    # MacBook (OS X)
-	"applepie.$LOCAL_DOMAIN"    # MacBook (Arch Linux)
-)
-
 # OS detection
 source $HOME/.zsh/osdetect.zsh
 
-# History: 10,000 lines in ~/.histfile
-HISTFILE=~/.histfile
-HISTSIZE=10000
-SAVEHIST=10000
+# $PATH
+source $HOME/.zsh/path.zsh
+
+# Check the environment for possible incompatibilities
+# Needs $PATH correctly set up before.
+source $HOME/.zsh/check_env.zsh
+
+# Configuration
+source $HOME/.zsh/config.zsh
 
 if which dircolors &>/dev/null; then
 	# On OS X, there is no dircolors, but it is not needed
@@ -43,24 +29,6 @@ fi
 setopt autocd
 setopt noclobber
 unsetopt beep notify
-
-# path
-PATH=""
-PATH=${PATH}${HOME}/bin:  # allow me to overwrite scripts installed by packages
-[ -d "${HOME}/scripts" ] && PATH=${PATH}${HOME}/scripts: # on some hosts, ~/bin is not my github repository malte70/scripts, it is in ~/scripts.
-#[ $OS = "Mac OS X" ] && PATH=${PATH}/usr/local/opt/php55/bin:
-PATH=${PATH}/usr/local/bin:
-PATH=${PATH}/usr/local/sbin:
-PATH=${PATH}/bin:
-PATH=${PATH}/sbin:
-PATH=${PATH}/usr/bin:
-PATH=${PATH}/usr/sbin:
-PATH=${PATH}/usr/bin/core_perl:
-PATH=${PATH}/usr/bin/vendor_perl:
-PATH=${PATH}/opt/java/jre/bin:
-[ -d "/opt/android-sdk/platform-tools" ] && PATH=${PATH}/opt/android-sdk/platform-tools:
-which ruby &>/dev/null && PATH=${PATH}$(ruby -rubygems -e 'puts Gem.user_dir')/bin:
-export PATH
 
 # vi keybindings
 bindkey -v
@@ -180,8 +148,6 @@ then
 	elif which firefox &>/dev/null
 		# If Chrome isn't installed, firefox is.
 		BROWSER==firefox
-	else
-		echo "WARNUNG: No Browsers found?!?" >&2
 	fi
 elif [[ $OS == "Mac OS X" ]]; then
 	# On OS X, open <URL> always launches the user's default browser of choice.
@@ -200,19 +166,6 @@ stty stop ^A
 source $HOME/.zsh/prompt.zsh
 
 [ -f $HOME/.mc/solarized.ini ] && export MC_SKIN=$HOME/.mc/solarized.ini
-
-if [[ $OS != "Darwin" ]]
-then
-	if [[ $OS == "Windows NT" ]] && [[ -e /dev/clipboard ]]
-	then
-		alias pbcopy="cat > /dev/clipboard"
-		alias pbpaste="cat /dev/clipboard"
-	elif which xsel &>/dev/null
-	then
-		alias pbcopy='xsel --clipboard --input'
-		alias pbpaste='xsel --clipboard --output'
-	fi
-fi
 
 source $HOME/.zsh/todo.zsh
 

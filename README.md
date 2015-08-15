@@ -26,7 +26,7 @@ on the following operating systems (and might work on many others, too):
  * GNU/Linux
     * ArchLinux
     * Gentoo (on s390x a.k.a. System z)
-	* Debian
+    * Debian
  * OS X (10.6 should still be working, but only 10.10 is practically used)
  * FreeBSD and GhostBSD (which is de facto the same)
  * OpenIndiana (the Illuminos distribution, fork of OpenSolaris/SunOS)

@@ -49,6 +49,8 @@ fi
 alias g-c="git clone"
 alias g-p="git push --tags -u origin master"
 alias tree="tree -AC"
+alias zshrc-reload="source ~/.zshrc"
+
 # global aliases:
 alias -g L="|$PAGER"
 alias -g G='|grep'
@@ -147,4 +149,17 @@ fi
 start() {
 	$@ </dev/null >/dev/null &|
 }
+
+if [[ $OS != "Mac OS X" ]]
+then
+	if [[ $OS == "Windows NT" ]] && [[ -e /dev/clipboard ]]
+	then
+		alias pbcopy="cat > /dev/clipboard"
+		alias pbpaste="cat /dev/clipboard"
+	elif which xsel &>/dev/null
+	then
+		alias pbcopy='xsel --clipboard --input'
+		alias pbpaste='xsel --clipboard --output'
+	fi
+fi
 
