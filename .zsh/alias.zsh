@@ -18,12 +18,14 @@ fi
 if [[ $OS != "Mac OS X" && $OS != "FreeBSD" ]]; then
 	alias ls="`print -n =ls` --color=auto --escape -l --file-type -h --time-style=long-iso"
 	alias df="`print -n =df` --human-readable --print-type"
+	alias du="`print -n =du` --summarize --total --human-readable"
 	alias d=`print -n =date`' --rfc-3339=seconds | tr " " "T"'
 else
 	if which gls &>/dev/null; then
 		# If gls is available, all other coreutils should be too.
 		alias ls="`print -n =gls` --color=auto --escape -l --file-type -h --time-style=long-iso"
 		alias df="`print -n =gdf` --human-readable --print-type"
+		alias du="`print -n =gdu` --summarize --total --human-readable"
 		alias d=`print -n =gdate`' --rfc-3339=seconds | tr " " "T"'
 		alias sed="`print -n =gsed`"
 	else
