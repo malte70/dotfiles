@@ -3,17 +3,25 @@
 # Aliases
 # 
 # command aliases:
-if [[ "$OS" == "Mac OS X" ]] && which pacapt &>/dev/null; then
-	# On OS X, pacapt is used
-	alias yaourt==pacapt
-	alias y="pacapt"
-	alias y-Syu="pacapt -Syu"
-	alias y-Syuw="pacapt -Syuw"
-elif [[ "$OSVARIANT" == "Arch" ]]; then
+if [[ "$OSVARIANT" == "Arch" ]]; then
 	alias y=yaourt
 	alias y-Syu="yaourt -Syu"
 	alias y-Syuw="yaourt -Syuw"
 	alias y-Qdt="yaourt -Qdt"
+elif which pacapt &>/dev/null; then
+	# If pacapt is installed, add some aliases.
+	if [[ "$OS" == "Mac OS X" ]] && which brew &>/dev/null; then
+		# On OS X with Homebrew, no sudo is needed
+		alias yaourt==pacapt
+		alias y="pacapt"
+		alias y-Syu="pacapt -Syu"
+		alias y-Syuw="pacapt -Syuw"
+	else
+		alias yaourt="sudo pacapt"
+		alias y="yaourt"
+		alias y-Syu="y -Syu"
+		alias y-Syuw="y -Syuw"
+	fi
 fi
 if [[ $OS != "Mac OS X" && $OS != "FreeBSD" ]]; then
 	alias ls="`print -n =ls` --color=auto --escape -l --file-type -h --time-style=long-iso"
