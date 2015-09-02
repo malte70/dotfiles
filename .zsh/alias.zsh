@@ -106,31 +106,48 @@ fi
 
 # System update function
 update () {
+	echo "${_ANSI_COLOR_DARK_CYAN}==[${_ANSI_COLOR_LIGHT_GREEN} pushd <- \$HOME ${_ANSI_COLOR_DARK_CYAN}]==${_ANSI_RESET}"
 	pushd $HOME >/dev/null
+	echo "${_ANSI_COLOR_DARK_CYAN}==[${_ANSI_COLOR_LIGHT_GREEN} git pull @ malte70/dotfiles ${_ANSI_COLOR_DARK_CYAN}]==${_ANSI_RESET}"
 	git pull
-	git submodule init
-	git submodule sync
-	git submodule update
+	git submodule init >/dev/null
+	git submodule sync >/dev/null
+	git submodule update >/dev/null
 	if [[ -d $HOME/scripts ]]; then
+	echo "${_ANSI_COLOR_DARK_CYAN}==[${_ANSI_COLOR_LIGHT_GREEN} pushd <- \$HOME/scripts ${_ANSI_COLOR_DARK_CYAN}]==${_ANSI_RESET}"
 		pushd $HOME/scripts >/dev/null
 	else
+	echo "${_ANSI_COLOR_DARK_CYAN}==[${_ANSI_COLOR_LIGHT_GREEN} pushd <- \$HOME/bin ${_ANSI_COLOR_DARK_CYAN}]==${_ANSI_RESET}"
 		pushd $HOME/bin >/dev/null
 	fi
+	echo "${_ANSI_COLOR_DARK_CYAN}==[${_ANSI_COLOR_LIGHT_GREEN} git pull @ malte70/scripts ${_ANSI_COLOR_DARK_CYAN}]==${_ANSI_RESET}"
 	git pull
 	popd >/dev/null
+	echo "${_ANSI_COLOR_DARK_CYAN}==[${_ANSI_COLOR_LIGHT_GREEN} popd ${_ANSI_COLOR_DARK_CYAN}]==${_ANSI_RESET}"
 	popd >/dev/null
+	echo "${_ANSI_COLOR_DARK_CYAN}==[${_ANSI_COLOR_LIGHT_GREEN} popd ${_ANSI_COLOR_DARK_CYAN}]==${_ANSI_RESET}"
+	
 	if [[ $OS == "GNU/Linux" ]]; then
 		if [[ $OSVARIANT == "Arch" ]]; then
+			echo "${_ANSI_COLOR_DARK_CYAN}==[${_ANSI_COLOR_LIGHT_GREEN} ArchLinux :: Upgrade ${_ANSI_COLOR_DARK_CYAN}]==${_ANSI_RESET}"
 			y-Syu --aur
+			echo "${_ANSI_COLOR_DARK_CYAN}==[${_ANSI_COLOR_LIGHT_GREEN} ArchLinux :: Cleanup ${_ANSI_COLOR_DARK_CYAN}]==${_ANSI_RESET}"
 			y -Qqdt &>/dev/null && y -R $(y -Qqdt)
+			
 		elif [[ $OSVARIANT == "Debian" || $OSVARIANT == "Ubuntu" ]]; then
+			echo "${_ANSI_COLOR_DARK_CYAN}==[${_ANSI_COLOR_LIGHT_GREEN} $OSVARIANT :: Update ${_ANSI_COLOR_DARK_CYAN}]==${_ANSI_RESET}"
 			sudo apt-get update
+			echo "${_ANSI_COLOR_DARK_CYAN}==[${_ANSI_COLOR_LIGHT_GREEN} $OSVARIANT :: Upgrade ${_ANSI_COLOR_DARK_CYAN}]==${_ANSI_RESET}"
 			sudo apt-get upgrade
+			echo "${_ANSI_COLOR_DARK_CYAN}==[${_ANSI_COLOR_LIGHT_GREEN} $OSVARIANT :: Dist-Upgrade ${_ANSI_COLOR_DARK_CYAN}]==${_ANSI_RESET}"
 			sudo apt-get dist-upgrade
+			echo "${_ANSI_COLOR_DARK_CYAN}==[${_ANSI_COLOR_LIGHT_GREEN} $OSVARIANT :: Cleanup ${_ANSI_COLOR_DARK_CYAN}]==${_ANSI_RESET}"
 			sudo apt-get autoremove
 		fi
 	elif [[ $OS == "Mac OS X" ]]; then
+		echo "${_ANSI_COLOR_DARK_CYAN}==[${_ANSI_COLOR_LIGHT_GREEN} Homebrew :: Update ${_ANSI_COLOR_DARK_CYAN}]==${_ANSI_RESET}"
 		brew update
+		echo "${_ANSI_COLOR_DARK_CYAN}==[${_ANSI_COLOR_LIGHT_GREEN} Homebrew :: Upgrade ${_ANSI_COLOR_DARK_CYAN}]==${_ANSI_RESET}"
 		brew upgrade --all
 	fi
 	# Make sure $? equals 0
