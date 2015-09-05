@@ -52,6 +52,10 @@ alias g-c="git clone"
 alias g-p="git push --tags -u origin master"
 alias tree="tree -AC"
 alias zshrc-reload="source ~/.zshrc"
+if which lsusb.py &>/dev/null
+then
+	alias lsusb.py="$(print =lsusb.py) -u -c"
+fi
 
 # global aliases:
 alias -g L="|$PAGER"
