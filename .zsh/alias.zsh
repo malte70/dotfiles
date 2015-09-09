@@ -186,3 +186,7 @@ then
 	fi
 fi
 
+if which compass &>/dev/null
+then
+	alias mkcss="$(which compass) compile"
+fi
