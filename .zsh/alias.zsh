@@ -8,6 +8,7 @@ if [[ "$OSVARIANT" == "Arch" ]]; then
 	alias y-Syu="yaourt -Syu"
 	alias y-Syuw="yaourt -Syuw"
 	alias y-Qdt="yaourt -Qdt"
+	alias y-Qo="yaourt -Qo"
 elif which pacapt &>/dev/null; then
 	# If pacapt is installed, add some aliases.
 	if [[ "$OS" == "Mac OS X" ]] && which brew &>/dev/null; then
@@ -16,11 +17,13 @@ elif which pacapt &>/dev/null; then
 		alias y="pacapt"
 		alias y-Syu="pacapt -Syu"
 		alias y-Syuw="pacapt -Syuw"
+		alias y-Qo="pacapt -Qo"
 	else
 		alias yaourt="sudo pacapt"
 		alias y="yaourt"
 		alias y-Syu="y -Syu"
 		alias y-Syuw="y -Syuw"
+		alias y-Qo="pacapt -Qo"
 	fi
 fi
 if [[ $OS != "Mac OS X" && $OS != "FreeBSD" ]]; then
@@ -50,12 +53,16 @@ then
 fi
 alias g-c="git clone"
 alias g-p="git push --tags -u origin master"
+alias g-t="git t"
+alias g-d="git d"
+alias g-ds="git ds"
 alias tree="tree -AC"
 alias zshrc-reload="source ~/.zshrc"
 if which lsusb.py &>/dev/null
 then
 	alias lsusb.py="$(print =lsusb.py) -u -c"
 fi
+alias mkdir="mkdir -p"
 
 # global aliases:
 alias -g L="|$PAGER"
