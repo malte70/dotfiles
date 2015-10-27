@@ -144,13 +144,14 @@ then
 	then
 		# First choice should be asking the DE (MATE in most cases for me)
 		BROWSER==gvfs-open
-	if which google-chrome-beta &>/dev/null
+	fi
+	if which firefox &>/dev/null
+	then
+		BROWSER==firefox
+	elif which google-chrome-beta &>/dev/null
 	then
 		# If Chrome (Note: I'm always using Beta channel) is available, it is the default browser.
 		BROWSER==google-chrome-beta
-	elif which firefox &>/dev/null
-		# If Chrome isn't installed, firefox is.
-		BROWSER==firefox
 	fi
 elif [[ $OS == "Mac OS X" ]]; then
 	# On OS X, open <URL> always launches the user's default browser of choice.
