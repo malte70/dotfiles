@@ -51,6 +51,31 @@ if which todo.sh &>/dev/null
 then
 	alias t==todo.sh
 fi
+g-i() {
+	YEAR="$(date +%Y)"
+	
+	if [[ $# -ne 1 ]]
+	then
+		echo "Usage: $0 <reponame>" >&2
+		exit 1
+	elif [[ -d $1 ]]
+	then
+		echo "$0: Error: Directory $1 already exists!" >&2
+		exit 1
+	fi
+	
+	mkdir "$1"
+	pushd "$1" &>/dev/null
+	git init
+	echo "# $1" > README.md
+	wget -q 'https://raw.githubusercontent.com/malte70/moin/master/COPYING.md'
+	sed -i "s/2015/$YEAR/g" COPYING.md
+	
+	git add README.md COPYING.md
+	git commit -m 'Initial commit'
+	
+	popd &>/dev/null
+}
 alias g-c="git clone"
 alias g-p="git push --tags -u origin master"
 alias g-t="git t"
