@@ -1,7 +1,13 @@
 #
 # .zsh/path.zsh
 #   Sets $PATH 
-#
+# 
+# Part of:
+#     malte70's dotfiles, https://github.com/malte70/dotfiles
+# 
+# Copyright (c) 2015 Malte Bublitz, http://malte-bublitz.de
+# All rights reserved.
+# 
 
 PATH=""
 PATH=${PATH}${HOME}/bin:  # allow me to overwrite scripts installed by packages
@@ -19,3 +25,4 @@ PATH=${PATH}/opt/java/jre/bin:
 [ -d "/opt/android-sdk/platform-tools" ] && PATH=${PATH}/opt/android-sdk/platform-tools:
 which ruby &>/dev/null && PATH=${PATH}$(ruby -rubygems -e 'puts Gem.user_dir')/bin:
 export PATH
+

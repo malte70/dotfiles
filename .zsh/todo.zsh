@@ -1,8 +1,14 @@
-#!/bin/zsh
-#
-# show todo, if logging in
-# i know, this code is terrible...
-#
+# 
+# .zsh/todo.zsh
+#     Show todo if logging in
+# 
+# Part of:
+#     malte70's dotfiles, https://github.com/malte70/dotfiles
+# 
+# Copyright (c) 2015 Malte Bublitz, http://malte-bublitz.de
+# All rights reserved.
+# 
+
 if which todo.sh &>/dev/null
 then
 	[ -z $SHOW_TODO ] && SHOW_TODO="yes"

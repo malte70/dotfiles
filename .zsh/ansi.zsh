@@ -1,5 +1,12 @@
-#
-# ANSI Color codes
+# 
+# .zsh/ansi.zsh
+#     ANSI Color codes
+# 
+# Part of:
+#     malte70's dotfiles, https://github.com/malte70/dotfiles
+# 
+# Copyright (c) 2015 Malte Bublitz, http://malte-bublitz.de
+# All rights reserved.
 # 
 
 _ANSI_ESCAPE=$(printf "\e")

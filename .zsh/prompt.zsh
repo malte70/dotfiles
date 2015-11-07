@@ -1,5 +1,14 @@
-#!/bin/zsh
-# prompt theme
+# 
+# .zsh/prompt.zsh
+#   ZSH prompt theme
+# 
+# Part of:
+#     malte70's dotfiles, https://github.com/malte70/dotfiles
+# 
+# Copyright (c) 2015 Malte Bublitz, http://malte-bublitz.de
+# All rights reserved.
+# 
+
 get_git_prompt_info() {
 	UPSTREAM=`gitinfo`
 	if [[ $UPSTREAM != "no git" ]]; then

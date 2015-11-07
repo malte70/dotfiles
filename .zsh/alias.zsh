@@ -1,7 +1,14 @@
-#!/bin/zsh
-#
-# Aliases
 # 
+# .zsh/alias.zsh
+#     Alias definitions
+# 
+# Part of:
+#     malte70's dotfiles, https://github.com/malte70/dotfiles
+# 
+# Copyright (c) 2015 Malte Bublitz, http://malte-bublitz.de
+# All rights reserved.
+# 
+
 # command aliases:
 if [[ "$OSVARIANT" == "Arch" ]]; then
 	alias y=yaourt

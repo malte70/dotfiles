@@ -1,7 +1,13 @@
-#
+# 
 # .zsh/config.zsh
 #   Configuration variables
-#
+# 
+# Part of:
+#     malte70's dotfiles, https://github.com/malte70/dotfiles
+# 
+# Copyright (c) 2015 Malte Bublitz, http://malte-bublitz.de
+# All rights reserved.
+# 
 
 # my network setup. used to adjust behaviour to specific host
 DOMAIN="mcbx.de"

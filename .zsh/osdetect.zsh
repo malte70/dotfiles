@@ -1,7 +1,13 @@
-#
+# 
 # .zsh/osdetect.zsh
 #   OS detection
-#
+# 
+# Part of:
+#     malte70's dotfiles, https://github.com/malte70/dotfiles
+# 
+# Copyright (c) 2015 Malte Bublitz, http://malte-bublitz.de
+# All rights reserved.
+# 
 
 OS=`uname -s`
 OSVERSION=`uname -r`
