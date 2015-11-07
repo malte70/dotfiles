@@ -130,6 +130,8 @@ endif
 if sysname == "Darwin"
 	" On OS X, use ctags provided by homebrew
 	let Tlist_Ctags_Cmd = "/usr/local/bin/ctags"
+elseif sysname == "FreeBSD"
+	let Tlist_Ctags_Cmd = "/usr/local/bin/exctags"
 else
 	" On other systems, use the regular ctags.
 	let Tlist_Ctags_Cmd = "/usr/bin/ctags"
