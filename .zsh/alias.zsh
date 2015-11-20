@@ -179,3 +179,19 @@ if which compass &>/dev/null
 then
 	alias mkcss="$(which compass) compile"
 fi
+
+# 
+# Copy last command to clipboard
+# 
+# Needs working pbcopy (the original one OS X
+# or the alias defined above)
+# 
+copy-last-commandline() {
+	if which pbcopy &>/dev/null
+	then
+		history | tail -n1 | cut -c 6- | stripwhite | tr -d "\n" | pbcopy
+	else
+		echo "pbcopy not found. Please copy manually:"
+		history | tail -n1 | cut -c 6- | stripwhite
+	fi
+}
