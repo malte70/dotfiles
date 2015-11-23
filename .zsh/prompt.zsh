@@ -8,6 +8,15 @@
 # Copyright (c) 2015 Malte Bublitz, http://malte-bublitz.de
 # All rights reserved.
 # 
+# Example:
+# 
+# [x86_64|GNU/Linux|4.2.5-1-ARCH] [1] [malte70/geheim:master:5] ~/code/geheim
+# malte70@sauron$ _
+# 
+# [1] => Return value of last command if non-equal
+# [malte70/geheim:master:5]  => Git repository on branch master, 5 uncommited
+#                               changes, and origin is malte70/geheim on Github
+# 
 
 get_git_prompt_info() {
 	UPSTREAM=`gitinfo`
