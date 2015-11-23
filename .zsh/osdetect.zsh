@@ -19,6 +19,9 @@ if [[ "$OS" == "Darwin" ]]; then
 elif [[ `uname -o` == "Cygwin" ]]; then
 	OS="Windows NT"
 	OSVERSION=`python -c 'import OSDetect; _i = OSDetect.OSInfo(); print _i.GetInfo()["OSVersion"]'`
+elif [[ `uname -o` == "Msys" ]]; then
+	OS="Windows NT"
+	OSVERSION=`python -c 'import OSDetect; print(OSDetect.info["OS"].split("-")[1])'`
 else
 	OS=`uname -o`
 	if which lsb_release &>/dev/null; then
