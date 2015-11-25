@@ -4,8 +4,11 @@
 " 
 
 let sysname = substitute(system('uname -s'), '\n', '', '')
+
 " auto-reload
 autocmd! bufwritepost ~/.vim/basic.vim source %
+autocmd! bufwritepost ~/.vim/boilerplates/_main.vim source %
+autocmd! bufwritepost ~/.vim/ide.vim source %
 
 syntax enable
 filetype plugin on
@@ -82,24 +85,6 @@ inoremap <C-n> <ESC>:nohl<CR>
 " set status line
 set stl=%f\ %y\ %m\ %r\ Line:%l.%c/%L[%p%%]\ [0x%B]
 
-" let <F11> execute current file
-function! RunShebang()
-	if (match(getline(1),'^\#!') == 0)
-		!./%
-	else
-		echo "No shebang in this file."
-	endif
-endfunction
-map <F11> :call RunShebang()<CR>
-
-" automatically add executable permission to scripts
-" written by yanniklm
-function! MakeScriptExecuteable()
-	if getline(1) =~ "^#!.*/bin/"
-		silent !chmod +x <afile>
-	endif
-endfunction
-
 set background=dark
 colorscheme desert
 
@@ -108,10 +93,6 @@ set diffopt+=iwhite
 
 " show line numbers when printing
 set popt=number:y
-
-" quick and dirty session handling (see https://gist.github.com/828119)
-map <F6> :mksession! ~/.vim_session <cr> " Quick write session with F6
-map <F7> :source ~/.vim_session <cr>     " And load session with F7
 
 " Save current file on <F2> from insert mode
 imap <F2> <ESC>:w<CR>a
@@ -138,7 +119,6 @@ else
 endif
 let Tlist_WinWidth = 50
 let Tlist_Use_Right_Window = 1
-map <F4> :TlistToggle<cr>
 
 " Syntastic
 let g:syntastic_always_populate_loc_list = 1
@@ -152,20 +132,17 @@ au BufRead,BufNewFile *.md set filetype=markdown
 " Ignore some file types in NERDTree
 let NERDTreeIgnore = [ '\.o$', '\~$', '\.class$', '\.pyc$' ]
 
-" open NerdTree and Taglist for PHP, Python and Java files
-au BufRead,BufNewFile *.php TlistOpen
-au BufRead,BufNewFile *.py TlistOpen
-au BufRead,BufNewFile *.java TlistOpen
-au BufRead,BufNewFile *.php NERDTree
-au BufRead,BufNewFile *.py NERDTree
-au BufRead,BufNewFile *.java NERDTree
-
 " Printing
 map <C-F12> :TOhtml<cr>
 
 set tabstop=4
 set shiftwidth=4
 set noexpandtab
+
+" 
+" Vim IDE
+" 
+source ~/.vim/ide.vim
 
 " Functions for bootstrapping source code files (a.k.a. Boilerplates)
 source ~/.vim/boilerplates/_main.vim
