@@ -195,3 +195,34 @@ copy-last-commandline() {
 		history | tail -n1 | cut -c 6- | stripwhite
 	fi
 }
+
+# 
+# mount-nas / umount-nas
+# 
+# Mounts/umounts all NAS shares
+# 
+# Note: Intended for usage at tardis.mcbx.de only.
+# 
+mount-nas() {
+	for share in $(grep '^nas.*nfs' /etc/fstab | awk '{print $2}')
+	do
+		if grep $share /etc/mtab &>/dev/null
+		then
+			echo "${_ANSI_COLOR_LIGHT_YELLOW}[SKIP]$_ANSI_RESET $share"
+		else
+			echo "${_ANSI_COLOR_LIGHT_GREEN}[ OK ]$_ANSI_RESET $share"
+			mount $share
+		fi
+	done
+}
+umount-nas() {
+	for mount in $(grep /mnt/nas /etc/mtab | awk '{print $2}')
+	do 
+		if umount $mount &>/dev/null
+		then
+			echo "${_ANSI_COLOR_LIGHT_GREEN}[ OK ]$_ANSI_RESET Unmount $mount"      
+		else    
+			echo "${_ANSI_COLOR_LIGHT_RED}[FAIL]$_ANSI_RESET Unmount $mount"        
+		fi
+	done
+}
