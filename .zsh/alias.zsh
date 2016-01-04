@@ -226,3 +226,15 @@ umount-nas() {
 		fi
 	done
 }
+
+if [[ $OS == "GNU/Linux" ]]
+then
+	if which colordiff &> /dev/null
+	then
+		_diff=$(which colordiff)
+	else
+		_diff=$(which diff)
+	fi
+	alias diff="${_diff} -N -p -u -r -x .git"
+	unset _diff
+fi
