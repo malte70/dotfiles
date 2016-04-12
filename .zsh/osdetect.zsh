@@ -5,7 +5,7 @@
 # Part of:
 #     malte70's dotfiles, https://github.com/malte70/dotfiles
 # 
-# Copyright (c) 2015 Malte Bublitz, http://malte-bublitz.de
+# Copyright (c) 2015-2016 Malte Bublitz, https://malte70.github.io
 # All rights reserved.
 # 
 
@@ -21,7 +21,8 @@ elif [[ `uname -o` == "Cygwin" ]]; then
 	OSVERSION=`python -c 'import OSDetect; _i = OSDetect.OSInfo(); print _i.GetInfo()["OSVersion"]'`
 elif [[ `uname -o` == "Msys" ]]; then
 	OS="Windows NT"
-	OSVERSION=`python -c 'import OSDetect; print(OSDetect.info["OS"].split("-")[1])'`
+	#OSVERSION=`python -c 'import OSDetect; print(OSDetect.info["OS"].split("-")[1])'`
+	OSVERSION=`uname -s | cut -d- -f2`
 else
 	OS=`uname -o`
 	if which lsb_release &>/dev/null; then

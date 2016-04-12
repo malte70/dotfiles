@@ -5,7 +5,7 @@
 # Part of:
 #     malte70's dotfiles, https://github.com/malte70/dotfiles
 # 
-# Copyright (c) 2015 Malte Bublitz, http://malte-bublitz.de
+# Copyright (c) 2015-2016 Malte Bublitz, https://malte70.github.io
 # All rights reserved.
 # 
 # Example:
@@ -48,6 +48,14 @@ fi
 
 PROMPT="%F{cyan}[%F{green}%B`uname -m`%b%F{cyan}|%F{green}%B$OS%b%F{cyan}|%F{green}%B$OSVERSION%b%F{cyan}]%(?.. %F{cyan}[%F{red}%?%F{cyan}]) "'$(get_git_prompt_info)'"%F{yellow}%~%b%F{white}
 %F{white}%n@${PROMPT_USER_COLOR}%m%F{white}$ "
+
+# Those mixed-case hostnames on Windows suck...
+# Use a lowercase hostname instead if Msys
+if [[ "$OS" == "Windows NT" ]]
+then
+	HOSTNAME_LOWER=$(hostname | tr 'A-Z' 'a-z')
+	PROMPT=$(echo $PROMPT | sed "s/%m/$HOSTNAME_LOWER/g")
+fi
 
 # 
 # Display runtime of commands that run longer than 5 seconds (no need for time $command anymore)

@@ -5,13 +5,20 @@
 # Part of:
 #     malte70's dotfiles, https://github.com/malte70/dotfiles
 # 
-# Copyright (c) 2015 Malte Bublitz, http://malte-bublitz.de
+# Copyright (c) 2015-2016 Malte Bublitz, https://malte70.github.io
 # All rights reserved.
 # 
 
 # command aliases:
 if [[ "$OSVARIANT" == "Arch" ]]; then
 	alias y=yaourt
+	alias y-Syu="yaourt -Syu"
+	alias y-Syuw="yaourt -Syuw"
+	alias y-Qdt="yaourt -Qdt"
+	alias y-Qo="yaourt -Qo"
+elif [[ "$(uname -o)" == "Msys" ]]; then
+	alias yaourt==pacman
+	alias y="yaourt"
 	alias y-Syu="yaourt -Syu"
 	alias y-Syuw="yaourt -Syuw"
 	alias y-Qdt="yaourt -Qdt"
@@ -237,4 +244,9 @@ then
 	fi
 	alias diff="${_diff} -N -p -u -r -x .git"
 	unset _diff
+fi
+
+if [[ "$(uname -o)" == "Msys" ]]
+then
+	alias python="/mingw32/bin/python3"
 fi

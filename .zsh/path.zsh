@@ -5,7 +5,7 @@
 # Part of:
 #     malte70's dotfiles, https://github.com/malte70/dotfiles
 # 
-# Copyright (c) 2015 Malte Bublitz, http://malte-bublitz.de
+# Copyright (c) 2015-2016 Malte Bublitz, https://malte70.github.io
 # All rights reserved.
 # 
 
@@ -24,5 +24,16 @@ PATH=${PATH}/usr/bin/vendor_perl:
 PATH=${PATH}/opt/java/jre/bin:
 [ -d "/opt/android-sdk/platform-tools" ] && PATH=${PATH}/opt/android-sdk/platform-tools:
 which ruby &>/dev/null && PATH=${PATH}$(ruby -rubygems -e 'puts Gem.user_dir')/bin:
-export PATH
 
+if [[ "$(uname -o)" == "Msys" ]]
+then
+	PATH=""
+	PATH="${PATH}${HOME}/bin:"
+	PATH="${PATH}/mingw32/bin:"
+	PATH="${PATH}/usr/bin:"
+	PATH="${PATH}/bin:"
+	PATH="${PATH}/c/Windows/system32:"
+	PATH="${PATH}/c/Windows"
+fi
+
+export PATH

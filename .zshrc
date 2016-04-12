@@ -4,16 +4,15 @@
 # Part of malte70's dotfiles
 #  https://github.com/malte70/dotfiles
 #
-# Copyright (c) 2012-2015 Malte Bublitz, http://malte-bublitz.de
+# Copyright (c) 2012-2016 Malte Bublitz, https://malte70.github.io
+# All rights reserved.
 # 
-# Licensed under the terms of the 2-clause BSD license ("FreeBSD license"); see COPYING for details.
-# 
-
-# OS detection
-source $HOME/.zsh/osdetect.zsh
 
 # $PATH
 source $HOME/.zsh/path.zsh
+
+# OS detection
+source $HOME/.zsh/osdetect.zsh
 
 # Check the environment for possible incompatibilities
 # Needs $PATH correctly set up before.
