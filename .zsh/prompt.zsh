@@ -26,8 +26,16 @@ get_git_prompt_info() {
 }
 setopt prompt_subst
 
+# Those mixed-case hostnames on Windows suck...
+HOSTNAME_LOWER=$(hostname | tr 'A-Z' 'a-z')
+
 precmd() {
-	print -Pn "\e]0;%~ (%n@%m)\a"
+	if [[ "$OS" != "Windows NT" ]]
+	then
+		print -Pn "\e]0;%~ (%n@%m)\a"
+	else
+		print -Pn "\e]0;%~ (%n@${HOSTNAME_LOWER})\a"
+	fi
 }
 preexec() {
 	CMD=`echo $1 | cut -d" " -f1`
@@ -35,7 +43,13 @@ preexec() {
 		exit 0
 	fi
 	if [[ ! $CMD =~ "[^ ]+=" && $TERM != "linux" ]]; then
-		print -Pn "\e]0;%~ (%n@%m) ($CMD)\a"
+		# Those mixed-case hostnames on Windows suck...
+		if [[ "$OS" != "Windows NT" ]]
+		then
+			print -Pn "\e]0;%~ (%n@%m) ($CMD)\a"
+		else
+			print -Pn "\e]0;%~ (%n@${HOSTNAME_LOWER}) ($CMD)\a"
+		fi
 	fi
 }
 
@@ -50,10 +64,8 @@ PROMPT="%F{cyan}[%F{green}%B`uname -m`%b%F{cyan}|%F{green}%B$OS%b%F{cyan}|%F{gre
 %F{white}%n@${PROMPT_USER_COLOR}%m%F{white}$ "
 
 # Those mixed-case hostnames on Windows suck...
-# Use a lowercase hostname instead if Msys
 if [[ "$OS" == "Windows NT" ]]
 then
-	HOSTNAME_LOWER=$(hostname | tr 'A-Z' 'a-z')
 	PROMPT=$(echo $PROMPT | sed "s/%m/$HOSTNAME_LOWER/g")
 fi
 
