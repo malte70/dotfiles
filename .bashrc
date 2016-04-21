@@ -112,9 +112,3 @@ case $OS in
 		;;
 esac
 
-if which mc &>/dev/null; then
-	if [[ -f ~/.mc/solarized.ini ]]; then
-		export MC_SKIN=$HOME/.mc/solarized.ini
-	fi
-fi
-
