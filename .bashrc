@@ -72,8 +72,10 @@ case $OS in
 		OSVER="Linux-$(uname -r)"
 		DIST="Termux"
 		
+		export TERMUX_ROOT="/data/data/com.termux/files"
 		export PS1="${PROMPT_ANDROID}"
-		
+		export PATH="${TERMUX_ROOT}/usr/bin:${TERMUX_ROOT}/usr/bin/applets:${HOME}/bin"
+
 		alias ..="cd .."
 		alias ls="$(which ls) --color=auto --escape --file-type -h --time-style=long-iso"
 		alias ll="$(which ls) --color=auto --escape -l --file-type -h --time-style=long-iso"
