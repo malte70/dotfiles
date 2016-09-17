@@ -47,7 +47,7 @@ fi
 
 export PROMPT_LINUX="\u$CLR1@$CLR2\h$CLR0:$CLR3\w$CLR1$PROMPT_END $CLR0"
 export PROMPT_OSX="$CLR1[$CLR0\u@$CLR2\h$CLR0 $CLR3\w$CLR1]${PROMPT_END}${CLR0} "
-export PROMPT_ANDROID="${CLR1}${ANDROID_HOSTNAME}${CLR0}:[${CLR1}\w${CLR0}]\n${CLR2}\$${CLR0} "
+export PROMPT_ANDROID="${CLR1}${HOSTNAME_ANDROID}${CLR0}:[${CLR1}\w${CLR0}]\n${CLR2}\$${CLR0} "
 export PROMPT_NT="$CLR1[$CLR0\u@${CLR2}${HOSTNAME_LOWER}$CLR0 $CLR3\w$CLR1]${PROMPT_END}${CLR0} "
 
 case $OS in
@@ -146,4 +146,3 @@ case $OS in
 		echo "Error: Only GNU/Linux, OS X and Msys/Windows NT are supported yet." >&2
 		;;
 esac
-
