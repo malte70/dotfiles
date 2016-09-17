@@ -1,6 +1,7 @@
 *
 !.abcde.conf
 !.bashrc
+!.bash_profile
 !.config/uzbl/*
 !.conkyrc
 !.conkyrc_bottom_left

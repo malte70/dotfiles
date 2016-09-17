@@ -1,6 +1,10 @@
-#
-# Maltes bashrc
-#
+# 
+# ~/.bashrc
+#    Used for NON-login shells (X11 Terminals)
+# 
+# Part of:
+#    https://github.com/malte70/dotfiles
+# 
 
 CLR0="\[\033[0m\]"
 CLR1="\[\033[0;36m\]"
