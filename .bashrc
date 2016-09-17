@@ -21,6 +21,7 @@ CLR3="\[\033[1;32m\]"
 
 export PROMPT_LINUX="\u$CLR1@$CLR2\h$CLR0:$CLR3\w$CLR1$PROMPT_END $CLR0"
 export PROMPT_OSX="$CLR1[$CLR0\u@$CLR2\h$CLR0 $CLR3\w$CLR1]${PROMPT_END}${CLR0} "
+export PROMPT_ANDROID="${CLR1}nexus4${CLR0}:[${CLR1}\w${CLR0}]\n${CLR2}\$${CLR0} "
 
 # Those mixed-case hostnames on Windows suck...
 HOSTNAME_LOWER=$(hostname | tr 'A-Z' 'a-z')
@@ -30,7 +31,12 @@ OS=$(uname -s)
 
 if [[ "$(uname -o)" == "Msys" ]]
 then
+	# Msys2 on Windows NT
 	OS=$(uname -o)
+elif echo $SHELL | grep "com.termux" &> /dev/null
+then
+	# Termux on Android
+	OS="Android"
 fi
 
 case $OS in
@@ -42,6 +48,20 @@ case $OS in
 		[ "x" == "x$DIST" ] && DIST="Unknown"
 		
 		export PS1="${PROMPT_LINUX}"
+		
+		alias ..="cd .."
+		alias ls="$(which ls) --color=auto --escape --file-type -h --time-style=long-iso"
+		alias ll="$(which ls) --color=auto --escape -l --file-type -h --time-style=long-iso"
+		alias df="$(which df) --human-readable --print-type"
+		alias d='date --rfc-3339=seconds | tr " " "T"'
+		;;
+		
+	"Android")
+		# Android/Termux
+		OSVER="Linux-$(uname -r)"
+		DIST="Termux"
+		
+		export PS1="${PROMPT_ANDROID}"
 		
 		alias ..="cd .."
 		alias ls="$(which ls) --color=auto --escape --file-type -h --time-style=long-iso"
