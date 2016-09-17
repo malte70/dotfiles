@@ -19,14 +19,6 @@ else
 fi
 CLR3="\[\033[1;32m\]"
 
-export PROMPT_LINUX="\u$CLR1@$CLR2\h$CLR0:$CLR3\w$CLR1$PROMPT_END $CLR0"
-export PROMPT_OSX="$CLR1[$CLR0\u@$CLR2\h$CLR0 $CLR3\w$CLR1]${PROMPT_END}${CLR0} "
-export PROMPT_ANDROID="${CLR1}nexus4${CLR0}:[${CLR1}\w${CLR0}]\n${CLR2}\$${CLR0} "
-
-# Those mixed-case hostnames on Windows suck...
-HOSTNAME_LOWER=$(hostname | tr 'A-Z' 'a-z')
-export PROMPT_NT="$CLR1[$CLR0\u@${CLR2}${HOSTNAME_LOWER}$CLR0 $CLR3\w$CLR1]${PROMPT_END}${CLR0} "
-
 OS=$(uname -s)
 
 if [[ "$(uname -o)" == "Msys" ]]
@@ -38,6 +30,25 @@ then
 	# Termux on Android
 	OS="Android"
 fi
+
+# Those mixed-case hostnames on Windows suck...
+HOSTNAME_LOWER=$(hostname | tr 'A-Z' 'a-z')
+
+# Detect hostname on Android
+if [[ $OS == "Android" ]]
+then
+	HOSTNAME_ANDROID=$(getprop net.hostname)
+	if [[ -z "$HOSTNAME_ANDROID" ]]
+	then
+		# No hostname set - fall back to devicename
+		HOSTNAME_ANDROID=$(getprop ro.product.device)
+	fi
+fi
+
+export PROMPT_LINUX="\u$CLR1@$CLR2\h$CLR0:$CLR3\w$CLR1$PROMPT_END $CLR0"
+export PROMPT_OSX="$CLR1[$CLR0\u@$CLR2\h$CLR0 $CLR3\w$CLR1]${PROMPT_END}${CLR0} "
+export PROMPT_ANDROID="${CLR1}${ANDROID_HOSTNAME}${CLR0}:[${CLR1}\w${CLR0}]\n${CLR2}\$${CLR0} "
+export PROMPT_NT="$CLR1[$CLR0\u@${CLR2}${HOSTNAME_LOWER}$CLR0 $CLR3\w$CLR1]${PROMPT_END}${CLR0} "
 
 case $OS in
 	"Linux")
