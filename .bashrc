@@ -148,3 +148,5 @@ case $OS in
 		echo "Error: Only GNU/Linux, OS X and Msys/Windows NT are supported yet." >&2
 		;;
 esac
+
+[ -f $HOME/.bashrc.local ] && . $HOME/.bashrc.local; true
