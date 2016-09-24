@@ -12,7 +12,6 @@
 PATH=""
 PATH=${PATH}${HOME}/bin:  # allow me to overwrite scripts installed by packages
 [ -d "${HOME}/scripts" ] && PATH=${PATH}${HOME}/scripts: # on some hosts, ~/bin is not my github repository malte70/scripts, it is in ~/scripts.
-#[ $OS = "Mac OS X" ] && PATH=${PATH}/usr/local/opt/php55/bin:
 PATH=${PATH}/usr/local/bin:
 PATH=${PATH}/usr/local/sbin:
 PATH=${PATH}/bin:
@@ -34,6 +33,15 @@ then
 	PATH="${PATH}/bin:"
 	PATH="${PATH}/c/Windows/system32:"
 	PATH="${PATH}/c/Windows"
+elif echo $SHELL | grep "com.termux" &> /dev/null; then
+	# Termux on Android
+	TERMUX_ROOT="/data/data/com.termux/files"
+	PATH=""
+	PATH="${PATH}${TERMUX_ROOT}/usr/bin"
+	PATH="${PATH}:${TERMUX_ROOT}/usr/bin/applets"
+	PATH="${PATH}:${HOME}/bin"
+	
+	export TERMUX_ROOT
 fi
 
 export PATH

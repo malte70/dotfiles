@@ -23,6 +23,17 @@ elif [[ `uname -o` == "Msys" ]]; then
 	OS="Windows NT"
 	#OSVERSION=`python -c 'import OSDetect; print(OSDetect.info["OS"].split("-")[1])'`
 	OSVERSION=`uname -s | cut -d- -f2`
+elif which zsh | grep "com.termux" &> /dev/null; then
+	# Termux on Android
+	OS="Android"
+	OSVARIANT="Termux"
+	OSVERSION=$(getprop ro.build.version.release)
+	HOSTNAME_ANDROID=$(getprop net.hostname)
+	if [[ -z "$HOSTNAME_ANDROID" ]]
+	then
+		# No hostname set - fall back to devicename
+		HOSTNAME_ANDROID=$(getprop ro.product.device)
+	fi
 else
 	OS=`uname -o`
 	if which lsb_release &>/dev/null; then

@@ -133,8 +133,6 @@ then
 	# If elinks is installed, set it as a fallback, just to be sure $BROWSER is
 	# always set if no GUI browsers are available
 	BROWSER==elinks
-else
-	echo "WARNING: ELinks not found in PATH!" >&2
 fi
 if [[ -n $DISPLAY ]] && [[ $OS != "Mac OS X" ]]
 then
@@ -155,6 +153,16 @@ then
 elif [[ $OS == "Mac OS X" ]]; then
 	# On OS X, open <URL> always launches the user's default browser of choice.
 	BROWSER=open
+elif [[ $OS == "Android" ]]; then
+	# Termux provides termux-open-url in termux-tools
+	BROWSER=termux-open-url
+	if ! which $BROWSER &>/dev/null; then
+		BROWSER=
+		echo "Warning: Please install termux-tools and reload zshrc:" >&2
+		echo "  apt install termux-tools && zshrc-reload" >&2
+	fi
+else
+	echo "WARNING: ELinks not found in PATH!" >&2
 fi
 if [ -d $HOME/Mail ]; then
 	export MAIL=~/Mail
