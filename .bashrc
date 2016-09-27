@@ -31,6 +31,11 @@ then
 	OS="Android"
 fi
 
+if [[ -z "$PS1" ]]
+then
+	exit
+fi
+
 # Those mixed-case hostnames on Windows suck...
 HOSTNAME_LOWER=$(hostname | tr 'A-Z' 'a-z')
 
