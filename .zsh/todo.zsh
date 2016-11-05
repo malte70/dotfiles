@@ -9,13 +9,12 @@
 # All rights reserved.
 # 
 
-if which todo.sh &>/dev/null
-then
+if which todo &>/dev/null; then
 	[ -z $SHOW_TODO ] && SHOW_TODO="yes"
-	if [ $SHOW_TODO != "no" -a "$(t list | wc -l)" -ne 2 ]; then
-	echo "-= TODO =-"
-	t list | head -n-2 | sort
-	echo
+	
+	if [ $SHOW_TODO != "no" -a "$(t | wc -l)" -ne 2 ]; then
+		todo
+		echo
 	fi
 	SHOW_TODO="no"
 fi
