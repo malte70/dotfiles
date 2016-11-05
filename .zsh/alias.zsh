@@ -61,10 +61,7 @@ else
 fi
 alias goyo="$(echo =vim) -c Goyo"
 alias mem="free -m"
-if which todo.sh &>/dev/null
-then
-	alias t==todo.sh
-fi
+alias t==todo
 g-i() {
 	YEAR="$(date +%Y)"
 	
