@@ -162,7 +162,9 @@ elif [[ $OS == "Android" ]]; then
 		echo "  apt install termux-tools && zshrc-reload" >&2
 	fi
 else
-	echo "WARNING: ELinks not found in PATH!" >&2
+	if ! which elinks &>/dev/null; then
+		echo "WARNING: ELinks not found in PATH!" >&2
+	fi
 fi
 if [ -d $HOME/Mail ]; then
 	export MAIL=~/Mail
