@@ -9,7 +9,7 @@
 # All rights reserved.
 # 
 
-if which todo &>/dev/null; then
+if which todo &>/dev/null && [[ -f "$HOME/.todo" ]]; then
 	[ -z $SHOW_TODO ] && SHOW_TODO="yes"
 	
 	if [ $SHOW_TODO != "no" -a "$(t | wc -l)" -ne 2 ]; then
