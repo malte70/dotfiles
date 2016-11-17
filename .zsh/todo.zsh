@@ -12,8 +12,17 @@
 if which todo &>/dev/null && [[ -f "$HOME/.todo" ]]; then
 	[ -z $SHOW_TODO ] && SHOW_TODO="yes"
 	
-	if [ $SHOW_TODO != "no" -a "$(t | wc -l)" -ne 2 ]; then
-		todo
+	# There's no /usr/bin/env on
+	# Termux/Android, so todo's
+	# Shebang fails
+	if [[ -x /usr/bin/env ]]; then
+		TODO="$(which todo)"
+	else
+		TODO="bash $(which todo)"
+	fi
+
+	if [[ $SHOW_TODO != "no" && "$(eval ${TODO} | wc -l)" -ne 2 ]]; then
+		eval ${TODO}
 		echo
 	fi
 	SHOW_TODO="no"
@@ -38,7 +47,7 @@ then
 fi
 
 # Show notes when shell starts (but not if .zshrc is sourced again!)
-if [[ "$DID_SHOW_NOTES" != "yes" ]] && [[ -f "$NOTES" ]]
+if [[ "$DID_SHOW_NOTES" != "yes" && -f "$NOTES" ]]
 then
 	# Only show if 10 lines or less to not mess up the screen
 	if [[ $(wc -l "$NOTES" | cut -d" " -f1) -lt 12 ]]
