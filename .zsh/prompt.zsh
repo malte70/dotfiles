@@ -29,30 +29,6 @@ setopt prompt_subst
 # Those mixed-case hostnames on Windows suck...
 HOSTNAME_LOWER=$(hostname | tr 'A-Z' 'a-z')
 
-precmd() {
-	if [[ "$OS" != "Windows NT" ]]
-	then
-		print -Pn "\e]0;%~ (%n@%m)\a"
-	else
-		print -Pn "\e]0;%~ (%n@${HOSTNAME_LOWER})\a"
-	fi
-}
-preexec() {
-	CMD=`echo $1 | cut -d" " -f1`
-	if [[ CMD == "pycalc" ]]; then
-		exit 0
-	fi
-	if [[ ! $CMD =~ "[^ ]+=" && $TERM != "linux" ]]; then
-		# Those mixed-case hostnames on Windows suck...
-		if [[ "$OS" != "Windows NT" ]]
-		then
-			print -Pn "\e]0;%~ (%n@%m) ($CMD)\a"
-		else
-			print -Pn "\e]0;%~ (%n@${HOSTNAME_LOWER}) ($CMD)\a"
-		fi
-	fi
-}
-
 # User color - Red for root, green for other users
 if [[ $UID -eq 0 ]]; then
 	PROMPT_USER_COLOR="%F{red}"
