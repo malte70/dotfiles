@@ -178,6 +178,8 @@ stty stop ^A
 
 source $HOME/.zsh/prompt.zsh
 
+[ -f $HOME/.mc/solarized.ini ] && export MC_SKIN=$HOME/.mc/solarized.ini
+
 source $HOME/.zsh/todo.zsh
 
 [ -f $HOME/.zshrc.local ] && . $HOME/.zshrc.local; true
