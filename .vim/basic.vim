@@ -48,6 +48,7 @@ set smartcase
 
 " default split behavior sucks.
 set splitbelow
+set splitright
 
 " Backspace ignores linebreaks
 set backspace=indent,eol,start
