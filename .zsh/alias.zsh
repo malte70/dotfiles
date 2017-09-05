@@ -163,7 +163,7 @@ fi
 
 # Launch GUI applications detched (Inspired by Windows...)
 start() {
-	$@ </dev/null >/dev/null &|
+	$@ </dev/null &>/dev/null &|
 }
 
 if [[ $OS != "Mac OS X" ]]
