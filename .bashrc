@@ -64,6 +64,10 @@ case $OS in
 		[ "x" == "x$DIST" ] && DIST="Unknown"
 		
 		export PS1="${PROMPT_LINUX}"
+		# If ~/bin exists, add it to $PATH
+		if [[ -d "${HOME}/bin" ]]; then
+			echo $PATH | grep -q "${HOME}/bin" || PATH="${HOME}/bin:${PATH}"
+		fi
 		
 		alias ..="cd .."
 		alias ls="$(which ls) --color=auto --escape --file-type -h --time-style=long-iso"
