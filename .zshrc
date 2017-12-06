@@ -8,11 +8,11 @@
 # All rights reserved.
 # 
 
-# $PATH
-source $HOME/.zsh/path.zsh
-
-# OS detection
-source $HOME/.zsh/osdetect.zsh
+# At this point, ~/.zshenv should already executed, but I had problems
+# with some special situations where it was not.
+if [[ ${ZSHENV} -ne 1 ]]; then
+	source $HOME/.zshenv
+fi
 
 # Check the environment for possible incompatibilities
 # Needs $PATH correctly set up before.
@@ -20,9 +20,6 @@ source $HOME/.zsh/check_env.zsh
 
 # Configuration
 source $HOME/.zsh/config.zsh
-
-# ANSI Color codes
-source $HOME/.zsh/ansi.zsh
 
 if which dircolors &>/dev/null; then
 	# On OS X, there is no dircolors, but it is not needed

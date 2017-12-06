@@ -11,6 +11,7 @@
 !.vimrc
 !.vim/*
 !.zshrc
+!.zshenv
 !.zsh/*
 !.Xmodmap
 !.Xmodmap-macbook
