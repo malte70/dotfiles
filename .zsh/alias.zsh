@@ -247,3 +247,20 @@ if [[ "$(uname -o)" == "Msys" ]]
 then
 	alias python="/mingw32/bin/python3"
 fi
+
+# Add a ccat ("colored cat") alias with source code highlighting
+# using `highlight`.
+# See also: http://www.andre-simon.de/doku/highlight/highlight.html
+if which highlight &>/dev/null; then
+	if [[ $TERM == "xterm-256color" ]]; then
+		alias ccat="$(which highlight) -O xterm256"
+		
+	elif [[ "$(tput colors 2>/dev/null)" -gt 2 ]]; then
+		alias ccat="$(which highlight) -O ansi"
+		
+	else
+		# Fallback for dummy terminals
+		alias ccat="/bin/cat"
+	fi
+fi
+
