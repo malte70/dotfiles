@@ -81,7 +81,7 @@ zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}
 zstyle ':completion:*' menu select=0
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 
-my_accounts=($SERVERS $DESKTOPS)
+my_accounts=($HOSTS $ACCOUNTS)
 
 zstyle ':completion:*:my-accounts' users-hosts $my_accounts
 autoload -Uz compinit

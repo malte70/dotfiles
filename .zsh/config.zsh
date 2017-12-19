@@ -10,22 +10,24 @@
 # 
 
 # my network setup. used to adjust behaviour to specific host
-DOMAIN="mcbx.de"
+DOMAIN="ancistrus.de"
 LOCAL_DOMAIN="tardis.$DOMAIN"
-SERVERS=(
-	"abyss.$DOMAIN"             # primary server
-	"gimli.$DOMAIN"             # secondary server
-	"web0.$DOMAIN"              # primary web server
-	"minecraft.$DOMAIN"         # Minecraft server
-	"demeter.$DOMAIN"           # Datux's server / primary mail server
-	"khaos.$DOMAIN"             # test server / application server
-	"deepthought.khaos.$DOMAIN" # Emulated System z on khaos
-	"mcp.$LOCAL_DOMAIN"         # Local VM host server
+HOSTS=(
+	"mcp.$LOCAL_DOMAIN"         # Main workstation
+	"pluto.$LOCAL_DOMAIN"       # Netbook
+	"nas.$LOCAL_DOMAIN"         # NAS
+	"moto-g.$LOCAL_DOMAIN"      # Smartphone (for FTP via FileManager HD)
+	"backfisch.falken.$DOMAIN"  # Pascal's notebook
 )
-DESKTOPS=(
-	"sauron.$LOCAL_DOMAIN"      # main desktop
-	"placenta.$LOCAL_DOMAIN"    # MacBook (OS X)
-	"applepie.$LOCAL_DOMAIN"    # MacBook (Arch Linux)
+ACCOUNTS=(
+	"malte70@mcp.$LOCAL_DOMAIN"
+	"malte70@pluto.$LOCAL_DOMAIN"
+	"malte70@nas.$LOCAL_DOMAIN"
+	"malte70@moto-g.$LOCAL_DOMAIN"
+	"malte70@backfisch.falken.$DOMAIN"
+	"root@nas.$LOCAL_DOMAIN"
+	"pascal@pluto.$LOCAL_DOMAIN"
+	"pascal@backfisch.falken.$DOMAIN"
 )
 
 # History: 10,000 lines in ~/.histfile
