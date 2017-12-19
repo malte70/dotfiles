@@ -239,7 +239,7 @@ then
 	else
 		_diff=$(which diff)
 	fi
-	alias diff="${_diff} -N -p -u -r -x .git"
+	alias diff="${_diff} --color=auto -N -p -u -r -x .git"
 	unset _diff
 fi
 
