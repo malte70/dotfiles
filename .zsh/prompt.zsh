@@ -19,7 +19,7 @@
 # 
 
 get_git_prompt_info() {
-	UPSTREAM=`zsh $(which gitinfo)`
+	UPSTREAM=`env gitinfo`
 	if [[ $UPSTREAM != "no git" ]]; then
 		echo -n "%F{cyan}[%B%F{white}${UPSTREAM}%b%F{cyan}] "
 	fi
