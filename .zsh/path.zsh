@@ -22,7 +22,7 @@ PATH=${PATH}/usr/bin/core_perl:
 PATH=${PATH}/usr/bin/vendor_perl:
 PATH=${PATH}/opt/java/jre/bin:
 [ -d "/opt/android-sdk/platform-tools" ] && PATH=${PATH}/opt/android-sdk/platform-tools:
-which ruby &>/dev/null && PATH=${PATH}$(ruby -rubygems -e 'puts Gem.user_dir')/bin:
+which ruby &>/dev/null && PATH=${PATH}$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:
 
 if [[ "$(uname -o)" == "Msys" ]]
 then
