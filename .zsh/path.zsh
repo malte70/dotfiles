@@ -33,7 +33,7 @@ then
 	PATH="${PATH}/bin:"
 	PATH="${PATH}/c/Windows/system32:"
 	PATH="${PATH}/c/Windows"
-elif echo $SHELL | grep "com.termux" &> /dev/null; then
+elif [[ -n "$ANDROID_DATA" ]]; then
 	# Termux on Android
 	TERMUX_ROOT="/data/data/com.termux/files"
 	PATH=""
