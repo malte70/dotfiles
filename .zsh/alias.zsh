@@ -87,6 +87,7 @@ g-i() {
 	
 	popd &>/dev/null
 }
+alias g="git"
 alias g-c="git clone"
 alias g-p="git push --tags -u origin master"
 alias g-t="git t"
