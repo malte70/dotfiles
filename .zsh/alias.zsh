@@ -100,6 +100,26 @@ then
 	alias lsusb.py="$(print =lsusb.py) -u -c"
 fi
 alias mkdir="mkdir -p"
+mkcd () {
+	_d="$1"
+	if [[ -e "$_d" ]]
+	then
+		if [[ ! -d "$_d" ]]
+		then
+			echo "mkcd: Error: Non-directory $_d already exists" >&2
+		else
+			cd "$_d"
+		fi
+	else
+		mkdir "$_d"
+		if [[ $? -ne 0 ]]
+		then
+			echo "mkcd: Could not create $_d" >&2
+		else
+			cd "$_d"
+		fi
+	fi
+}
 
 # global aliases:
 alias -g L="|$PAGER"
