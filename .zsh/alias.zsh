@@ -253,10 +253,10 @@ fi
 # See also: http://www.andre-simon.de/doku/highlight/highlight.html
 if which highlight &>/dev/null; then
 	if [[ $TERM == "xterm-256color" ]]; then
-		alias ccat="$(which highlight) -O xterm256"
+		alias ccat="$(which highlight) --tab=4 -O xterm256"
 		
 	elif [[ "$(tput colors 2>/dev/null)" -gt 2 ]]; then
-		alias ccat="$(which highlight) -O ansi"
+		alias ccat="$(which highlight) --tab=4 -O ansi"
 		
 	else
 		# Fallback for dummy terminals
