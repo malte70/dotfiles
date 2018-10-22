@@ -33,7 +33,7 @@ fi
 
 if [[ -z "$PS1" ]]
 then
-	exit
+	return
 fi
 
 # Those mixed-case hostnames on Windows suck...

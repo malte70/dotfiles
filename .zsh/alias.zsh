@@ -42,9 +42,15 @@ elif which pacapt &>/dev/null; then
 fi
 if [[ $OS != "Mac OS X" && $OS != "FreeBSD" ]]; then
 	alias ls="`print -n =ls` --color=auto --escape -l --file-type -h --time-style=long-iso"
-	alias df="`print -n =df` --human-readable --print-type"
 	alias du="`print -n =du` --summarize --total --human-readable"
 	alias d=`print -n =date`' --rfc-3339=seconds | tr " " "T"'
+	if [[ $OS != "Android" ]]; then
+		alias df="`print -n =df` --human-readable --print-type"
+	else
+		# Termux's df command is not the GNU version, but an alternative
+		# implementation from the termux-tools package
+		alias df="`print -n =df` -h"
+	fi
 else
 	if which gls &>/dev/null; then
 		# If gls is available, all other coreutils should be too.
@@ -58,6 +64,11 @@ else
 		alias df="/bin/df -h"
 		alias d='date "+%Y-%m-%dT%H:%M:%S%z"'
 	fi
+fi
+if [[ $OS == "Android" ]]; then
+	stripwhite() {
+		python -c 'import sys;print(sys.stdin.read(),end="")' | sed 's/^[ \t]*//;s/[ \t]*$//g' </dev/stdin
+	}
 fi
 alias goyo="$(echo =vim) -c Goyo"
 alias mem="free -m"
@@ -87,6 +98,7 @@ g-i() {
 	
 	popd &>/dev/null
 }
+alias g="git"
 alias g-c="git clone"
 alias g-p="git push --tags -u origin master"
 alias g-t="git t"
@@ -99,6 +111,26 @@ then
 	alias lsusb.py="$(print =lsusb.py) -u -c"
 fi
 alias mkdir="mkdir -p"
+mkcd () {
+	_d="$1"
+	if [[ -e "$_d" ]]
+	then
+		if [[ ! -d "$_d" ]]
+		then
+			echo "mkcd: Error: Non-directory $_d already exists" >&2
+		else
+			cd "$_d"
+		fi
+	else
+		mkdir "$_d"
+		if [[ $? -ne 0 ]]
+		then
+			echo "mkcd: Could not create $_d" >&2
+		else
+			cd "$_d"
+		fi
+	fi
+}
 
 # global aliases:
 alias -g L="|$PAGER"
@@ -176,6 +208,10 @@ then
 	then
 		alias pbcopy='xsel --clipboard --input'
 		alias pbpaste='xsel --clipboard --output'
+	elif [[ $OS == "Android" ]]
+	then
+		alias pbcopy='termux-clipboard-set'
+		alias pbpaste='termux-clipboard-get'
 	fi
 fi
 
