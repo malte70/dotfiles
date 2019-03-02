@@ -4,6 +4,7 @@
 " 
 
 let sysname = substitute(system('uname -s'), '\n', '', '')
+let vimuser = substitute(system('stat -c %U ~/.vimrc'), '\n', '', '')
 
 " auto-reload
 autocmd! bufwritepost ~/.vim/basic.vim source %
@@ -22,17 +23,20 @@ set scrolloff=5
 
 " persistend undo
 " written by yanniklm
-set backup
-let g:dotvim_backups=expand('$HOME') . '/.vim/backups'
-if ! isdirectory(g:dotvim_backups)
-	call mkdir(g:dotvim_backups, "p")
-endif
-exec "set backupdir=" . g:dotvim_backups
-if has('persistent_undo')
-	set undofile
-	set undolevels=1000
-	set undoreload=10000
-	exec "set undodir=" . g:dotvim_backups
+"if $USER == 'malte70'
+if $USER == vimuser 
+	set backup
+	let g:dotvim_backups=expand('$HOME') . '/.vim/backups'
+	if ! isdirectory(g:dotvim_backups)
+		call mkdir(g:dotvim_backups, "p")
+	endif
+	exec "set backupdir=" . g:dotvim_backups
+	if has('persistent_undo')
+		set undofile
+		set undolevels=1000
+		set undoreload=10000
+		exec "set undodir=" . g:dotvim_backups
+	endif
 endif
 
 " set Tab behavior
