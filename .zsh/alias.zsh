@@ -73,6 +73,9 @@ if [[ $OS == "Android" ]]; then
 		python -c 'import sys;print(sys.stdin.read(),end="")' | sed 's/^[ \t]*//;s/[ \t]*$//g' </dev/stdin
 	}
 fi
+if which lsblk &>/dev/null; then
+	alias disks="/bin/lsblk -o NAME,TYPE,FSTYPE,SIZE,LABEL,MOUNTPOINT"
+fi
 alias goyo="$(echo =vim) -c Goyo"
 alias mem="free -m"
 alias t==todo
