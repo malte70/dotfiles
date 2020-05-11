@@ -11,11 +11,25 @@
 
 # command aliases:
 if [[ "$OSVARIANT" == "Arch" ]]; then
-	alias y=yaourt
-	alias y-Syu="yaourt -Syu"
-	alias y-Syuw="yaourt -Syuw"
-	alias y-Qdt="yaourt -Qdt"
-	alias y-Qo="yaourt -Qo"
+	if which yaourt &>/dev/null; then
+		alias y=yaourt
+		alias y-Syu="yaourt -Syu"
+		alias y-Syuw="yaourt -Syuw"
+		alias y-Qdt="yaourt -Qdt"
+		alias y-Qo="yaourt -Qo"
+	elif which trizen &>/dev/null; then
+		alias y=trizen
+		alias y-Syu="trizen -Syu"
+		alias y-Syuw="trizen -Syuw"
+		alias y-Qdt="trizen -Qdt"
+		alias y-Qo="trizen -Qo"
+	else
+		alias y=pacman
+		alias y-Syu="pacman -Syu"
+		alias y-Syuw="pacman -Syuw"
+		alias y-Qdt="pacman -Qdt"
+		alias y-Qo="pacman -Qo"
+	fi
 elif [[ "$(uname -o)" == "Msys" ]]; then
 	alias yaourt==pacman
 	alias y="yaourt"
