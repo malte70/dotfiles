@@ -32,6 +32,17 @@ on the following operating systems (and might work on many others, too):
  * My shell scripts repository [malte70/scripts](https://github.com/malte70/scripts)
    cloned to either `~/bin` or `~/scripts` (If `~/bin` is already existing)
 
+## Initializing git submodules of vim plugins
+
+The VIM plugins are Git Submodules, managed through Pathogen.vim. Run the following
+commands to sync these repositories:
+
+```
+git submodule init
+git submodule sync
+git submodule update
+```
+
 ## Links
 
  * [Github: malte70/dotfiles](https://github.com/malte70/dotfiles)
