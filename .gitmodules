@@ -15,3 +15,6 @@
 [submodule ".vim/bundle/editorconfig-vim"]
 	path = .vim/bundle/editorconfig-vim
 	url = https://github.com/editorconfig/editorconfig-vim
+[submodule ".vim/bundle/vim-ps1"]
+	path = .vim/bundle/vim-ps1
+	url = https://github.com/PProvost/vim-ps1
