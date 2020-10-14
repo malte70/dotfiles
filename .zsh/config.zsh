@@ -10,24 +10,22 @@
 # 
 
 # my network setup. used to adjust behaviour to specific host
-DOMAIN="ancistrus.de"
+DOMAIN="malte70.de"
 LOCAL_DOMAIN="tardis.$DOMAIN"
 HOSTS=(
-	"mcp.$LOCAL_DOMAIN"         # Main workstation
-	"pluto.$LOCAL_DOMAIN"       # Netbook
-	"nas.$LOCAL_DOMAIN"         # NAS
-	"moto-g.$LOCAL_DOMAIN"      # Smartphone (for FTP via FileManager HD)
-	"backfisch.falken.$DOMAIN"  # Pascal's notebook
+	"torchwood.$LOCAL_DOMAIN"    # Notebook
+	"raspberrypi.$LOCAL_DOMAIN"  # Raspberry Pi
+	"nas.$LOCAL_DOMAIN"          # NAS
+	"sauron.$LOCAL_DOMAIN"       # Desktop
+	"spandau.rolltreppe3.de"     # VPS
 )
 ACCOUNTS=(
-	"malte70@mcp.$LOCAL_DOMAIN"
-	"malte70@pluto.$LOCAL_DOMAIN"
+	"malte70@torchwood.$LOCAL_DOMAIN"
+	"pi@raspberrypi.$LOCAL_DOMAIN"
 	"malte70@nas.$LOCAL_DOMAIN"
-	"malte70@moto-g.$LOCAL_DOMAIN"
-	"malte70@backfisch.falken.$DOMAIN"
+	"malte70@sauron.$LOCAL_DOMAIN"
+	"malte70@spandau.rolltreppe3.de"
 	"root@nas.$LOCAL_DOMAIN"
-	"pascal@pluto.$LOCAL_DOMAIN"
-	"pascal@backfisch.falken.$DOMAIN"
 )
 
 # History: 10,000 lines in ~/.histfile
