@@ -26,7 +26,7 @@ PATH=${PATH}/opt/java/jre/bin:
 [ -d "/usr/games" ] && PATH=${PATH}/usr/games:
 which ruby &>/dev/null && PATH=${PATH}$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:
 
-if [[ "$(uname -o)" == "Msys" ]]
+if [[ "$OSVARIANT" == "Msys" ]]
 then
 	PATH=""
 	PATH="${PATH}${HOME}/bin:"
