@@ -16,11 +16,18 @@ if [[ "$OS" == "Darwin" ]]; then
 	OSVARIANT=$OS
 	OSXVersion=`python -c 'import platform; print platform.mac_ver()[0],'`
 	OSVERSION=$OSXVersion
-elif [[ `uname -o` == "Cygwin" ]]; then
+elif [[ `uname -s` == "DragonFly" ]]; then
+	# Must be placed before the first call of uname -o, since this
+	# option is not supported.
+	OS="$(uname -s) BSD"
+	OSVERSION=`uname -r`
+elif [[ `uname -o 2>/dev/null` == "Cygwin" ]]; then
 	OS="Windows NT"
+	OSVARIANT=`uname -o`
 	OSVERSION=`python -c 'import OSDetect; _i = OSDetect.OSInfo(); print _i.GetInfo()["OSVersion"]'`
-elif [[ `uname -o` == "Msys" ]]; then
+elif [[ `uname -o 2>/dev/null` == "Msys" ]]; then
 	OS="Windows NT"
+	OSVARIANT=`uname -o`
 	#OSVERSION=`python -c 'import OSDetect; print(OSDetect.info["OS"].split("-")[1])'`
 	OSVERSION=`uname -s | cut -d- -f2`
 elif which zsh | grep "com.termux" &> /dev/null; then

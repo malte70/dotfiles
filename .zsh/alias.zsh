@@ -30,7 +30,7 @@ if [[ "$OSVARIANT" == "Arch" ]]; then
 		alias y-Qdt="pacman -Qdt"
 		alias y-Qo="pacman -Qo"
 	fi
-elif [[ "$(uname -o)" == "Msys" ]]; then
+elif [[ "$OSVARIANT" == "Msys" ]]; then
 	alias yaourt==pacman
 	alias y="yaourt"
 	alias y-Syu="yaourt -Syu"
@@ -54,7 +54,7 @@ elif which pacapt &>/dev/null; then
 		alias y-Qo="pacapt -Qo"
 	fi
 fi
-if [[ $OS != "Mac OS X" && $OS != "FreeBSD" ]]; then
+if [[ $OS != "Mac OS X" && $OS != "FreeBSD" && $OS != "DragonFly BSD" ]]; then
 	alias ls="`print -n =ls` --color=auto --escape -l --file-type -h --time-style=long-iso"
 	alias l1="`print -n =ls` --color=auto --escape -1"
 	alias du="`print -n =du` --summarize --total --human-readable"
@@ -299,7 +299,7 @@ then
 	unset _diff
 fi
 
-if [[ "$(uname -o)" == "Msys" ]]
+if [[ "$OSVARIANT" == "Msys" ]]
 then
 	alias python="/mingw32/bin/python3"
 fi
