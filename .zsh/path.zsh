@@ -12,6 +12,7 @@
 PATH=""
 PATH=${PATH}${HOME}/bin:  # allow me to overwrite scripts installed by packages
 [ -d "${HOME}/scripts" ] && PATH=${PATH}${HOME}/scripts: # on some hosts, ~/bin is not my github repository malte70/scripts, it is in ~/scripts.
+[ -d "${HOME}/.local/bin" ] && PATH=${PATH}${HOME}/.local/bin:
 PATH=${PATH}/usr/local/bin:
 PATH=${PATH}/usr/local/sbin:
 PATH=${PATH}/bin:
