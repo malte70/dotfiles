@@ -318,5 +318,8 @@ if which highlight &>/dev/null; then
 		# Fallback for dummy terminals
 		alias ccat="/bin/cat"
 	fi
+else
+	# Don't let ccat fail if highlight is not available
+	alias ccat="/bin/cat"
 fi
 
