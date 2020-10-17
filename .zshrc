@@ -134,18 +134,21 @@ fi
 if [[ -n $DISPLAY ]] && [[ $OS != "Mac OS X" ]]
 then
 	# X11 available (Either locally on a desktop or remote via VNC)
-	if which gvfs-open &>/dev/null
+	if which xdg-open &>/dev/null
 	then
-		# First choice should be asking the DE (MATE in most cases for me)
-		BROWSER==gvfs-open
+		BROWSER==xdg-open
 	fi
 	if which firefox &>/dev/null
 	then
 		BROWSER==firefox
-	elif which google-chrome-beta &>/dev/null
+	fi
+	if which google-chrome-stable &>/dev/null
 	then
-		# If Chrome (Note: I'm always using Beta channel) is available, it is the default browser.
-		BROWSER==google-chrome-beta
+		BROWSER==google-chrome-stable
+	fi
+	if which vivaldi-stable &>/dev/null
+	then
+		BROWSER==vivaldi-stable
 	fi
 elif [[ $OS == "Mac OS X" ]]; then
 	# On OS X, open <URL> always launches the user's default browser of choice.

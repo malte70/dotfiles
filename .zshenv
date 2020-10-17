@@ -38,6 +38,10 @@ then
 	then
 		BROWSER==xdg-open
 	fi
+	if which vivaldi-stable &>/dev/null
+	then
+		BROWSER==vivaldi-stable
+	fi
 elif [[ $OS == "Mac OS X" ]]; then
 	# On OS X, open <URL> always launches the user's default browser of choice.
 	BROWSER=open
