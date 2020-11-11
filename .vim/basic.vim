@@ -43,7 +43,7 @@ endif
 set smartindent
 set noexpandtab
 set tabstop=4
-set shiftwidth=4
+set softtabstop=4
 
 " smart search: ignore case when search is all lower case,
 " but recognize uppercase if specified
@@ -133,6 +133,9 @@ set spelllang=de
 
 " *.md files are markdown, not Modula!
 au BufRead,BufNewFile *.md set filetype=markdown
+
+" Use tab indention for Python code, too
+au BufRead,BufNewFile *.py set noexpandtab tabstop=4 softtabstop=4
 
 " Ignore some file types in NERDTree
 let NERDTreeIgnore = [ '\.o$', '\~$', '\.class$', '\.pyc$' ]
