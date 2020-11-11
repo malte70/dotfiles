@@ -14,17 +14,23 @@ DOMAIN="malte70.de"
 LOCAL_DOMAIN="tardis.$DOMAIN"
 HOSTS=(
 	"torchwood.$LOCAL_DOMAIN"    # Notebook
-	"raspberrypi.$LOCAL_DOMAIN"  # Raspberry Pi
+	"raspberrypi.$LOCAL_DOMAIN"  # Raspberry Pi 1
+	"tau.$LOCAL_DOMAIN"          # Raspberry Pi 4
 	"nas.$LOCAL_DOMAIN"          # NAS
 	"sauron.$LOCAL_DOMAIN"       # Desktop
-	"spandau.rolltreppe3.de"     # VPS
+	"deepthought.$LOCAL_DOMAIN"  # Workstation/Big Desktop
+	"spandau.rolltreppe3.de"     # Old VPS
+	"spandau.rt3x.de"            # VPS
 )
 ACCOUNTS=(
 	"malte70@torchwood.$LOCAL_DOMAIN"
 	"pi@raspberrypi.$LOCAL_DOMAIN"
+	"pi@tau.$LOCAL_DOMAIN"
 	"malte70@nas.$LOCAL_DOMAIN"
 	"malte70@sauron.$LOCAL_DOMAIN"
+	"malte70@deepthought.$LOCAL_DOMAIN"
 	"malte70@spandau.rolltreppe3.de"
+	"malte70@spandau.rt3x.de"
 	"root@nas.$LOCAL_DOMAIN"
 )
 
