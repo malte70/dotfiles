@@ -17,3 +17,7 @@ function! BoilerPlateC()
 	r~/.vim/boilerplates/_bp.c
 endfunction
 
+function! BoilerPlatePython()
+	r~/.vim/boilerplates/_bp.py
+endfunction
+
