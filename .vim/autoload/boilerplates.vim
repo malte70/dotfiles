@@ -2,6 +2,9 @@
 " Boilerplates
 "
 
+if exists("g:boilerplates_loaded") | finish | endif
+let g:boilerplates_loaded=1
+
 function! BoilerPlateHTML()
 	r~/.vim/boilerplates/_bp.html
 endfunction
