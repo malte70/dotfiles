@@ -18,3 +18,9 @@
 [submodule ".vim/bundle/vim-ps1"]
 	path = .vim/bundle/vim-ps1
 	url = https://github.com/PProvost/vim-ps1
+[submodule ".vim/bundle/jcl.vim"]
+	path = .vim/bundle/jcl.vim
+	url = https://github.com/vim-scripts/jcl.vim
+[submodule ".vim/bundle/vim-toml"]
+	path = .vim/bundle/vim-toml
+	url = https://github.com/cespare/vim-toml
