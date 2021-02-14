@@ -52,6 +52,7 @@ elif which pacapt &>/dev/null; then
 		alias y-Syu="y -Syu"
 		alias y-Syuw="y -Syuw"
 		alias y-Qo="pacapt -Qo"
+		alias trizen="sudo pacapt"
 	fi
 fi
 if [[ $OS != "Mac OS X" && $OS != "FreeBSD" && $OS != "DragonFly BSD" ]]; then
