@@ -98,10 +98,11 @@ alias mem="free -m"
 alias t==todo
 g-i() {
 	YEAR="$(date +%Y)"
+	AUTHOR="$(getent passwd $USER | cut -d: -f5)"
 	
 	if [[ $# -ne 1 ]]
 	then
-		echo "Usage: $0 <reponame>" >&2
+		echo "Usage: $0 [-c] <reponame> [<readme title>]" >&2
 		exit 1
 	elif [[ -d $1 ]]
 	then
@@ -113,10 +114,14 @@ g-i() {
 	pushd "$1" &>/dev/null
 	git init
 	echo "# $1" > README.md
-	wget -q 'https://raw.githubusercontent.com/malte70/moin/master/COPYING.md'
-	sed -i "s/2015/$YEAR/g" COPYING.md
+	echo "" > README.md
 	
-	git add README.md COPYING.md
+	# Create LICENSE from a template
+	wget -q -O LICENSE "https://f.malte70.de/LICENSE.tpl"
+	sed -i "s/%YEAR%/$YEAR/g" LICENSE
+	sed -i "s/%AUTHOR%/$AUTHOR/g" LICENSE
+	
+	git add README.md LICENSE
 	git commit -m 'Initial commit'
 	
 	popd &>/dev/null
