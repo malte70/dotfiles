@@ -1,26 +1,42 @@
 [submodule ".vim/bundle/nerdtree"]
 	path = .vim/bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
+	branch = master
 
 [submodule ".vim/bundle/html5.vim"]
 	path = .vim/bundle/html5.vim
 	url = https://github.com/othree/html5.vim.git
+	branch = master
 
 [submodule ".vim/bundle/goyo"]
 	path = .vim/bundle/goyo
 	url = https://github.com/junegunn/goyo.vim
+	branch = master
+	ignore = untracked
+
 [submodule ".vim/bundle/taglist.vim"]
 	path = .vim/bundle/taglist.vim
 	url = https://github.com/vim-scripts/taglist.vim.git
+	branch = master
+	ignore = untracked
+
 [submodule ".vim/bundle/editorconfig-vim"]
 	path = .vim/bundle/editorconfig-vim
 	url = https://github.com/editorconfig/editorconfig-vim
+	branch = master
+
 [submodule ".vim/bundle/vim-ps1"]
 	path = .vim/bundle/vim-ps1
 	url = https://github.com/PProvost/vim-ps1
+	branch = master
+
 [submodule ".vim/bundle/jcl.vim"]
 	path = .vim/bundle/jcl.vim
 	url = https://github.com/vim-scripts/jcl.vim
+	branch = master
+
 [submodule ".vim/bundle/vim-toml"]
 	path = .vim/bundle/vim-toml
 	url = https://github.com/cespare/vim-toml
+	branch = master
+
