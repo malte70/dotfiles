@@ -56,6 +56,7 @@ elif which pacapt &>/dev/null; then
 fi
 if [[ $OS != "Mac OS X" && $OS != "FreeBSD" && $OS != "DragonFly BSD" ]]; then
 	alias ls="`print -n =ls` --color=auto --escape -l --file-type -h --time-style=long-iso"
+	alias la="`print -n =ls` --color=auto --escape -l --file-type -h --time-style=long-iso --almost-all"
 	alias l1="`print -n =ls` --color=auto --escape -1"
 	alias du="`print -n =du` --summarize --total --human-readable"
 	alias d=`print -n =date`' --rfc-3339=seconds | tr " " "T"'
@@ -70,6 +71,7 @@ else
 	if which gls &>/dev/null; then
 		# If gls is available, all other coreutils should be too.
 		alias ls="`print -n =gls` --color=auto --escape -l --file-type -h --time-style=long-iso"
+		alias ls="`print -n =gls` --color=auto --escape -l --file-type -h --time-style=long-iso --almost-all"
 		alias l1="`print -n =gls` --color=auto --escape -1"
 		alias df="`print -n =gdf` --human-readable --print-type"
 		alias du="`print -n =gdu` --summarize --total --human-readable"
@@ -77,6 +79,7 @@ else
 		alias sed="`print -n =gsed`"
 	else
 		alias ls="/bin/ls -l -G -F -b -h"
+		alias la="/bin/ls -l -G -F -b -h -A"
 		alias l1="/bin/ls -1"
 		alias df="/bin/df -h"
 		alias d='date "+%Y-%m-%dT%H:%M:%S%z"'
