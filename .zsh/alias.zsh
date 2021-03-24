@@ -52,10 +52,12 @@ elif which pacapt &>/dev/null; then
 		alias y-Syu="y -Syu"
 		alias y-Syuw="y -Syuw"
 		alias y-Qo="pacapt -Qo"
+		alias trizen="sudo pacapt"
 	fi
 fi
 if [[ $OS != "Mac OS X" && $OS != "FreeBSD" && $OS != "DragonFly BSD" ]]; then
 	alias ls="`print -n =ls` --color=auto --escape -l --file-type -h --time-style=long-iso"
+	alias la="`print -n =ls` --color=auto --escape -l --file-type -h --time-style=long-iso --almost-all"
 	alias l1="`print -n =ls` --color=auto --escape -1"
 	alias du="`print -n =du` --summarize --human-readable"
 	alias d=`print -n =date`' --rfc-3339=seconds | tr " " "T"'
@@ -70,6 +72,7 @@ else
 	if which gls &>/dev/null; then
 		# If gls is available, all other coreutils should be too.
 		alias ls="`print -n =gls` --color=auto --escape -l --file-type -h --time-style=long-iso"
+		alias ls="`print -n =gls` --color=auto --escape -l --file-type -h --time-style=long-iso --almost-all"
 		alias l1="`print -n =gls` --color=auto --escape -1"
 		alias df="`print -n =gdf` --human-readable --print-type"
 		alias du="`print -n =gdu` --summarize --human-readable"
@@ -77,6 +80,7 @@ else
 		alias sed="`print -n =gsed`"
 	else
 		alias ls="/bin/ls -l -G -F -b -h"
+		alias la="/bin/ls -l -G -F -b -h -A"
 		alias l1="/bin/ls -1"
 		alias df="/bin/df -h"
 		alias d='date "+%Y-%m-%dT%H:%M:%S%z"'
@@ -95,10 +99,11 @@ alias mem="free -m"
 alias t==todo
 g-i() {
 	YEAR="$(date +%Y)"
+	AUTHOR="$(getent passwd $USER | cut -d: -f5)"
 	
 	if [[ $# -ne 1 ]]
 	then
-		echo "Usage: $0 <reponame>" >&2
+		echo "Usage: $0 [-c] <reponame> [<readme title>]" >&2
 		exit 1
 	elif [[ -d $1 ]]
 	then
@@ -110,10 +115,14 @@ g-i() {
 	pushd "$1" &>/dev/null
 	git init
 	echo "# $1" > README.md
-	wget -q 'https://raw.githubusercontent.com/malte70/moin/master/COPYING.md'
-	sed -i "s/2015/$YEAR/g" COPYING.md
+	echo "" > README.md
 	
-	git add README.md COPYING.md
+	# Create LICENSE from a template
+	wget -q -O LICENSE "https://f.malte70.de/LICENSE.tpl"
+	sed -i "s/%YEAR%/$YEAR/g" LICENSE
+	sed -i "s/%AUTHOR%/$AUTHOR/g" LICENSE
+	
+	git add README.md LICENSE
 	git commit -m 'Initial commit'
 	
 	popd &>/dev/null
