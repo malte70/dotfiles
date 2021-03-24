@@ -74,5 +74,5 @@ endfunction
 map  <F4> :call IDEModeToggle()<CR>
 map  <F6> :call IDEModeLoadSession()<CR>
 map  <F7> :call IDEModeSaveSession()<CR>
-map <F11> :call IDEModeRunShebang()<CR>
+map  <F8> :call IDEModeRunShebang()<CR>
 
