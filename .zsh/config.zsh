@@ -19,8 +19,7 @@ HOSTS=(
 	"nas.$LOCAL_DOMAIN"          # NAS
 	"sauron.$LOCAL_DOMAIN"       # Desktop
 	"deepthought.$LOCAL_DOMAIN"  # Workstation/Big Desktop
-	"spandau.rolltreppe3.de"     # Old VPS
-	"spandau.rt3x.de"            # VPS
+	"spandau.rolltreppe3.de"     # VPS
 )
 ACCOUNTS=(
 	"malte70@torchwood.$LOCAL_DOMAIN"
@@ -30,7 +29,6 @@ ACCOUNTS=(
 	"malte70@sauron.$LOCAL_DOMAIN"
 	"malte70@deepthought.$LOCAL_DOMAIN"
 	"malte70@spandau.rolltreppe3.de"
-	"malte70@spandau.rt3x.de"
 	"root@nas.$LOCAL_DOMAIN"
 )
 
