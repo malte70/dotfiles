@@ -68,6 +68,10 @@ case $OS in
 		if [[ -d "${HOME}/bin" ]]; then
 			echo $PATH | grep -q "${HOME}/bin" || PATH="${HOME}/bin:${PATH}"
 		fi
+		# If ~/.local/bin exists, add it to $PATH
+		if [[ -d "${HOME}/.local/bin" ]]; then
+			echo $PATH | grep -q "${HOME}/.local/bin" || PATH="${HOME}/.local/bin:${PATH}"
+		fi
 		
 		alias ..="cd .."
 		alias ls="$(which ls) --color=auto --escape --file-type -h --time-style=long-iso"
