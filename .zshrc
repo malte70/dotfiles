@@ -80,6 +80,7 @@ zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character t
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}'
 zstyle ':completion:*' menu select=0
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+zstyle ':completion:*' rehash true
 
 my_accounts=($HOSTS $ACCOUNTS)
 
@@ -117,6 +118,11 @@ setopt NO_clobber
 
 # Allow comments even in interactive shells
 setopt interactivecomments
+
+# Exit on ^D even if current command line isn't empty
+exit_zsh() { exit }
+zle -N exit_zsh
+bindkey '^D' exit_zsh
 
 # default browser and editor
 EDITOR==vim
