@@ -60,7 +60,7 @@ case $OS in
 		# GNU/Linux
 		OS="$(uname -o)"
 		OSVER="$(uname -r)"
-		DIST=$(grep DESCRIPTION /etc/lsb-release 2>/dev/null | cut -d\" -f2)
+		DIST=$(grep DESCRIPTION /etc/lsb-release 2>/dev/null | cut -d\" -f2 || lsb_release --short --description)
 		[ "x" == "x$DIST" ] && DIST="Unknown"
 		
 		export PS1="${PROMPT_LINUX}"
