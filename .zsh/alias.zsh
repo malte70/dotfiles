@@ -273,7 +273,7 @@ copy-last-commandline() {
 # Note: Intended for usage at tardis.mcbx.de only.
 # 
 mount-nas() {
-	for share in $(grep '^nas.*nfs' /etc/fstab | awk '{print $2}')
+	for share in $(grep SynologyNAS /etc/fstab | awk '{print $2}')
 	do
 		if grep $share /etc/mtab &>/dev/null
 		then
