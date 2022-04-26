@@ -175,6 +175,7 @@ alias -g T='|tail'
 alias -g W='|wc -l'
 alias -g S='|stripwhite'
 alias -g 2null='2>/dev/null'
+alias -g X='|hexdump -C'
 
 # Alias for alsaequal (only if installed)
 ALSAEQUAL_PLUGIN_PATH="/usr/lib/alsa-lib/libasound_module_ctl_equal.so"
