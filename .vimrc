@@ -27,4 +27,6 @@ call pathogen#helptags()
 " basic configuration
 source ~/.vim/basic.vim
 
-" vim:  set ts=2 sw=2 et:
+set modeline
+
+" vim: set ts=8 sw=8 et:
