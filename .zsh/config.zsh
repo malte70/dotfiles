@@ -11,25 +11,31 @@
 
 # my network setup. used to adjust behaviour to specific host
 DOMAIN="malte70.de"
+ORG_DOMAIN="rolltreppe3.de"
 LOCAL_DOMAIN="tardis.$DOMAIN"
 HOSTS=(
-	"torchwood.$LOCAL_DOMAIN"    # Notebook
-	"raspberrypi.$LOCAL_DOMAIN"  # Raspberry Pi 1
-	"tau.$LOCAL_DOMAIN"          # Raspberry Pi 4
-	"nas.$LOCAL_DOMAIN"          # NAS
-	"sauron.$LOCAL_DOMAIN"       # Desktop
-	"deepthought.$LOCAL_DOMAIN"  # Workstation/Big Desktop
-	"spandau.rolltreppe3.de"     # VPS
+	"torchwood.$LOCAL_DOMAIN"                # Notebook
+	"raspberrypi.$LOCAL_DOMAIN"              # Raspberry Pi 1
+	"tau.$LOCAL_DOMAIN"                      # Raspberry Pi 4
+	"mcp.$LOCAL_DOMAIN"                      # Mac mini
+	"deepthought.$ORG_DOMAIN"                # Root server
+	"web.deepthought.$ORG_DOMAIN"            # Web server
+	"workstation.deepthought.$ORG_DOMAIN"    # Cloud workstation
+	"minecraft.deepthought.$ORG_DOMAIN"      # Minecraft server
+	"sauron.$LOCAL_DOMAIN"                   # Small Desktop
 )
 ACCOUNTS=(
 	"malte70@torchwood.$LOCAL_DOMAIN"
 	"pi@raspberrypi.$LOCAL_DOMAIN"
 	"pi@tau.$LOCAL_DOMAIN"
-	"malte70@nas.$LOCAL_DOMAIN"
-	"malte70@sauron.$LOCAL_DOMAIN"
-	"malte70@deepthought.$LOCAL_DOMAIN"
-	"malte70@spandau.rolltreppe3.de"
-	"root@nas.$LOCAL_DOMAIN"
+	"malte70@mcp.$LOCAL_DOMAIN"
+	"malte70@deepthought.$ORG_DOMAIN"
+	"merkvr@deepthought.$ORG_DOMAIN"
+	"malte70@web.deepthought.$ORG_DOMAIN"
+	"merkvr@web.deepthought.$ORG_DOMAIN"
+	"malte70@workstation.deepthought.$ORG_DOMAIN"
+	"malte70@minecraft.deepthought.$ORG_DOMAIN"
+	"merkvr@minecraft.deepthought.$ORG_DOMAIN"
 )
 
 # History: 10,000 lines in ~/.histfile
