@@ -38,8 +38,8 @@ ACCOUNTS=(
 	"merkvr@minecraft.deepthought.$ORG_DOMAIN"
 )
 
-# History: 10,000 lines in ~/.histfile
+# History: 100,000 lines in ~/.histfile
 HISTFILE=~/.zsh/histfile
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=100000
+SAVEHIST=100000
 
