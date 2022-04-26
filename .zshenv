@@ -52,3 +52,4 @@ elif [[ $OS == "Android" ]]; then
 	fi
 fi
 
+[ -f $HOME/.zshenv.local ] && . $HOME/.zshenv.local; true
