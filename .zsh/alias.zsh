@@ -359,3 +359,8 @@ if which dust &>/dev/null; then
 	alias du="$(which dust)"
 fi
 
+# Use NeoVim if available
+if which nvim &>/dev/null; then
+	alias vim=$(which nvim)
+fi
+
