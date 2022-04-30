@@ -60,7 +60,7 @@ if [[ $OS != "Mac OS X" && $OS != "FreeBSD" && $OS != "DragonFly BSD" ]]; then
 	alias la="`print -n =ls` --color=auto --escape -l --file-type -h --time-style=long-iso --almost-all"
 	alias l1="`print -n =ls` --color=auto --escape -1"
 	alias du="`print -n =du` --summarize --human-readable"
-	alias d=`print -n =date`' --rfc-3339=seconds | tr " " "T"'
+	alias d=`print -n =date`' --iso-8601=seconds'
 	if [[ $OS != "Android" ]]; then
 		alias df="`print -n =df` --human-readable --print-type"
 	else
@@ -76,7 +76,7 @@ else
 		alias l1="`print -n =gls` --color=auto --escape -1"
 		alias df="`print -n =gdf` --human-readable --print-type"
 		alias du="`print -n =gdu` --summarize --human-readable"
-		alias d=`print -n =gdate`' --rfc-3339=seconds | tr " " "T"'
+		alias d=`print -n =gdate`' --iso-8601=seconds'
 		alias sed="`print -n =gsed`"
 	else
 		alias ls="/bin/ls -l -G -F -b -h"
@@ -175,6 +175,7 @@ alias -g T='|tail'
 alias -g W='|wc -l'
 alias -g S='|stripwhite'
 alias -g 2null='2>/dev/null'
+alias -g X='|hexdump -C'
 
 # Alias for alsaequal (only if installed)
 ALSAEQUAL_PLUGIN_PATH="/usr/lib/alsa-lib/libasound_module_ctl_equal.so"
@@ -273,7 +274,7 @@ copy-last-commandline() {
 # Note: Intended for usage at tardis.mcbx.de only.
 # 
 mount-nas() {
-	for share in $(grep SynologyNAS /etc/fstab | awk '{print $2}')
+	for share in $(grep SynologyNAS /etc/fstab | grep -v ^# | awk '{print $2}')
 	do
 		if grep $share /etc/mtab &>/dev/null
 		then
@@ -330,5 +331,36 @@ if which highlight &>/dev/null; then
 else
 	# Don't let ccat fail if highlight is not available
 	alias ccat="/bin/cat"
+fi
+
+# Use alternative modern Unix utilities if available:
+#   ls   -> exa
+#   tree -> exa
+#   cat  -> bat
+#   df   -> duf
+#   du   -> dust
+if which exa &>/dev/null; then
+	alias ls="$(which exa) --long --header --group --time-style=long-iso --icons"
+	alias l1="$(which exa) -1"
+	alias ll="ls --git --links"
+	alias tree="$(which exa) --long --header -T --icons"
+fi
+if which bat &>/dev/null; then
+	#alias bat="/usr/bin/bat --plain -P"
+	alias bat="$(which bat) --paging=never"
+	alias cat="bat"
+	alias ccat="bat"
+fi
+if which duf &>/dev/null; then
+	alias df="$(which duf) -hide special"
+	alias duf="$(which duf) -hide special"
+fi
+if which dust &>/dev/null; then
+	alias du="$(which dust)"
+fi
+
+# Use NeoVim if available
+if which nvim &>/dev/null; then
+	alias vim=$(which nvim)
 fi
 

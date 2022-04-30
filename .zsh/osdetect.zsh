@@ -14,7 +14,7 @@ OSVERSION=`uname -r`
 if [[ "$OS" == "Darwin" ]]; then
 	OS="Mac OS X"
 	OSVARIANT=$OS
-	OSXVersion=`python -c 'import platform; print platform.mac_ver()[0],'`
+	OSXVersion=`python3 -c 'import platform; print(platform.mac_ver()[0],end="")'`
 	OSVERSION=$OSXVersion
 elif [[ `uname -s` == "DragonFly" ]]; then
 	# Must be placed before the first call of uname -o, since this

@@ -10,9 +10,7 @@
 
 # At this point, ~/.zshenv should already executed, but I had problems
 # with some special situations where it was not.
-if [[ ${ZSHENV} -ne 1 ]]; then
-	source $HOME/.zshenv
-fi
+source $HOME/.zshenv
 
 # Check the environment for possible incompatibilities
 # Needs $PATH correctly set up before.

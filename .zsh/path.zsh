@@ -9,13 +9,19 @@
 # All rights reserved.
 # 
 
+OLD_PATH=$PATH
 PATH=""
-PATH=${PATH}${HOME}/bin:  # allow me to overwrite scripts installed by packages
+#PATH=${PATH}${HOME}/bin:  # allow me to overwrite scripts installed by packages
+PATH=${HOME}/bin:  # allow me to overwrite scripts installed by packages
 [ -d "${HOME}/scripts" ] && PATH=${PATH}${HOME}/scripts: # on some hosts, ~/bin is not my github repository malte70/scripts, it is in ~/scripts.
 [ -d "${HOME}/.local/bin" ] && PATH=${PATH}${HOME}/.local/bin:
 [ -d "${HOME}/.config/composer/vendor/bin" ] && PATH=${PATH}${HOME}/.config/composer/vendor/bin:
 PATH=${PATH}/usr/local/bin:
 PATH=${PATH}/usr/local/sbin:
+if [ -d /opt/homebrew/bin ]; then
+	PATH=${PATH}/opt/homebrew/bin:
+	PATH=${PATH}/opt/homebrew/sbin:
+fi
 PATH=${PATH}/bin:
 PATH=${PATH}/sbin:
 PATH=${PATH}/usr/bin:
@@ -26,6 +32,8 @@ PATH=${PATH}/opt/java/jre/bin:
 [ -d "/opt/android-sdk/platform-tools" ] && PATH=${PATH}/opt/android-sdk/platform-tools:
 [ -d "/usr/games" ] && PATH=${PATH}/usr/games:
 which ruby &>/dev/null && PATH=${PATH}$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:
+PATH="${PATH}:${OLD_PATH}"
+unset OLD_PATH
 
 if [[ "$OSVARIANT" == "Msys" ]]
 then
