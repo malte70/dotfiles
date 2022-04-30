@@ -372,3 +372,20 @@ ttyinfo() {
 	echo "Size: ${COLUMNS}x${LINES}"
 }
 
+# Alias to search the web using Google
+# Uses ELinks if installed, and falls back to `open` from malte70/scripts
+google() {
+	q=$(echo -n $@ | python -c "import urllib.parse,sys;print(urllib.parse.quote(sys.stdin.read()))")
+	if which elinks &>/dev/null; then
+		elinks "http://www.google.com/search?hl=de&q=${q}"
+	else
+		open "http://www.google.com/search?hl=de&q=${q}"
+	fi
+}
+
+# Change terminal title
+# https://tldp.org/HOWTO/pdf/Xterm-Title.pdf
+set-xterm-title() {
+	print -Pn "\e]0;$1\a"
+}
+

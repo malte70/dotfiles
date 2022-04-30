@@ -184,4 +184,12 @@ source $HOME/.zsh/prompt.zsh
 
 source $HOME/.zsh/todo.zsh
 
+# Define $PYTHONSTARTUP. See python(1) for details
+PYTHONSTARTUP="$HOME/.pythonstartup"
+if [[ -f "$PYTHONSTARTUP" ]]; then
+	export PYTHONSTARTUP
+else
+	unset PYTHONSTARTUP
+fi
+
 [ -f $HOME/.zshrc.local ] && . $HOME/.zshrc.local; true
