@@ -333,3 +333,29 @@ else
 	alias ccat="/bin/cat"
 fi
 
+# Use alternative modern Unix utilities if available:
+#   ls   -> exa
+#   tree -> exa
+#   cat  -> bat
+#   df   -> duf
+#   du   -> dust
+if which exa &>/dev/null; then
+	alias ls="$(which exa) --long --header --group --time-style=long-iso --icons"
+	alias l1="$(which exa) -1"
+	alias ll="ls --git --links"
+	alias tree="$(which exa) --long --header -T --icons"
+fi
+if which bat &>/dev/null; then
+	#alias bat="/usr/bin/bat --plain -P"
+	alias bat="$(which bat) --paging=never"
+	alias cat="bat"
+	alias ccat="bat"
+fi
+if which duf &>/dev/null; then
+	alias df="$(which duf) -hide special"
+	alias duf="$(which duf) -hide special"
+fi
+if which dust &>/dev/null; then
+	alias du="$(which dust)"
+fi
+
