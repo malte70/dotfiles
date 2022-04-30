@@ -364,3 +364,11 @@ if which nvim &>/dev/null; then
 	alias vim=$(which nvim)
 fi
 
+# Show basic information about the terminal
+ttyinfo() {
+	echo "==> Terminal Info"
+	echo "TTY.: $TTY"
+	echo "Type: $TERM"
+	echo "Size: ${COLUMNS}x${LINES}"
+}
+
