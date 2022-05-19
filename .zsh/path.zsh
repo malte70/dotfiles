@@ -15,6 +15,11 @@ PATH=""
 PATH=${HOME}/bin:  # allow me to overwrite scripts installed by packages
 [ -d "${HOME}/scripts" ] && PATH=${PATH}${HOME}/scripts: # on some hosts, ~/bin is not my github repository malte70/scripts, it is in ~/scripts.
 [ -d "${HOME}/.local/bin" ] && PATH=${PATH}${HOME}/.local/bin:
+# Python --user installs
+if [[ $OS == "Mac OS X" ]]; then
+	PY_VERSION=$(python -c 'import sys;print(str(sys.version_info.major)+"."+str(sys.version_info.minor))')
+	[ -d "$HOME/Library/Python/$PY_VERSION/bin" ] && PATH=${PATH}"$HOME/Library/Python/$PY_VERSION/bin:"
+fi
 [ -d "${HOME}/.config/composer/vendor/bin" ] && PATH=${PATH}${HOME}/.config/composer/vendor/bin:
 PATH=${PATH}/usr/local/bin:
 PATH=${PATH}/usr/local/sbin:
