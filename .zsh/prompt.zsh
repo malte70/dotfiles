@@ -18,10 +18,44 @@
 #                               changes, and origin is malte70/geheim on Github
 # 
 
-get_git_prompt_info() {
+prompt_get_git_info() {
 	UPSTREAM=`env gitinfo`
 	if [[ $UPSTREAM != "no git" ]]; then
 		echo -n "%F{cyan}[%B%F{white}${UPSTREAM}%b%F{cyan}] "
+	fi
+}
+prompt_get_host_icon() {
+	# Get an Nerd Font icon for the Host
+	if [[ $HOST == "deepthought.rolltreppe3.de" ]]; then
+		printf "\uf233 "
+		
+	elif [[ $HOST == "web.deepthought.rolltreppe3.de" ]]; then
+		printf "\ufa9e "
+		
+	elif [[ $HOST == "minecraft.deepthought.rolltreppe3.de" ]]; then
+		printf "\uf872 "
+		
+	elif [[ $HOST == "workstation.deepthought.rolltreppe3.de" ]]; then
+		printf "\ufa9e "
+
+	elif [[ $OS == "Mac OS X" ]]; then
+		printf "\ue711 "
+		
+	elif [[ $OSVARIANT == "Ubuntu" ]]; then
+		printf "\uf31b "
+		
+	elif [[ $OSVARIANT == "Raspbian" ]]; then
+		printf "\uf315 "
+		
+	elif [[ $OSVARIANT == "Arch" ]]; then
+		printf "\uf303 "
+		
+	elif [[ $OS == "GNU/Linux" ]]; then
+		printf "\ue712 "
+		
+	elif [[ $OS == "FreeBSD" ]]; then
+		printf "\uf30c "
+		
 	fi
 }
 setopt prompt_subst
@@ -36,7 +70,7 @@ else
 	PROMPT_USER_COLOR="%F{green}"
 fi
 
-PROMPT="%F{cyan}[%F{green}%B`uname -m`%b%F{cyan}|%F{green}%B$OS%b%F{cyan}|%F{green}%B$OSVERSION%b%F{cyan}]%(?.. %F{cyan}[%F{red}%?%F{cyan}]) "'$(get_git_prompt_info)'"%F{yellow}%~%b%F{white}
+PROMPT="%F{cyan}[%F{green}%B`uname -m`%b%F{cyan}|%F{green}%B$OS%b%F{cyan}|%F{green}%B$OSVERSION%b%F{cyan}]%(?.. %F{cyan}[%F{red}%?%F{cyan}]) "'$(prompt_get_git_info)%F{white}$(prompt_get_host_icon)'"%F{yellow}%~%b%F{white}
 %F{white}%n@${PROMPT_USER_COLOR}%m%F{white}$ "
 
 # Those mixed-case hostnames on Windows suck...
