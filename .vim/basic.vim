@@ -23,12 +23,16 @@ set scrolloff=5
 
 " persistend undo
 " written by yanniklm
-"if $USER == 'malte70'
-if $USER == vimuser 
+if $USER == 'malte70'
+"if $USER == vimuser 
 	set backup
-	let g:dotvim_backups=expand('$HOME') . '/.vim/backups'
-	if ! isdirectory(g:dotvim_backups)
-		call mkdir(g:dotvim_backups, "p")
+	if ! has('nvim')
+		let g:dotvim_backups=expand('$HOME') . '/.vim/backups'
+		if ! isdirectory(g:dotvim_backups)
+			call mkdir(g:dotvim_backups, "p")
+		endif
+	else
+		let g:dotvim_backups=expand('$HOME') . '/.local/share/nvim/backup'
 	endif
 	exec "set backupdir=" . g:dotvim_backups
 	if has('persistent_undo')
