@@ -18,16 +18,16 @@ on the following operating systems (and might work on many others, too):
     * ArchLinux
     * ArchLinux ARM
     * Debian
-    * Gentoo (on s390x a.k.a. System z)
-    * Ubuntu
- * FreeBSD and GhostBSD (which is de facto the same)
- * OpenIndiana (the Illuminos distribution, fork of OpenSolaris/SunOS)
- * Windows NT with Cygwin or [Msys2](https://msys2.github.io/)
+    * Ubuntu (tested on the most current LTS releases, inside KVM as well as on Windows Subsystem for Linux)
+ * FreeBSD
+ * macOS
 
 ### Software requirements of zsh configuration
 
+Additional software that has to be installed
+
  * Python
- * Vim (soft requirement using EDITOR variable)
+ * Vim or NeoVim (soft requirement using EDITOR variable)
  * Elinks (Also a soft requirement for the BROWSER variable)
  * My shell scripts repository [malte70/scripts](https://github.com/malte70/scripts)
    cloned to either `~/bin` or `~/scripts` (If `~/bin` is already existing)
