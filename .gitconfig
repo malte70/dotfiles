@@ -9,6 +9,7 @@
 	
 [alias]
 	c         = clone
+	origin    = config --get remote.origin.url
 	a         = add
 	d         = diff
 	ds        = diff --staged
