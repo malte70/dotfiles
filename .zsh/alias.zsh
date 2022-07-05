@@ -294,15 +294,20 @@ mount-nas() {
 		then
 			echo "${_ANSI_COLOR_LIGHT_YELLOW}[SKIP]$_ANSI_RESET $share"
 		else
-			echo "${_ANSI_COLOR_LIGHT_GREEN}[ OK ]$_ANSI_RESET $share"
-			mount $share
+			echo -ne "${_ANSI_COLOR_LIGHT_GREEN}[ OK ]$_ANSI_RESET $share"
+			mount $share 2>/dev/null || sudo mount $share 2>/dev/null 
+			if [[ $? -ne 0 ]]; then
+				echo -e "\r${_ANSI_COLOR_LIGHT_RED}[FAIL]$_ANSI_RESET $share"
+			else
+				echo
+			fi
 		fi
 	done
 }
 umount-nas() {
 	for mount in $(grep /mnt/nas /etc/mtab | awk '{print $2}')
 	do 
-		if umount $mount &>/dev/null
+		if umount $mount &>/dev/null || sudo umount $mount &>/dev/null
 		then
 			echo "${_ANSI_COLOR_LIGHT_GREEN}[ OK ]$_ANSI_RESET Unmount $mount"      
 		else    
