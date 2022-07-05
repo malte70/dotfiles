@@ -54,7 +54,8 @@ prompt_get_host_icon() {
 		printf "\ue712 "
 		
 	elif [[ $OS == "FreeBSD" ]]; then
-		printf "\uf30c "
+		# Don't display icon on consoles
+		[[ $TTY =~ "/dev/pts/*" ]] && printf "\uf30c "
 		
 	fi
 }
