@@ -91,9 +91,23 @@ if [[ $OS == "Android" ]]; then
 		python -c 'import sys;print(sys.stdin.read(),end="")' | sed 's/^[ \t]*//;s/[ \t]*$//g' </dev/stdin
 	}
 fi
-if which lsblk &>/dev/null; then
-	alias disks="/bin/lsblk -o NAME,TYPE,FSTYPE,SIZE,LABEL,MOUNTPOINT"
+
+if [[ $OS == "GNU/Linux" ]]; then
+	if which lsblk &>/dev/null; then
+		alias disks="`print =lsblk` -o NAME,TYPE,FSTYPE,SIZE,LABEL,MOUNTPOINT"
+		
+	fi
+	
+elif [[ $OS == "FreeBSD" ]]; then
+	if which lsblk &>/dev/null; then
+		alias disks="lsblk"
+	fi
+	
+elif [[ $OS == "Mac OS X" ]]; then
+	alias disks="sudo diskutil list"
+	
 fi
+
 alias goyo="$(echo =vim) -c Goyo"
 alias mem="free -m"
 alias t==todo
