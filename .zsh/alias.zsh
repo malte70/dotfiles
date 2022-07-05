@@ -129,7 +129,7 @@ g-i() {
 }
 alias g="git"
 alias g-c="git clone"
-alias g-p="git push --tags -u origin master"
+alias g-p="g branch G main && g push --tags -u origin main || g push --tags -u origin master"
 alias g-t="git t"
 alias g-d="git d"
 alias g-ds="git ds"
