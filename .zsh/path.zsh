@@ -67,4 +67,5 @@ elif [[ -n "$ANDROID_DATA" ]]; then
 	export TERMUX_ROOT
 fi
 
-export PATH
+export PATH="${PATH%:*}"
+
