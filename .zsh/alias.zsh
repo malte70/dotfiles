@@ -346,8 +346,7 @@ if which exa &>/dev/null; then
 	alias tree="$(which exa) --long --header -T --icons"
 fi
 if which bat &>/dev/null; then
-	#alias bat="/usr/bin/bat --plain -P"
-	alias bat="$(which bat) --paging=never"
+	alias bat="`print -n =bat` --paging=never"
 	alias cat="bat"
 	alias ccat="bat"
 fi
