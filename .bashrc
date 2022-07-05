@@ -21,7 +21,10 @@ CLR3="\[\033[1;32m\]"
 
 OS=$(uname -s)
 
-if [[ "$(uname -o)" == "Msys" ]]
+if [[ "$OS" == "Darwin" ]]
+then
+	OS="macOS"
+elif [[ "$(uname -o)" == "Msys" ]]
 then
 	# Msys2 on Windows NT
 	OS=$(uname -o)
@@ -96,11 +99,10 @@ case $OS in
 		alias d='date --rfc-3339=seconds | tr " " "T"'
 		;;
 		
-	"Darwin")
-		# (Mac) OS X
-		OS="Darwin"
-		OSVER="$(uname -r)"
-		DIST="OS X $(/usr/bin/python -c 'import platform; print platform.mac_ver()[0]')"
+	"macOS")
+		# macOS
+		OSVER="$(python3 -c 'import platform; print(platform.mac_ver()[0])')"
+		DIST="macOS $OSVER"
 		
 		export PS1="${PROMPT_OSX}"
 		
