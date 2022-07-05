@@ -9,6 +9,13 @@
 # All rights reserved.
 # 
 
+if [[ $TERM_PROGRAM == "vscode" ]]; then
+	# Hide todo and notes in Visual Studio Code's terminal
+	SHOW_TODO="no"
+	DID_SHOW_NOTES="yes"
+fi
+
+
 if which todo &>/dev/null && [[ -f "$HOME/.todo" ]]; then
 	[ -z $SHOW_TODO ] && SHOW_TODO="yes"
 	
