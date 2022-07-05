@@ -363,6 +363,12 @@ if which nvim &>/dev/null; then
 	alias vim=$(which nvim)
 fi
 
+# On macOS, use the original `open`, not my implementation from
+# <https://github.com/malte70/scripts> written for GNU/Linux and *BSD.
+if [[ $OS == "macOS" ]]; then
+	alias open="/usr/bin/open"
+fi
+
 # Show basic information about the terminal
 ttyinfo() {
 	echo "==> Terminal Info"
