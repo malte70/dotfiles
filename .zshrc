@@ -83,6 +83,14 @@ zstyle ':completion:*' rehash true
 my_accounts=($HOSTS $ACCOUNTS)
 
 zstyle ':completion:*:my-accounts' users-hosts $my_accounts
+# Zsh completions from zsh-completions Homebrew formula
+# @see https://stackoverflow.com/a/22753363
+if type brew &>/dev/null; then
+	if [[ -d "$(brew --prefix)/share/zsh-completions" ]]; then
+		FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+	fi
+fi
+
 autoload -Uz compinit
 compinit
 autoload -U _requested _normal _setup _tags _next_label _path_files _parameters _wanted _set_command _suffix_alias_files
