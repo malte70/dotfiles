@@ -413,3 +413,8 @@ set-xterm-title() {
 	print -Pn "\e]0;$1\a"
 }
 
+# Hide ffmpeg/ffprobe banner
+if which ffmpeg &>/dev/null; then
+	alias ffmpeg="`print =ffmpeg` -hide_banner"
+	alias ffprobe="`print =ffprobe` -hide_banner"
+fi
