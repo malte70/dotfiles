@@ -2,6 +2,7 @@
 !.abcde.conf
 !.bashrc
 !.bash_profile
+!.bash_aliases
 !.config/uzbl/*
 !.gitconfig
 !.gitignore
