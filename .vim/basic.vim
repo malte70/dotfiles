@@ -84,6 +84,13 @@ else
 	set clipboard=unnamed
 endif
 set mouse=a
+" Enable newer SGR protocol, instead of the limited old xterm
+" protocol used by default and limited to 223 columns!
+if has('mouse_sgr')
+	set ttymouse=sgr
+else
+	set ttymouse=xterm2
+endif
 
 
 " remove highlight of last search with ^N
