@@ -164,4 +164,7 @@ case $OS in
 		;;
 esac
 
+# OS independent aliases
+. $HOME/.bash_aliases
+
 [ -f $HOME/.bashrc.local ] && . $HOME/.bashrc.local; true
