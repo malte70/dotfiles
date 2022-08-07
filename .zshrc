@@ -201,3 +201,6 @@ else
 fi
 
 [ -f $HOME/.zshrc.local ] && . $HOME/.zshrc.local; true
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
