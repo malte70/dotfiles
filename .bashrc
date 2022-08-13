@@ -183,4 +183,12 @@ esac
 # OS independent aliases
 . $HOME/.bash_aliases
 
+# Define $PYTHONSTARTUP. See python(1) for details
+PYTHONSTARTUP="$HOME/.pythonstartup"
+if [[ -f "$PYTHONSTARTUP" ]]; then
+	export PYTHONSTARTUP
+else
+	unset PYTHONSTARTUP
+fi
+
 [ -f $HOME/.bashrc.local ] && . $HOME/.bashrc.local; true
