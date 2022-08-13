@@ -32,7 +32,7 @@ fi
 # 
 if [[ $OS == "GNU/Linux" ]]; then
 	if which lsblk &>/dev/null; then
-		alias disks="`print =lsblk` -o NAME,TYPE,FSTYPE,SIZE,LABEL,MOUNTPOINT"
+		alias disks="$(which lsblk) -o NAME,TYPE,FSTYPE,SIZE,LABEL,MOUNTPOINT"
 	fi
 elif [[ $OS == "FreeBSD" ]]; then
 	if which lsblk &>/dev/null; then
