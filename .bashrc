@@ -34,6 +34,22 @@ then
 	OS="Android"
 fi
 
+# Default Editor/Browser
+EDITOR=$(which vim)
+if [[ $OS == "macOS" ]]; then
+	# Use open(1)
+	BROWSER="/usr/bin/open"
+elif [[ -z $DISPLAY ]]; then
+	# No X11 display available
+	BROWSER=$(which elinks)
+else
+	# Use xdg-open(1) on X11
+	BROWSER=$(which xdg-open)
+fi
+PAGER="less"
+LESS="-R"
+export BROWSER EDITOR PAGER LESS
+
 if [[ -z "$PS1" ]]
 then
 	return
