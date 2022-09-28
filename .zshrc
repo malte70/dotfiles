@@ -101,6 +101,7 @@ autoload -U _source
 autoload -U _tar
 autoload -U _tar_archive
 autoload -U _typeset
+autoload -Uz ztodo
 
 # define word separators (for stuff like backward-word, forward-word, backward-kill-word,..)
 WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>' # the default
@@ -200,7 +201,19 @@ else
 	unset PYTHONSTARTUP
 fi
 
+# https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key
+GPG_TTY=$(tty)
+export GPG_TTY
+
+# https://github.com/zsh-users/zsh-syntax-highlighting
+[[ -d "/usr/share/zsh/plugins/zsh-syntax-highlighting" ]] && \
+	source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh || source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh || true
+
+# git-extras
+[[ -f /usr/share/doc/git-extras ]] && \
+	source /usr/share/doc/git-extras/git-extras-completion.zsh
+
 [ -f $HOME/.zshrc.local ] && . $HOME/.zshrc.local; true
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
 

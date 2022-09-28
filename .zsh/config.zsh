@@ -38,8 +38,28 @@ ACCOUNTS=(
 	"merkvr@minecraft.deepthought.$ORG_DOMAIN"
 )
 
-# History: 100,000 lines in ~/.histfile
+# History: 100,000 lines in ~/.zsh/histfile
 HISTFILE=~/.zsh/histfile
 HISTSIZE=100000
 SAVEHIST=100000
+
+
+# Always push $OLDPWD
+setopt AUTO_CD
+# No silent chdir $TERM
+setopt CD_SILENT
+setopt PUSHD_SILENT
+setopt PUSHD_TO_HOME
+
+# Load modules
+zmodload zsh/attr
+zmodload zsh/termcap
+zmodload zsh/terminfo
+
+
+# Access On-Line help
+# Fails because run-help is an alias for man
+unalias run-help
+autoload run-help
+
 
