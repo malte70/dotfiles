@@ -1,0 +1,50 @@
+# 
+# ~/.bash_prompt
+# 
+# Set the bash prompt.
+# Supports themes, managed by the function `prompt()`
+# 
+
+export PROMPT_LINUX="\u$CLR1@$CLR2\h$CLR0:$CLR3\w$CLR1$PROMPT_END $CLR0"
+export PROMPT_OSX="$CLR1[$CLR0\u@$CLR2\h$CLR0 $CLR3\w$CLR1]${PROMPT_END}${CLR0} "
+export PROMPT_ANDROID="${CLR1}\h${CLR0}:[${CLR1}\w${CLR0}]\n${CLR2}\$${CLR0} "
+export PROMPT_NT="$CLR1[$CLR0\u@${CLR2}${HOSTNAME_LOWER}$CLR0 $CLR3\w$CLR1]${PROMPT_END}${CLR0} "
+
+# 
+# Manage prompt themes
+# 
+prompt() {
+	if [[ "$#" -eq 1 && "${1:0:1}" != "-" ]]; then
+		case "$1" in
+			"linux")        PS1=$PROMPT_LINUX   ;;
+			"osx"|"macos")  PS1=$PROMPT_OSX     ;;
+			"android")      PS1=$PROMPT_ANDROID ;;
+			"nt"|"windows") PS1=$PROMPT_NT      ;;
+			*) echo "$0: Invalid prompt theme: \"$1\"" 1>&2
+			   return 1
+			   ;;
+		esac
+		
+	else
+		if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+			echo -e "Usage:\n\tprompt <name>\n\tprompt [--help|--list]"
+			return 0
+			
+		elif [[ "$1" == "--list" || "$1" == "-l" ]]; then
+			for prompt_theme in "linux" "osx" "android" "nt"; do
+				echo "* ${prompt_theme}"
+			done
+			return 0
+			
+		else
+			echo -e "$0: I don't know what to do... Try passing \"--help\"." 1>&2
+			return 2
+			
+		fi
+		
+	fi
+	
+	export PS1
+}
+
+# vim: set ft=bash:

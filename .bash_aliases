@@ -36,7 +36,7 @@ if [[ $OS == "GNU/Linux" ]]; then
 	fi
 elif [[ $OS == "FreeBSD" ]]; then
 	if which lsblk &>/dev/null; then
-		alias disks="lsblk"
+		alias disks="$(which lsblk)"
 	fi
 elif [[ $OS == "Mac OS X" ]]; then
 	alias disks="sudo diskutil list"
