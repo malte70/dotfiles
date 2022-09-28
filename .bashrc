@@ -36,6 +36,7 @@ fi
 
 # Default Editor/Browser
 EDITOR=$(which vim)
+VISUAL=$EDITOR
 if [[ $OS == "macOS" ]]; then
 	# Use open(1)
 	BROWSER="/usr/bin/open"
