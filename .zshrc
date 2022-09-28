@@ -207,7 +207,11 @@ export GPG_TTY
 
 # https://github.com/zsh-users/zsh-syntax-highlighting
 [[ -d "/usr/share/zsh/plugins/zsh-syntax-highlighting" ]] && \
-	source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh || source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh || true
+	source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[[ -d "/opt/homebrew/share/zsh-syntax-highlighting" ]] && \
+	source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[[ -d "/usr/local/share/zsh/plugins/zsh-syntax-highlighting" ]] && \
+	source /usr/local/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # git-extras
 [[ -f /usr/share/doc/git-extras ]] && \
