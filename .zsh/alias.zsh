@@ -407,11 +407,14 @@ google() {
 	fi
 }
 
+
 # Change terminal title
 # https://tldp.org/HOWTO/pdf/Xterm-Title.pdf
 set-xterm-title() {
 	print -Pn "\e]0;$1\a"
 }
+set-xterm-title "$USER@$HOST"
+
 
 # Hide ffmpeg/ffprobe banner
 if which ffmpeg &>/dev/null; then
