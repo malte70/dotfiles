@@ -399,7 +399,7 @@ ttyinfo() {
 # Alias to search the web using Google
 # Uses ELinks if installed, and falls back to `open` from malte70/scripts
 google() {
-	q=$(echo -n $@ | python -c "import urllib.parse,sys;print(urllib.parse.quote(sys.stdin.read()))")
+	q=$(echo -n $@ | python3 -c "import urllib.parse,sys;print(urllib.parse.quote(sys.stdin.read()))")
 	if which elinks &>/dev/null; then
 		elinks "http://www.google.com/search?hl=de&q=${q}"
 	else
@@ -407,11 +407,14 @@ google() {
 	fi
 }
 
+
 # Change terminal title
 # https://tldp.org/HOWTO/pdf/Xterm-Title.pdf
 set-xterm-title() {
 	print -Pn "\e]0;$1\a"
 }
+set-xterm-title "$USER@$HOST"
+
 
 # Hide ffmpeg/ffprobe banner
 if which ffmpeg &>/dev/null; then
@@ -486,4 +489,36 @@ ${_ANSI_COLOR_GREEN}"
 
 	}
 fi
+
+
+#
+# ANSI Color Demo
+#
+ansicolordemo() {
+	clear
+	echo "\n\t${_ANSI_ATTR_BOLD}${_ANSI_ATTR_UNDERLINE}ANSI Color Demo\n\n${_ANSI_RESET}"
+	echo "  _ANSI_RESET"
+	echo "$_ANSI_ATTR_BOLD  _ANSI_ATTR_BOLD $_ANSI_RESET"
+	echo "$_ANSI_ATTR_ITALIC  _ANSI_ATTR_ITALIC $_ANSI_RESET"
+	echo "$_ANSI_ATTR_UNDERLINE  _ANSI_ATTR_UNDERLINE $_ANSI_RESET"
+	#echo "$_ANSI_COLOR_BLACK  _ANSI_COLOR_BLACK $_ANSI_RESET"
+	echo "$_ANSI_COLOR_GREY  _ANSI_COLOR_BLACK $_ANSI_RESET"
+	echo "$_ANSI_COLOR_RED  _ANSI_COLOR_RED $_ANSI_RESET"
+	echo "$_ANSI_COLOR_GREEN  _ANSI_COLOR_GREEN $_ANSI_RESET"
+	echo "$_ANSI_COLOR_YELLOW  _ANSI_COLOR_YELLOW $_ANSI_RESET"
+	echo "$_ANSI_COLOR_BLUE  _ANSI_COLOR_BLUE $_ANSI_RESET"
+	echo "$_ANSI_COLOR_DARK_MAGENTA  _ANSI_COLOR_DARK_MAGENTA $_ANSI_RESET"
+	echo "$_ANSI_COLOR_DARK_CYAN  _ANSI_COLOR_DARK_CYAN $_ANSI_RESET"
+	echo "$_ANSI_COLOR_GREY  _ANSI_COLOR_GREY $_ANSI_RESET"
+	echo "$_ANSI_COLOR_DARK_GREY  _ANSI_COLOR_DARK_GREY $_ANSI_RESET"
+	echo "$_ANSI_COLOR_LIGHT_RED  _ANSI_COLOR_LIGHT_RED $_ANSI_RESET"
+	echo "$_ANSI_COLOR_LIGHT_GREEN  _ANSI_COLOR_LIGHT_GREEN $_ANSI_RESET"
+	echo "$_ANSI_COLOR_LIGHT_YELLOW  _ANSI_COLOR_LIGHT_YELLOW $_ANSI_RESET"
+	echo "$_ANSI_COLOR_LIGHT_BLUE  _ANSI_COLOR_LIGHT_BLUE $_ANSI_RESET"
+	echo "$_ANSI_COLOR_MAGENTA  _ANSI_COLOR_MAGENTA $_ANSI_RESET"
+	echo "$_ANSI_COLOR_CYAN  _ANSI_COLOR_CYAN $_ANSI_RESET"
+	echo "$_ANSI_COLOR_WHITE  _ANSI_COLOR_WHITE $_ANSI_RESET"
+	echo
+}
+
 

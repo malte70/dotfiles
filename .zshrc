@@ -207,7 +207,11 @@ export GPG_TTY
 
 # https://github.com/zsh-users/zsh-syntax-highlighting
 [[ -d "/usr/share/zsh/plugins/zsh-syntax-highlighting" ]] && \
-	source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh || source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh || true
+	source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[[ -d "/opt/homebrew/share/zsh-syntax-highlighting" ]] && \
+	source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[[ -d "/usr/local/share/zsh/plugins/zsh-syntax-highlighting" ]] && \
+	source /usr/local/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # git-extras
 [[ -d /usr/share/doc/git-extras ]] && \
@@ -215,7 +219,17 @@ export GPG_TTY
 [[ -d /opt/homebrew/share/git-extras ]] && \
 	source /opt/homebrew/share/git-extras/git-extras-completion.zsh
 
+# 
+# Default options for less(1)
+# 
+# --RAW-CONTROL-CHARS: Allow ANSI "color" escape codes
+# --tilde:             Show lines after EOF as empty lines instead of a "~"
+# -Ps<less>:           Set a custom prompt
+# 
+export LESS="--RAW-CONTROL-CHARS --tilde -Ps<less>"
+
 [ -f $HOME/.zshrc.local ] && . $HOME/.zshrc.local; true
 
+# iTerm2 shell integration
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
 
