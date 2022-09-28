@@ -453,3 +453,37 @@ mktouch() {
 		shift
 	done
 }
+
+
+#
+# FreeBSD version info
+#
+if [[ $OS == "FreeBSD" ]]; then
+	sysinfo-freebsd-version() {
+		echo
+		echo "${_ANSI_COLOR_BLUE}==>${_ANSI_COLOR_WHITE} FreeBSD Version ${_ANSI_RESET}"
+		echo
+
+		echo -n "${_ANSI_COLOR_WHITE}Installed kernel:${_ANSI_RESET}
+${_ANSI_COLOR_GREEN}"
+		freebsd-version -k
+		echo
+
+		echo -n "${_ANSI_COLOR_WHITE}Running kernel:${_ANSI_RESET}
+"
+		if [[ "$(freebsd-version -k)" == "$(freebsd-version -r)" ]]; then
+			echo -n "${_ANSI_COLOR_GREEN}"
+		else
+			echo -n "${_ANSI_COLOR_YELLOW}"
+		fi
+		freebsd-version -r
+		echo
+
+		echo -n "${_ANSI_COLOR_WHITE}Installed userland:${_ANSI_RESET}
+${_ANSI_COLOR_GREEN}"
+		freebsd-version -u
+		echo
+
+	}
+fi
+
