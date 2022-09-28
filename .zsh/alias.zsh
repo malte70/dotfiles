@@ -399,7 +399,7 @@ ttyinfo() {
 # Alias to search the web using Google
 # Uses ELinks if installed, and falls back to `open` from malte70/scripts
 google() {
-	q=$(echo -n $@ | python -c "import urllib.parse,sys;print(urllib.parse.quote(sys.stdin.read()))")
+	q=$(echo -n $@ | python3 -c "import urllib.parse,sys;print(urllib.parse.quote(sys.stdin.read()))")
 	if which elinks &>/dev/null; then
 		elinks "http://www.google.com/search?hl=de&q=${q}"
 	else
