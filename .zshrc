@@ -217,7 +217,17 @@ export GPG_TTY
 [[ -f /usr/share/doc/git-extras ]] && \
 	source /usr/share/doc/git-extras/git-extras-completion.zsh
 
+# 
+# Default options for less(1)
+# 
+# --RAW-CONTROL-CHARS: Allow ANSI "color" escape codes
+# --tilde:             Show lines after EOF as empty lines instead of a "~"
+# -Ps<less>:           Set a custom prompt
+# 
+export LESS="--RAW-CONTROL-CHARS --tilde -Ps<less>"
+
 [ -f $HOME/.zshrc.local ] && . $HOME/.zshrc.local; true
 
+# iTerm2 shell integration
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
 
