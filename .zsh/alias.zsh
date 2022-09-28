@@ -418,3 +418,38 @@ if which ffmpeg &>/dev/null; then
 	alias ffmpeg="`print =ffmpeg` -hide_banner"
 	alias ffprobe="`print =ffprobe` -hide_banner"
 fi
+
+# 
+# Find a password store entry matching a string
+# 
+findpass() {
+	#pass ls | grep --before-context=3 --after-context=1 --ignore-case $@
+	(
+		cd "$HOME/.password-store" || return 1
+		find . -iname "*${1}*.gpg" | sed 's/^\.//;s/\.gpg$//g'
+	)
+}
+
+# Change to per-user temporary directory
+cdtmp() {
+	_usertmp="/tmp/$USER"
+	[ -d "$_usertmp" ] || mkdir "$_usertmp"
+	echo "pushd $_usertmp"
+	pushd "$_usertmp" >&2
+}
+
+
+# 
+# Create (touch) a file and create the parent directory if required
+# 
+mktouch() {
+	while [[ $# -gt 0 ]]; do
+		_dirname=$(dirname $1)
+		if [[ ! -d "$_dirname" ]]; then
+			mkdir -p "$_dirname"
+		fi
+		touch $1
+		
+		shift
+	done
+}

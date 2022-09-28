@@ -59,22 +59,19 @@ fi
 # Those mixed-case hostnames on Windows suck...
 HOSTNAME_LOWER=$(hostname | tr 'A-Z' 'a-z')
 
-# Detect hostname on Android
-if [[ $OS == "Android" ]]
-then
-	HOSTNAME_ANDROID=$(getprop net.hostname)
-	if [[ -z "$HOSTNAME_ANDROID" ]]
-	then
-		# No hostname set - fall back to devicename
-		HOSTNAME_ANDROID=$(getprop ro.product.device)
-	fi
+. $HOME/.bash_prompt
+
+# Add ~/bin and ~/.local/bin to $PATH if they exist.
+if [[ -d "${HOME}/bin" ]]; then
+	echo $PATH | grep -q "${HOME}/bin" || PATH="${HOME}/bin:${PATH}"
+fi
+if [[ -d "${HOME}/.local/bin" ]]; then
+	echo $PATH | grep -q "${HOME}/.local/bin" || PATH="${HOME}/.local/bin:${PATH}"
 fi
 
-export PROMPT_LINUX="\u$CLR1@$CLR2\h$CLR0:$CLR3\w$CLR1$PROMPT_END $CLR0"
-export PROMPT_OSX="$CLR1[$CLR0\u@$CLR2\h$CLR0 $CLR3\w$CLR1]${PROMPT_END}${CLR0} "
-export PROMPT_ANDROID="${CLR1}${HOSTNAME_ANDROID}${CLR0}:[${CLR1}\w${CLR0}]\n${CLR2}\$${CLR0} "
-export PROMPT_NT="$CLR1[$CLR0\u@${CLR2}${HOSTNAME_LOWER}$CLR0 $CLR3\w$CLR1]${PROMPT_END}${CLR0} "
-
+# 
+# OS specific aliases etc.
+# 
 case $OS in
 	"Linux")
 		# GNU/Linux
@@ -83,32 +80,8 @@ case $OS in
 		DIST=$(grep DESCRIPTION /etc/lsb-release 2>/dev/null | cut -d\" -f2 || lsb_release --short --description)
 		[ "x" == "x$DIST" ] && DIST="Unknown"
 		
-		export PS1="${PROMPT_LINUX}"
-		# If ~/bin exists, add it to $PATH
-		if [[ -d "${HOME}/bin" ]]; then
-			echo $PATH | grep -q "${HOME}/bin" || PATH="${HOME}/bin:${PATH}"
-		fi
-		# If ~/.local/bin exists, add it to $PATH
-		if [[ -d "${HOME}/.local/bin" ]]; then
-			echo $PATH | grep -q "${HOME}/.local/bin" || PATH="${HOME}/.local/bin:${PATH}"
-		fi
+		prompt "linux"
 		
-		alias ..="cd .."
-		alias ls="$(which ls) --color=auto --escape --file-type -h --time-style=long-iso"
-		alias ll="$(which ls) --color=auto --escape -l --file-type -h --time-style=long-iso"
-		alias df="$(which df) --human-readable --print-type"
-		alias d='date --rfc-3339=seconds | tr " " "T"'
-		;;
-		
-	"Android")
-		# Android/Termux
-		OSVER="Linux-$(uname -r)"
-		DIST="Termux"
-		
-		export TERMUX_ROOT="/data/data/com.termux/files"
-		export PS1="${PROMPT_ANDROID}"
-		export PATH="${TERMUX_ROOT}/usr/bin:${TERMUX_ROOT}/usr/bin/applets:${HOME}/bin"
-
 		alias ..="cd .."
 		alias ls="$(which ls) --color=auto --escape --file-type -h --time-style=long-iso"
 		alias ll="$(which ls) --color=auto --escape -l --file-type -h --time-style=long-iso"
@@ -121,7 +94,7 @@ case $OS in
 		OSVER="$(python3 -c 'import platform; print(platform.mac_ver()[0])')"
 		DIST="macOS $OSVER"
 		
-		export PS1="${PROMPT_OSX}"
+		prompt "macos"
 		
 		alias ..="cd .."
 		alias ls="/bin/ls -G -F -b -h"
@@ -168,7 +141,8 @@ case $OS in
 		PATH="${PATH}:/c/Windows"
 		export PATH
 		
-		export PS1="${PROMPT_NT}"
+		prompt "nt"
+		
 		alias ..="cd .."
 		alias ls="$(which ls) --color=auto --escape --file-type -h --time-style=long-iso"
 		alias ll="$(which ls) --color=auto --escape -l --file-type -h --time-style=long-iso"
