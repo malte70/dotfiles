@@ -59,7 +59,7 @@ zmodload zsh/terminfo
 
 # Access On-Line help
 # Fails because run-help is an alias for man
-unalias run-help
+unalias run-help 2>/dev/null
 autoload run-help
 
 
