@@ -208,6 +208,8 @@ export GPG_TTY
 # https://github.com/zsh-users/zsh-syntax-highlighting
 [[ -d "/usr/share/zsh/plugins/zsh-syntax-highlighting" ]] && \
 	source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[[ -d "/usr/share/zsh-syntax-highlighting" ]] && \
+	source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 [[ -d "/opt/homebrew/share/zsh-syntax-highlighting" ]] && \
 	source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 [[ -d "/usr/local/share/zsh/plugins/zsh-syntax-highlighting" ]] && \
@@ -218,6 +220,7 @@ export GPG_TTY
 	source /usr/share/doc/git-extras/git-extras-completion.zsh
 [[ -d /opt/homebrew/share/git-extras ]] && \
 	source /opt/homebrew/share/git-extras/git-extras-completion.zsh
+autoload -U _git-extras
 
 # 
 # Default options for less(1)
