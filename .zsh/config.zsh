@@ -52,7 +52,7 @@ setopt PUSHD_SILENT
 setopt PUSHD_TO_HOME
 
 # Load modules
-zmodload zsh/attr
+zmodload zsh/attr 2>/dev/null
 zmodload zsh/termcap
 zmodload zsh/terminfo
 
