@@ -126,7 +126,7 @@ endif
 " Taglist
 if sysname == "Darwin"
 	" On OS X, use ctags provided by homebrew
-	let Tlist_Ctags_Cmd = "/usr/local/bin/ctags"
+	let Tlist_Ctags_Cmd = "/opt/homebrew/bin/ctags"
 elseif sysname == "FreeBSD"
 	let Tlist_Ctags_Cmd = "/usr/local/bin/exctags"
 else
