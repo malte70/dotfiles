@@ -43,14 +43,6 @@
 [cola]
 	spellcheck = false
 
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-
-[mergetool "sourcetree"]
-	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
-	
 # https://github.com/dandavison/delta
 [core]
 	pager = delta
@@ -70,4 +62,10 @@
 	conflictstyle = diff3
 [diff]
 	colorMoved = default
+
+# 
+# Support local overrides using ~/.gitconfig.local
+# 
+[include]
+	path = .gitconfig.local
 
