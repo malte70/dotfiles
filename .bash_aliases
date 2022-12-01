@@ -142,7 +142,7 @@ set-xterm-title() {
 # Python: When no "python" was found in $PATH, create an
 # alias.
 # 
-if ! which python &>/devknulkl; then
+if ! which python &>/dev/null; then
 	alias python="$(which python3)"
 	alias pip="$(which pip3)"
 	alias pydoc="$(which pydoc3)"
