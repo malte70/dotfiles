@@ -45,7 +45,7 @@ PATH=${PATH}/usr/sbin:
 [ -d "/opt/java/jre/bin" ] && PATH=${PATH}/opt/java/jre/bin:
 [ -d "/opt/android-sdk/platform-tools" ] && PATH=${PATH}/opt/android-sdk/platform-tools:
 [ -d "/usr/games" ] && PATH=${PATH}/usr/games:
-which ruby &>/dev/null && PATH=${PATH}$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:
+[ "$HOST" != "mcp.tardis.malte70.de" ] && which ruby &>/dev/null && PATH=${PATH}$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:
 
 if [[ "$OSVARIANT" == "Msys" ]]
 then
