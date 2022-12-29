@@ -4,6 +4,7 @@
 !.bash_profile
 !.bash_aliases
 !.config/uzbl/*
+!.config/cheat/*
 !.gitconfig
 !.gitignore
 !.ncmpcpp/config
