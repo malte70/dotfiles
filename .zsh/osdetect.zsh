@@ -45,6 +45,8 @@ else
 	OS=`uname -o`
 	if which lsb_release &>/dev/null; then
 		OSVARIANT=`lsb_release -s -i`
+	elif [[ -r /etc/os-release ]]; then
+		OSVARIANT=$(awk 'BEGIN { FS="\"" } ; /^NAME=/ { print $2 }' </etc/os-release)
 	else
 		OSVARIANT=$OS
 	fi

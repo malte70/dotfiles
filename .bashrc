@@ -42,7 +42,7 @@ if [[ $OS == "macOS" ]]; then
 	BROWSER="/usr/bin/open"
 elif [[ -z $DISPLAY ]]; then
 	# No X11 display available
-	BROWSER=$(which elinks)
+	which elinks &>/dev/null && BROWSER=$(which elinks)
 else
 	# Use xdg-open(1) on X11
 	BROWSER=$(which xdg-open)
