@@ -188,7 +188,9 @@ alias -g H='|head'
 alias -g T='|tail'
 alias -g W='|wc -l'
 alias -g S='|stripwhite'
+alias -g Snl='|tr -d "\n"'
 alias -g 2null='2>/dev/null'
+alias -g a2null='*>/dev/null'
 alias -g X='|hexdump -C'
 
 # Alias for alsaequal (only if installed)
