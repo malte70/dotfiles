@@ -39,3 +39,7 @@
 	path = .config/cheat/cheatsheets/malte70
 	url = git@github.com:malte70/cheat-sheets.git
 	branch = main
+[submodule ".config/cheat/cheatsheets/community"]
+	path = .config/cheat/cheatsheets/community
+	url = https://github.com/cheat/cheatsheets
+	branch = master
