@@ -149,7 +149,7 @@ au BufRead,BufNewFile *.md set filetype=markdown
 au BufRead,BufNewFile *.py set noexpandtab tabstop=4 softtabstop=4
 
 " Use bash syntax highlighting for *.sh files
-au BufRead,BufNewFile *.md set filetype=bash
+au BufRead,BufNewFile *.sh set filetype=bash
 
 " Ignore some file types in NERDTree
 let NERDTreeIgnore = [ '\.o$', '\~$', '\.class$', '\.pyc$' ]
