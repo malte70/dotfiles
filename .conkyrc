@@ -7,8 +7,9 @@ draw_borders no
 draw_outline no
 draw_shades no
 gap_x 5
-gap_y 35 
-maximum_width 250
+#gap_y 35 
+gap_y 55 
+maximum_width 350
 minimum_size 450 10
 own_window yes
 own_window_transparent yes
@@ -21,14 +22,16 @@ uppercase no
 
 use_xft yes
 xftalpha 0.8
-xftfont FreeSerif:size=11
+#xftfont FreeSerif:size=11
+xftfont Hack:size=11
 
 TEXT
 Mount:${alignr}Belegt:
  /$alignr${fs_used /} [${fs_used_perc /}%]
  /boot$alignr${fs_used /boot} [${fs_used_perc /boot}%]
  /home $alignr${fs_used /home} [${fs_used_perc /home}%]
- /srv $alignr${fs_used /srv} [${fs_used_perc /srv}%]
- /var $alignr${fs_used /var} [${fs_used_perc /var}%]
- videos $alignr${fs_used /mnt/nas/video} [${fs_used_perc /mnt/nas/video}%]
- pool/malte70 $alignr${fs_used /mnt/nas/backup} [${fs_used_perc /mnt/nas/backup}%]
+ /var/lib/libvirt/images $alignr${fs_used /var/lib/libvirt/images} [${fs_used_perc /var/lib/libvirt/images}%]
+ /mnt/windows_c $alignr${fs_used /mnt/windows_c} [${fs_used_perc /mnt/windows_c}%]
+ /mnt/windows_d $alignr${fs_used /mnt/windows_d} [${fs_used_perc /mnt/windows_d}%]
+${if_mounted /mnt/nas_malte70} /mnt/nas_malte70 $alignr${fs_used /mnt/nas_malte70} [${fs_used_perc /mnt/nas_malte70}%]$endif
+
