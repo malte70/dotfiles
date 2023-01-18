@@ -78,9 +78,6 @@ PROMPT="%F{cyan}[%F{green}%B`uname -m`%b%F{cyan}|%F{green}%B$OS%b%F{cyan}|%F{gre
 if [[ "$OS" == "Windows NT" ]]
 then
 	PROMPT=$(echo $PROMPT | sed "s/%m/$HOSTNAME_LOWER/g")
-elif [[ "$OS" == "Android" ]]
-then
-	PROMPT=$(echo $PROMPT | sed "s/%n@//g;s/%m/$HOSTNAME_ANDROID/g")
 fi
 
 # 

@@ -61,13 +61,7 @@ if [[ $OS != "Mac OS X" && $OS != "FreeBSD" && $OS != "DragonFly BSD" ]]; then
 	alias l1="`print -n =ls` --color=auto --escape -1"
 	alias du="`print -n =du` --summarize --human-readable"
 	alias d=`print -n =date`' --iso-8601=seconds'
-	if [[ $OS != "Android" ]]; then
-		alias df="`print -n =df` --human-readable --print-type"
-	else
-		# Termux's df command is not the GNU version, but an alternative
-		# implementation from the termux-tools package
-		alias df="`print -n =df` -h"
-	fi
+	alias df="`print -n =df` --human-readable --print-type"
 else
 	if which gls &>/dev/null; then
 		# If gls is available, all other coreutils should be too.
@@ -85,11 +79,6 @@ else
 		alias df="/bin/df -h"
 		alias d='date "+%Y-%m-%dT%H:%M:%S%z"'
 	fi
-fi
-if [[ $OS == "Android" ]]; then
-	stripwhite() {
-		python -c 'import sys;print(sys.stdin.read(),end="")' | sed 's/^[ \t]*//;s/[ \t]*$//g' </dev/stdin
-	}
 fi
 
 if [[ $OS == "GNU/Linux" ]]; then
@@ -254,10 +243,6 @@ then
 	then
 		alias pbcopy='xsel --clipboard --input'
 		alias pbpaste='xsel --clipboard --output'
-	elif [[ $OS == "Android" ]]
-	then
-		alias pbcopy='termux-clipboard-set'
-		alias pbpaste='termux-clipboard-get'
 	fi
 fi
 
@@ -386,7 +371,7 @@ fi
 
 # On macOS, use the original `open`, not my implementation from
 # <https://github.com/malte70/scripts> written for GNU/Linux and *BSD.
-if [[ $OS == "macOS" ]]; then
+if [[ $OS == "Mac OS X" ]]; then
 	alias open="/usr/bin/open"
 fi
 

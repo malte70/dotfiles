@@ -5,11 +5,11 @@
 # 
 ZSHENV=1
 
-# $PATH
-source $HOME/.zsh/path.zsh
-
 # OS detection
 source $HOME/.zsh/osdetect.zsh
+
+# $PATH
+source $HOME/.zsh/path.zsh
 
 # ANSI Color codes
 source $HOME/.zsh/ansi.zsh
@@ -44,12 +44,7 @@ then
 	fi
 elif [[ $OS == "Mac OS X" ]]; then
 	# On OS X, open <URL> always launches the user's default browser of choice.
-	BROWSER=open
-elif [[ $OS == "Android" ]]; then
-	# Termux provides termux-open-url in termux-tools
-	if ! which termux-open-url &>/dev/null; then
-		BROWSER=termux-open-url
-	fi
+	BROWSER=/usr/bin/open
 fi
 
 [ -f $HOME/.zshenv.local ] && . $HOME/.zshenv.local; true

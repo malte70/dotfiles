@@ -56,15 +56,6 @@ then
 	PATH="${PATH}/bin:"
 	PATH="${PATH}/c/Windows/system32:"
 	PATH="${PATH}/c/Windows"
-elif [[ -n "$ANDROID_DATA" ]]; then
-	# Termux on Android
-	TERMUX_ROOT="/data/data/com.termux/files"
-	PATH=""
-	PATH="${PATH}${TERMUX_ROOT}/usr/bin"
-	PATH="${PATH}:${TERMUX_ROOT}/usr/bin/applets"
-	PATH="${PATH}:${HOME}/bin"
-	
-	export TERMUX_ROOT
 fi
 
 export PATH="${PATH%:*}"

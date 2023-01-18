@@ -165,15 +165,7 @@ then
 	fi
 elif [[ $OS == "Mac OS X" ]]; then
 	# On OS X, open <URL> always launches the user's default browser of choice.
-	BROWSER=open
-elif [[ $OS == "Android" ]]; then
-	# Termux provides termux-open-url in termux-tools
-	BROWSER=termux-open-url
-	if ! which $BROWSER &>/dev/null; then
-		BROWSER=
-		echo "Warning: Please install termux-tools and reload zshrc:" >&2
-		echo "  apt install termux-tools && zshrc-reload" >&2
-	fi
+	BROWSER=/usr/bin/open
 else
 	if ! which elinks &>/dev/null; then
 		echo "WARNING: ELinks not found in PATH!" >&2
