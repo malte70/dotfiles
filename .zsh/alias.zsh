@@ -346,7 +346,7 @@ fi
 #   df   -> duf
 #   du   -> dust
 if which exa &>/dev/null; then
-	alias ls="$(which exa) --long --header --group --time-style=long-iso --icons"
+	alias ls="$(which exa) --long --header --group --time-style=long-iso --icons --group-directories-first"
 	alias l1="$(which exa) -1"
 	alias ll="ls --git --links"
 	alias tree="$(which exa) --long --header -T --icons"
@@ -398,6 +398,7 @@ google() {
 # Change terminal title
 # https://tldp.org/HOWTO/pdf/Xterm-Title.pdf
 set-xterm-title() {
+	[[ $TERM == "dump" ]] && return
 	print -Pn "\e]0;$1\a"
 }
 set-xterm-title "$USER@$HOST"
@@ -482,29 +483,56 @@ fi
 # ANSI Color Demo
 #
 ansicolordemo() {
+	_color_demo_figfont="mini"
+	_color_demo_title="ANSI Color Demo"
+	
 	clear
-	echo "\n\t${_ANSI_ATTR_BOLD}${_ANSI_ATTR_UNDERLINE}ANSI Color Demo\n\n${_ANSI_RESET}"
-	echo "  _ANSI_RESET"
-	echo "$_ANSI_ATTR_BOLD  _ANSI_ATTR_BOLD $_ANSI_RESET"
-	echo "$_ANSI_ATTR_ITALIC  _ANSI_ATTR_ITALIC $_ANSI_RESET"
-	echo "$_ANSI_ATTR_UNDERLINE  _ANSI_ATTR_UNDERLINE $_ANSI_RESET"
-	#echo "$_ANSI_COLOR_BLACK  _ANSI_COLOR_BLACK $_ANSI_RESET"
-	echo "$_ANSI_COLOR_GREY  _ANSI_COLOR_BLACK $_ANSI_RESET"
-	echo "$_ANSI_COLOR_RED  _ANSI_COLOR_RED $_ANSI_RESET"
-	echo "$_ANSI_COLOR_GREEN  _ANSI_COLOR_GREEN $_ANSI_RESET"
-	echo "$_ANSI_COLOR_YELLOW  _ANSI_COLOR_YELLOW $_ANSI_RESET"
-	echo "$_ANSI_COLOR_BLUE  _ANSI_COLOR_BLUE $_ANSI_RESET"
-	echo "$_ANSI_COLOR_DARK_MAGENTA  _ANSI_COLOR_DARK_MAGENTA $_ANSI_RESET"
-	echo "$_ANSI_COLOR_DARK_CYAN  _ANSI_COLOR_DARK_CYAN $_ANSI_RESET"
-	echo "$_ANSI_COLOR_GREY  _ANSI_COLOR_GREY $_ANSI_RESET"
-	echo "$_ANSI_COLOR_DARK_GREY  _ANSI_COLOR_DARK_GREY $_ANSI_RESET"
-	echo "$_ANSI_COLOR_LIGHT_RED  _ANSI_COLOR_LIGHT_RED $_ANSI_RESET"
-	echo "$_ANSI_COLOR_LIGHT_GREEN  _ANSI_COLOR_LIGHT_GREEN $_ANSI_RESET"
-	echo "$_ANSI_COLOR_LIGHT_YELLOW  _ANSI_COLOR_LIGHT_YELLOW $_ANSI_RESET"
-	echo "$_ANSI_COLOR_LIGHT_BLUE  _ANSI_COLOR_LIGHT_BLUE $_ANSI_RESET"
-	echo "$_ANSI_COLOR_MAGENTA  _ANSI_COLOR_MAGENTA $_ANSI_RESET"
-	echo "$_ANSI_COLOR_CYAN  _ANSI_COLOR_CYAN $_ANSI_RESET"
-	echo "$_ANSI_COLOR_WHITE  _ANSI_COLOR_WHITE $_ANSI_RESET"
+	if which figlet &>/dev/null
+	then
+		echo
+		figlet \
+			-f "${_color_demo_figfont}" \
+			"${_color_demo_title}"      \
+			| sed 's/^/	/'
+		
+	else
+		echo -n "\t${_ANSI_COLOR_WHITE}# "
+		echo -n "${_ANSI_ATTR_UNDERLINE}"
+		echo -n "${_color_demo_title}"
+		echo "${_ANSI_RESET}"
+		
+	fi
+	
+	echo; echo
+	echo "\t_ANSI_RESET"
+	echo "\t${_ANSI_ATTR_BOLD}_ANSI_ATTR_BOLD${_ANSI_RESET}                                       _ANSI_ATTR_BOLD_RESET"
+	echo "\t${_ANSI_ATTR_ITALIC}_ANSI_ATTR_ITALIC${_ANSI_RESET}                                   _ANSI_ATTR_ITALIC_RESET"
+	echo "\t${_ANSI_ATTR_UNDERLINE}_ANSI_ATTR_UNDERLINE${_ANSI_RESET}                             _ANSI_ATTR_UNDERLINE_RESET"
+	echo "\t${_ANSI_ATTR_STRIKETHROUGH}_ANSI_ATTR_STRIKETHROUGH${_ANSI_RESET}                     _ANSI_ATTR_STRIKETHROUGH_RESET"
+	echo "\t${_ANSI_ATTR_INVERSE}_ANSI_ATTR_INVERSE${_ANSI_RESET}                                 _ANSI_ATTR_INVERSE_RESET"
+	echo "\t${_ANSI_ATTR_BLINKING}_ANSI_ATTR_BLINKING${_ANSI_RESET}                               _ANSI_ATTR_BLINKING_RESET"
+	#echo "\t${_ANSI_ATTR_HIDDEN}_ANSI_ATTR_HIDDEN${_ANSI_RESET}                                   _ANSI_ATTR_HIDDEN_RESET"
+	echo "\t_ANSI_ATTR_CURSOR_VISIBLE                          _ANSI_ATTR_CURSOR_HIDDEN"
+	echo "\t_ANSI_ATTR_SCREEN_SAVE                            _ANSI_ATTR_SCREEN_RESTORE"
+	echo "\t_ANSI_ATTR_ALTERNATE_BUFFER_ENABLED    _ANSI_ATTR_ALTERNATE_BUFFER_DISABLED"
+	echo
+	echo "\t${_ANSI_COLOR_BLACK}_ANSI_COLOR_BLACK${_ANSI_RESET}"
+	echo "\t${_ANSI_COLOR_GREY}_ANSI_COLOR_BLACK${_ANSI_RESET}"
+	echo "\t${_ANSI_COLOR_RED}_ANSI_COLOR_RED${_ANSI_RESET}"
+	echo "\t${_ANSI_COLOR_GREEN}_ANSI_COLOR_GREEN${_ANSI_RESET}"
+	echo "\t${_ANSI_COLOR_YELLOW}_ANSI_COLOR_YELLOW${_ANSI_RESET}"
+	echo "\t${_ANSI_COLOR_BLUE}_ANSI_COLOR_BLUE${_ANSI_RESET}"
+	echo "\t${_ANSI_COLOR_DARK_MAGENTA}_ANSI_COLOR_DARK_MAGENTA${_ANSI_RESET}"
+	echo "\t${_ANSI_COLOR_DARK_CYAN}_ANSI_COLOR_DARK_CYAN${_ANSI_RESET}"
+	echo "\t${_ANSI_COLOR_GREY}_ANSI_COLOR_GREY${_ANSI_RESET}"
+	echo "\t${_ANSI_COLOR_DARK_GREY}_ANSI_COLOR_DARK_GREY${_ANSI_RESET}"
+	echo "\t${_ANSI_COLOR_LIGHT_RED}_ANSI_COLOR_LIGHT_RED${_ANSI_RESET}"
+	echo "\t${_ANSI_COLOR_LIGHT_GREEN}_ANSI_COLOR_LIGHT_GREEN${_ANSI_RESET}"
+	echo "\t${_ANSI_COLOR_LIGHT_YELLOW}_ANSI_COLOR_LIGHT_YELLOW${_ANSI_RESET}"
+	echo "\t${_ANSI_COLOR_LIGHT_BLUE}_ANSI_COLOR_LIGHT_BLUE${_ANSI_RESET}"
+	echo "\t${_ANSI_COLOR_MAGENTA}_ANSI_COLOR_MAGENTA${_ANSI_RESET}"
+	echo "\t${_ANSI_COLOR_CYAN}_ANSI_COLOR_CYAN${_ANSI_RESET}"
+	echo "\t${_ANSI_COLOR_WHITE}_ANSI_COLOR_WHITE${_ANSI_RESET}"
 	echo
 }
 

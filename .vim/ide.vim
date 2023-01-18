@@ -5,15 +5,13 @@
 " Part of:
 "     malte70's dotfiles, https://github.com/malte70/dotfiles
 "
-" Copyright (c) 2015 Malte Bublitz, http://malte-bublitz.de
-" All rights reserved.
-" 
 
 " Hotkeys
 " 
 " <F4>   Toggle IDE mode
-" <F7>   Save session
-" <F8>   Restore session
+" <F6>   Save session
+" <F7>   Restore session
+" <F8>   Execute a script
 " 
 
 let g:ide_mode_enabled = 0
@@ -44,13 +42,13 @@ function! MakeScriptExecuteable()
 endfunction
 
 " 
-" <F11>   Execute current file if it's a script
+" <F8>   Execute current file if it's a script
 " 
 function! IDEModeRunShebang()
 	if (match(getline(1),'^\#!') == 0)
 		" Make script executable if it isn't, and execute it.
-		silent !chmod +x <afile>
-		!./%
+		silent !chmod +x %
+		!clear;echo "\$ env $(realpath % | sed "s@$HOME@~@")\n"; env ./% || env $(abspath %)
 	else
 		echo "No shebang in this file."
 	endif

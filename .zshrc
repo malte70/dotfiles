@@ -23,9 +23,6 @@ if which dircolors &>/dev/null; then
 	# On OS X, there is no dircolors, but it is not needed
 	eval `dircolors -b`
 fi
-setopt autocd
-setopt noclobber
-unsetopt beep notify
 
 # vi keybindings
 bindkey -v
@@ -131,50 +128,10 @@ exit_zsh() { exit }
 zle -N exit_zsh
 bindkey '^D' exit_zsh
 
-# default browser and editor
-EDITOR==vim
-if which most &>/dev/null; then
-	PAGER==most
-else
-	PAGER==less
-fi
-if which elinks &>/dev/null
-then
-	# If elinks is installed, set it as a fallback, just to be sure $BROWSER is
-	# always set if no GUI browsers are available
-	BROWSER==elinks
-fi
-if [[ -n $DISPLAY ]] && [[ $OS != "Mac OS X" ]]
-then
-	# X11 available (Either locally on a desktop or remote via VNC)
-	if which xdg-open &>/dev/null
-	then
-		BROWSER==xdg-open
-	fi
-	if which firefox &>/dev/null
-	then
-		BROWSER==firefox
-	fi
-	if which google-chrome-stable &>/dev/null
-	then
-		BROWSER==google-chrome-stable
-	fi
-	if which vivaldi-stable &>/dev/null
-	then
-		BROWSER==vivaldi-stable
-	fi
-elif [[ $OS == "Mac OS X" ]]; then
-	# On OS X, open <URL> always launches the user's default browser of choice.
-	BROWSER=/usr/bin/open
-else
-	if ! which elinks &>/dev/null; then
-		echo "WARNING: ELinks not found in PATH!" >&2
-	fi
-fi
+# Mail location
 if [ -d $HOME/Mail ]; then
-	export MAIL=~/Mail
+	export MAIL="$HOME/Mail"
 fi
-export EDITOR PAGER BROWSER
 
 source $HOME/.zsh/alias.zsh
 

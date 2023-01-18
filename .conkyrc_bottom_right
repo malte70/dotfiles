@@ -1,0 +1,57 @@
+# vim: set ft=conkyrc:
+
+alignment bottom_right
+background yes
+border_width 0
+default_color 000000
+double_buffer yes
+draw_borders no
+draw_outline no
+draw_shades no
+gap_x 10
+gap_y 10
+#maximum_width 1650
+minimum_size 1800 15
+own_window yes
+own_window_transparent yes
+own_window_type desktop
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+own_window_argb_visual yes
+own_window_argb_value 100
+update_interval 2.0
+uppercase no
+
+use_xft yes
+xftalpha 0.8
+#xftfont inconsolata-g:size=10
+xftfont Hack:size=10
+
+TEXT
+$alignr $color \
+deepthought.rolltreppe3.de [${texeci 150 silentping.sh deepthought.rolltreppe3.de}]
+$alignr web.deepthought.rolltreppe3.de [${texeci 150 silentping.sh web.deepthought.rolltreppe3.de}]
+$alignr workstation.deepthought.rolltreppe3.de [${texeci 150 silentping.sh workstation.deepthought.rolltreppe3.de}]
+$alignr minecraft.deepthought.rolltreppe3.de [${texeci 150 silentping.sh minecraft.deepthought.rolltreppe3.de}]
+
+$alignr eddie.tardis.malte70.de [${texeci 150 silentping.sh eddie}]
+$alignr gibson.tardis.malte70.de [${texeci 150 silentping.sh gibson}]
+$alignr mcp.tardis.malte70.de [${texeci 150 silentping.sh mcp}]
+
+$alignr synologynas.tardis.malte70.de [${texeci 150 silentping.sh synologynas}]
+$alignr pi.tardis.malte70.de [${texeci 150 silentping.sh pi}]
+$alignr tau.tardis.malte70.de [${texeci 150 silentping.sh tau}]
+
+$alignr beast.torchwood.tardis.malte70.de [${texeci 150 silentping.sh beast.torchwood.tardis.malte70.de}]
+$alignr delphi.torchwood.tardis.malte70.de [${texeci 150 silentping.sh delphi.torchwood.tardis.malte70.de}]
+
+$alignr malte70@$nodename :: \
+Up: $uptime :: \
+CPU1: ${cpu cpu1}% :: \
+CPU2: ${cpu cpu2}% :: \
+CPU3: ${cpu cpu3}% :: \
+CPU4: ${cpu cpu4}% :: \
+CPU5: ${cpu cpu5}% :: \
+CPU6: ${cpu cpu6}% :: \
+CPU7: ${cpu cpu7}% :: \
+CPU8: ${cpu cpu8}% :: \
+RAM: $mem/$memmax ($memperc%)
