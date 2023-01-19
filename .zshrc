@@ -216,7 +216,7 @@ export GPG_TTY
 	source /usr/local/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # git-extras
-[[ -d /usr/share/doc/git-extras ]] && \
+[[ -f /usr/share/doc/git-extras/git-extras-completion.zsh ]] && \
 	source /usr/share/doc/git-extras/git-extras-completion.zsh
 [[ -d /opt/homebrew/share/git-extras ]] && \
 	source /opt/homebrew/share/git-extras/git-extras-completion.zsh
