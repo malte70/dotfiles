@@ -5,9 +5,11 @@
 # Part of:
 #     malte70's dotfiles, https://github.com/malte70/dotfiles
 # 
-# Copyright (c) 2015-2016 Malte Bublitz, https://malte70.github.io
-# All rights reserved.
-# 
+
+# Save the original value of $PATH
+if [[ -z "$_DEFAULT_PATH" ]]; then
+	_DEFAULT_PATH=$PATH
+fi
 
 if [[ -d "/usr/local/Cellar" ]]; then
 	HOMEBREW_PREFIX="/usr/local"
@@ -56,15 +58,6 @@ then
 	PATH="${PATH}/bin:"
 	PATH="${PATH}/c/Windows/system32:"
 	PATH="${PATH}/c/Windows"
-elif [[ -n "$ANDROID_DATA" ]]; then
-	# Termux on Android
-	TERMUX_ROOT="/data/data/com.termux/files"
-	PATH=""
-	PATH="${PATH}${TERMUX_ROOT}/usr/bin"
-	PATH="${PATH}:${TERMUX_ROOT}/usr/bin/applets"
-	PATH="${PATH}:${HOME}/bin"
-	
-	export TERMUX_ROOT
 fi
 
 export PATH="${PATH%:*}"
