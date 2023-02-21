@@ -180,8 +180,12 @@ autoload -U _git-extras
 # 
 export LESS="--RAW-CONTROL-CHARS --tilde -Ps<less>"
 
-[ -f $HOME/.zshrc.local ] && . $HOME/.zshrc.local; true
-
 # iTerm2 shell integration
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
+if [[ -n $SSH_CLIENT ]]; then
+	# Copy to the macOS client's clipboard
+	it2check && alias pbcopy="it2copy"
+fi
+
+[ -f $HOME/.zshrc.local ] && . $HOME/.zshrc.local; true
 
