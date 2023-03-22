@@ -67,18 +67,22 @@ HOSTNAME_LOWER=$(hostname | tr 'A-Z' 'a-z')
 # User color - Red for root, green for other users
 if [[ $UID -eq 0 ]]; then
 	PROMPT_USER_COLOR="%F{red}"
+	PROMPT_END="#"
 else
 	PROMPT_USER_COLOR="%F{green}"
+	PROMPT_END="$"
 fi
 
 PROMPT="%F{cyan}[%F{green}%B`uname -m`%b%F{cyan}|%F{green}%B$OS%b%F{cyan}|%F{green}%B$OSVERSION%b%F{cyan}]%(?.. %F{cyan}[%F{red}%?%F{cyan}]) "'$(prompt_get_git_info)%F{white}$(prompt_get_host_icon)'"%F{yellow}%~%b%F{white}
-%F{white}%n@${PROMPT_USER_COLOR}%m%F{white}$ "
+%F{white}%n@${PROMPT_USER_COLOR}%m%F{white}${PROMPT_END} "
 
 # Those mixed-case hostnames on Windows suck...
 if [[ "$OS" == "Windows NT" ]]
 then
 	PROMPT=$(echo $PROMPT | sed "s/%m/$HOSTNAME_LOWER/g")
 fi
+
+unset HOSTNAME_LOWER PROMPT_USER_COLOR PROMPT_END
 
 # 
 # Display runtime of commands that run longer than 5 seconds (no need for time $command anymore)
