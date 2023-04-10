@@ -94,8 +94,8 @@ if which bat &>/dev/null; then
 	alias ccat="bat"
 fi
 if which duf &>/dev/null; then
-	alias df="$(which duf) -hide special"
-	alias duf="$(which duf) -hide special"
+	alias df="$(which duf) -hide special,binds"
+	alias duf="$(which duf) -hide special,binds"
 fi
 if which dust &>/dev/null; then
 	alias du="$(which dust)"
