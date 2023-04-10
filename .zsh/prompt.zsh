@@ -5,9 +5,6 @@
 # Part of:
 #     malte70's dotfiles, https://github.com/malte70/dotfiles
 # 
-# Copyright (c) 2015-2016 Malte Bublitz, https://malte70.github.io
-# All rights reserved.
-# 
 # Example:
 # 
 # [x86_64|GNU/Linux|4.2.5-1-ARCH] [1] [malte70/geheim:master:5] ~/code/geheim
@@ -67,8 +64,10 @@ HOSTNAME_LOWER=$(hostname | tr 'A-Z' 'a-z')
 # User color - Red for root, green for other users
 if [[ $UID -eq 0 ]]; then
 	PROMPT_USER_COLOR="%F{red}"
+	PROMPT_END="#"
 else
 	PROMPT_USER_COLOR="%F{green}"
+	PROMPT_END="$"
 fi
 
 # iTerm2 prompt mark
@@ -78,7 +77,7 @@ if ! which iterm2_prompt_mark &>/dev/null; then
 fi
 
 PROMPT="%F{cyan}[%F{green}%B`uname -m`%b%F{cyan}|%F{green}%B$OS%b%F{cyan}|%F{green}%B$OSVERSION%b%F{cyan}]%(?.. %F{cyan}[%F{red}%?%F{cyan}]) "'$(prompt_get_git_info)%F{white}$(prompt_get_host_icon)'"%F{yellow}%~%b%F{white}
-%{$(iterm2_prompt_mark)%}%F{white}%n@${PROMPT_USER_COLOR}%m%F{white}$ "
+%{$(iterm2_prompt_mark)%}%F{white}%n@${PROMPT_USER_COLOR}%m%F{white}${PROMPT_END} "
 
 unset PROMPT_USER_COLOR PROMPT_MARKER
 
@@ -87,6 +86,8 @@ if [[ "$OS" == "Windows NT" ]]
 then
 	PROMPT=$(echo $PROMPT | sed "s/%m/$HOSTNAME_LOWER/g")
 fi
+
+unset HOSTNAME_LOWER PROMPT_USER_COLOR PROMPT_END
 
 # 
 # Display runtime of commands that run longer than 5 seconds (no need for time $command anymore)
@@ -100,3 +101,4 @@ if [[ ! -z "$MC_SID" ]]; then
 	PROMPT="%n@%m$ "
 	RPROMPT=""
 fi
+
