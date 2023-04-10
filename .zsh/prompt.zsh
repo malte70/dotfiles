@@ -71,8 +71,16 @@ else
 	PROMPT_USER_COLOR="%F{green}"
 fi
 
+# iTerm2 prompt mark
+#  → https://iterm2.com/documentation-shell-integration.html
+if ! which iterm2_prompt_mark &>/dev/null; then
+	iterm2_prompt_mark(){}
+fi
+
 PROMPT="%F{cyan}[%F{green}%B`uname -m`%b%F{cyan}|%F{green}%B$OS%b%F{cyan}|%F{green}%B$OSVERSION%b%F{cyan}]%(?.. %F{cyan}[%F{red}%?%F{cyan}]) "'$(prompt_get_git_info)%F{white}$(prompt_get_host_icon)'"%F{yellow}%~%b%F{white}
-%F{white}%n@${PROMPT_USER_COLOR}%m%F{white}$ "
+%{$(iterm2_prompt_mark)%}%F{white}%n@${PROMPT_USER_COLOR}%m%F{white}$ "
+
+unset PROMPT_USER_COLOR PROMPT_MARKER
 
 # Those mixed-case hostnames on Windows suck...
 if [[ "$OS" == "Windows NT" ]]
