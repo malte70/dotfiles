@@ -19,7 +19,7 @@ if ! which vim &>/dev/null; then
 fi
 
 if ! which python &>/dev/null; then
-	if ! which python3; then
+	if ! which python3 &>/dev/null; then
 		echo 'Error: Python was not found in $PATH!' >&2
 	else
 		alias python==python3
