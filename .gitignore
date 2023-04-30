@@ -13,6 +13,7 @@
 !.vim/**
 /.vim/backups/**
 !.zshrc
+!.zlogout
 !.zshenv
 !.zsh/
 !.zsh/**
