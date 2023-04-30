@@ -1,3 +1,4 @@
+# vim: set ft=zsh:
 # 
 # ~/.bashrc
 #    Used for NON-login shells (X11 Terminals)
@@ -6,35 +7,31 @@
 #    https://github.com/malte70/dotfiles
 # 
 
-CLR0="\[\033[0m\]"
-CLR1="\[\033[0;36m\]"
-CLR2_root="\[\033[1;31m\]"
-CLR2_normal="\[\033[0;32m\]"
-if [ $UID -eq 0 ]; then
-	CLR2=$CLR2_root
-	PROMPT_END="#"
-else
-	CLR2=$CLR2_normal
-	PROMPT_END="$"
-fi
-CLR3="\[\033[1;32m\]"
 
+# 
+# Environment variables
+# 
 OS=$(uname -s)
-
-if [[ "$OS" == "Darwin" ]]
-then
+if [[ "$OS" == "Darwin" ]]; then
 	OS="macOS"
-elif [[ "$(uname -o)" == "Msys" ]]
-then
+	
+elif [[ "$(uname -o)" == "Msys" ]]; then
 	# Msys2 on Windows NT
 	OS=$(uname -o)
+	
 elif echo $SHELL | grep "com.termux" &> /dev/null
 then
 	# Termux on Android
 	OS="Android"
+	
 fi
 
+# Ensure $HOSTNAME and $HOST are both set and have the same value.
+[[ -z $HOST && -n $HOSTNAME ]] && export HOST=$HOSTNAME
+
 # Default Editor/Browser
+# NOTE: You might want to set $VISUAL to a GUI application
+#       in your .bashrc.local.
 EDITOR=$(which vim)
 VISUAL=$EDITOR
 if [[ $OS == "macOS" ]]; then
@@ -47,27 +44,39 @@ else
 	# Use xdg-open(1) on X11
 	BROWSER=$(which xdg-open)
 fi
+# Use less(1) as default pager, with the "-R" option
+# (Which shows ANSI color codes and OSC 8 hyperlinks in
+# their raw form)
 PAGER="less"
 LESS="-R"
 export BROWSER EDITOR PAGER LESS
 
+
+# 
+# Don't run anything below on non-interactive sessions
+# 
 if [[ -z "$PS1" ]]
 then
 	return
 fi
 
-# Those mixed-case hostnames on Windows suck...
-HOSTNAME_LOWER=$(hostname | tr 'A-Z' 'a-z')
 
+# 
+# Set prompt from a list of hard-coded themes
+# 
 . $HOME/.bash_prompt
 
+
+# 
 # Add ~/bin and ~/.local/bin to $PATH if they exist.
+# 
 if [[ -d "${HOME}/bin" ]]; then
 	echo $PATH | grep -q "${HOME}/bin" || PATH="${HOME}/bin:${PATH}"
 fi
 if [[ -d "${HOME}/.local/bin" ]]; then
 	echo $PATH | grep -q "${HOME}/.local/bin" || PATH="${HOME}/.local/bin:${PATH}"
 fi
+
 
 # 
 # OS specific aliases etc.
@@ -155,7 +164,9 @@ case $OS in
 		;;
 esac
 
+# 
 # OS independent aliases
+# 
 . $HOME/.bash_aliases
 
 # Define $PYTHONSTARTUP. See python(1) for details
@@ -166,4 +177,6 @@ else
 	unset PYTHONSTARTUP
 fi
 
+
+# 
 [ -f $HOME/.bashrc.local ] && . $HOME/.bashrc.local; true

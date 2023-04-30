@@ -1,5 +1,6 @@
+# vim: set ft=zsh:
 # 
-# .bash_aliases
+# ~/.bash_aliases
 # 
 # Some OS-independent bash aliases. For OS-specific
 # aliases see ´.bashrc´.
@@ -18,6 +19,7 @@ alias g-d="git d"
 alias g-ds="git ds"
 alias tree="tree -AC"
 alias mkdir="mkdir -p"
+alias bashrc-reload="source ~/.bashrc"
 
 
 

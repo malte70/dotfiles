@@ -1,3 +1,4 @@
+# vim: set ft=zsh:
 # 
 # ~/.bash_profile
 #    Used for login shells

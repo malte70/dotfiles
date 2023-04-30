@@ -1,20 +1,66 @@
+# vim: set ft=zsh:
 # 
 # ~/.bash_prompt
 # 
 # Set the bash prompt.
 # Supports themes, managed by the function `prompt()`
 # 
+# USAGE OF THE prompt UTIL
+# ========================
+# 
+# Usage help:
+#   prompt -h|--help
+# List available themes:
+#   prompt --list|-l
+# Apply a theme:
+#   prompt <name>
+# 
 
-export PROMPT_LINUX="\u$CLR1@$CLR2\h$CLR0:$CLR3\w$CLR1$PROMPT_END $CLR0"
-export PROMPT_OSX="$CLR1[$CLR0\u@$CLR2\h$CLR0 $CLR3\w$CLR1]${PROMPT_END}${CLR0} "
-export PROMPT_ANDROID="${CLR1}\h${CLR0}:[${CLR1}\w${CLR0}]\n${CLR2}\$${CLR0} "
-export PROMPT_NT="$CLR1[$CLR0\u@${CLR2}${HOSTNAME_LOWER}$CLR0 $CLR3\w$CLR1]${PROMPT_END}${CLR0} "
 
 # 
-# Manage prompt themes
+# ANSI escape codes used in the prompt
+# 
+
+# Reset all colors and attributes
+CLR0="\[\033[0m\]"
+# Dark cyan
+CLR1="\[\033[0;36m\]"
+# Light red
+CLR2_root="\[\033[1;31m\]"
+# Green
+CLR2_normal="\[\033[0;32m\]"
+# Light green
+CLR3="\[\033[1;32m\]"
+# Set CLR2 and the end character for the prompt according to weather we are
+# root (UID 0) or not.
+if [ $UID -eq 0 ]; then
+	CLR2=$CLR2_root
+	PROMPT_END="#"
+else
+	CLR2=$CLR2_normal
+	PROMPT_END="$"
+fi
+
+
+# 
+# The prompt themes
+# 
+# Theme "linux"
+export PROMPT_LINUX="\u$CLR1@$CLR2\h$CLR0:$CLR3\w$CLR1$PROMPT_END $CLR0"
+# Theme "osx"
+export PROMPT_OSX="$CLR1[$CLR0\u@$CLR2\h$CLR0 $CLR3\w$CLR1]${PROMPT_END}${CLR0} "
+# Theme "android"
+export PROMPT_ANDROID="${CLR1}\h${CLR0}:[${CLR3}\w${CLR0}]\n${CLR2}\$${CLR0} "
+# Theme "nt"
+export PROMPT_NT="$CLR1[$CLR0\u@${CLR2}$(hostname | tr 'A-Z' 'a-z')$CLR0 $CLR3\w$CLR1]${PROMPT_END}${CLR0} "
+
+
+# 
+# prompt(): Utility function for applying prompt themes
 # 
 prompt() {
 	if [[ "$#" -eq 1 && "${1:0:1}" != "-" ]]; then
+		# Apply given prompt theme
 		case "$1" in
 			"linux")        PS1=$PROMPT_LINUX   ;;
 			"osx"|"macos")  PS1=$PROMPT_OSX     ;;
@@ -47,4 +93,3 @@ prompt() {
 	export PS1
 }
 
-# vim: set ft=bash:
