@@ -78,8 +78,8 @@ mkcd () {
 
 # 
 # Use alternative modern Unix utilities if available:
-#   ls   -> exa
-#   tree -> exa
+#   ls   -> eza/exa
+#   tree -> eza/exa
 #   cat  -> bat
 #   df   -> duf
 #   du   -> dust
@@ -89,6 +89,12 @@ if which exa &>/dev/null; then
 	alias l1="$(which exa) -1"
 	alias ll="ls --git --links"
 	alias tree="$(which exa) --long --header -T --icons"
+fi
+if which eza &>/dev/null; then
+	alias ls="$(which eza) --long --header --group --time-style=long-iso --icons"
+	alias l1="$(which eza) -1"
+	alias ll="ls --git --links"
+	alias tree="$(which eza) --long --header -T --icons"
 fi
 if which bat &>/dev/null; then
 	alias bat="$(which bat) --paging=never"
