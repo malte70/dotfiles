@@ -31,7 +31,15 @@ fi
 export EDITOR
 
 # $VISUAL - Full-fledged editor
-if [ -n "$DISPLAY" ] && which xed &>/dev/null; then
+if [[ $OS == "Mac OS X" ]]; then
+	if [[ -z $SSH_CLIENT ]]; then
+		if [[ -x "$HOME/.local/bin/CotEditor" ]]; then
+			VISUAL="$HOME/.local/bin/CotEditor"
+		else
+			VISUAL="/usr/bin/open -t"
+		fi
+	fi
+elif [ -n "$DISPLAY" ] && which xed &>/dev/null; then
 	VISUAL==xed
 elif [ -n "$DISPLAY" ] && which medit &>/dev/null; then
 	VISUAL==medit
