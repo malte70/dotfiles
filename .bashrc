@@ -166,4 +166,9 @@ else
 	unset PYTHONSTARTUP
 fi
 
+# libgl on GWSL
+if [[ $OSVERSION == *WSL* ]]; then
+	export LIBGL_ALWAYS_INDIRECT=1
+fi
+
 [ -f $HOME/.bashrc.local ] && . $HOME/.bashrc.local; true
