@@ -14,13 +14,12 @@ Especially the zsh configuration largely depends on the system and the
 applications installed. Currently, it is prooven to work without modifications
 on the following operating systems (and might work on many others, too):
 
+ * macOS
  * GNU/Linux
     * ArchLinux
-    * ArchLinux ARM
-    * Debian
+    * Raspbian/Debian
     * Ubuntu (tested on the most current LTS releases, inside KVM as well as on Windows Subsystem for Linux)
  * FreeBSD
- * macOS
 
 ### Software requirements of zsh configuration
 
