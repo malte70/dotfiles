@@ -19,17 +19,8 @@ fi
 if which todo &>/dev/null && [[ -f "$HOME/.todo" ]]; then
 	[ -z $SHOW_TODO ] && SHOW_TODO="yes"
 	
-	# There's no /usr/bin/env on
-	# Termux/Android, so todo's
-	# Shebang fails
-	if [[ -x /usr/bin/env ]]; then
-		TODO="$(which todo)"
-	else
-		TODO="bash $(which todo)"
-	fi
-
 	if [[ $SHOW_TODO != "no" && "$(eval ${TODO} | wc -l)" -ne 2 ]]; then
-		eval ${TODO}
+		todo
 		echo
 	fi
 	SHOW_TODO="no"

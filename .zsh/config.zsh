@@ -1,23 +1,27 @@
 # 
 # .zsh/config.zsh
-#   Configuration variables
+# 
+# Configuration variables and setopt
 # 
 # Part of:
 #     malte70's dotfiles, https://github.com/malte70/dotfiles
 # 
-# Copyright (c) 2015 Malte Bublitz, http://malte-bublitz.de
-# All rights reserved.
-# 
 
+
+
+#
 # my network setup. used to adjust behaviour to specific host
+# 
 DOMAIN="malte70.de"
 ORG_DOMAIN="rolltreppe3.de"
 LOCAL_DOMAIN="tardis.$DOMAIN"
 HOSTS=(
 	"torchwood.$LOCAL_DOMAIN"                # Notebook
-	"raspberrypi.$LOCAL_DOMAIN"              # Raspberry Pi 1
+	"pi.$LOCAL_DOMAIN"                       # Raspberry Pi 1
 	"tau.$LOCAL_DOMAIN"                      # Raspberry Pi 4
 	"mcp.$LOCAL_DOMAIN"                      # Mac mini
+	"eddie.$LOCAL_DOMAIN"                    # HP Workstation
+	"gibson.$LOCAL_DOMAIN"                   # Workstation 1
 	"deepthought.$ORG_DOMAIN"                # Root server
 	"web.deepthought.$ORG_DOMAIN"            # Web server
 	"workstation.deepthought.$ORG_DOMAIN"    # Cloud workstation
@@ -37,19 +41,45 @@ ACCOUNTS=(
 	"malte70@minecraft.deepthought.$ORG_DOMAIN"
 	"merkvr@minecraft.deepthought.$ORG_DOMAIN"
 )
+unset DOMAIN ORG_DOMAIN
 
+
+
+# 
 # History: 100,000 lines in ~/.zsh/histfile
+# 
 HISTFILE=~/.zsh/histfile
 HISTSIZE=100000
 SAVEHIST=100000
 
 
+
+# 
+# zsh Options
+# 
 # Always push $OLDPWD
 setopt AUTO_CD
+
+# Don't overwrite existing files when redirecting output
+setopt NO_CLOBBER
+
 # No silent chdir $TERM
 setopt CD_SILENT
 setopt PUSHD_SILENT
 setopt PUSHD_TO_HOME
+
+# history
+#setopt APPEND_HISTORY
+#setopt INC_APPEND_HISTORY
+#setopt SHARE_HISTORY
+
+# never ever beep ever
+unsetopt BEEP NOTIFY
+
+# allow tab completion in the middle of a word
+setopt COMPLETE_IN_WORD
+
+
 
 # Load modules
 zmodload zsh/attr 2>/dev/null

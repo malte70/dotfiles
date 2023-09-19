@@ -43,3 +43,7 @@
 	path = .config/cheat/cheatsheets/community
 	url = https://github.com/cheat/cheatsheets
 	branch = master
+[submodule ".vim/bundle/vim-polyglot"]
+	path = .vim/bundle/vim-polyglot
+	url = https://github.com/sheerun/vim-polyglot
+	branch = master

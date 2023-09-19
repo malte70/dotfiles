@@ -61,13 +61,7 @@ if [[ $OS != "Mac OS X" && $OS != "FreeBSD" && $OS != "DragonFly BSD" ]]; then
 	alias l1="`print -n =ls` --color=auto --escape -1"
 	alias du="`print -n =du` --summarize --human-readable"
 	alias d=`print -n =date`' --iso-8601=seconds'
-	if [[ $OS != "Android" ]]; then
-		alias df="`print -n =df` --human-readable --print-type"
-	else
-		# Termux's df command is not the GNU version, but an alternative
-		# implementation from the termux-tools package
-		alias df="`print -n =df` -h"
-	fi
+	alias df="`print -n =df` --human-readable --print-type"
 else
 	if which gls &>/dev/null; then
 		# If gls is available, all other coreutils should be too.
@@ -85,11 +79,6 @@ else
 		alias df="/bin/df -h"
 		alias d='date "+%Y-%m-%dT%H:%M:%S%z"'
 	fi
-fi
-if [[ $OS == "Android" ]]; then
-	stripwhite() {
-		python -c 'import sys;print(sys.stdin.read(),end="")' | sed 's/^[ \t]*//;s/[ \t]*$//g' </dev/stdin
-	}
 fi
 
 if [[ $OS == "GNU/Linux" ]]; then
@@ -254,10 +243,6 @@ then
 	then
 		alias pbcopy='xsel --clipboard --input'
 		alias pbpaste='xsel --clipboard --output'
-	elif [[ $OS == "Android" ]]
-	then
-		alias pbcopy='termux-clipboard-set'
-		alias pbpaste='termux-clipboard-get'
 	fi
 fi
 
@@ -361,7 +346,7 @@ fi
 #   df   -> duf
 #   du   -> dust
 if which exa &>/dev/null; then
-	alias ls="$(which exa) --long --header --group --time-style=long-iso --icons"
+	alias ls="$(which exa) --long --header --group --time-style=long-iso --icons --group-directories-first"
 	alias l1="$(which exa) -1"
 	alias ll="ls --git --links"
 	alias tree="$(which exa) --long --header -T --icons"
@@ -372,8 +357,8 @@ if which bat &>/dev/null; then
 	alias ccat="bat"
 fi
 if which duf &>/dev/null; then
-	alias df="$(which duf) -hide special"
-	alias duf="$(which duf) -hide special"
+	alias df="$(which duf) -hide special,binds"
+	alias duf="$(which duf) -hide special,binds"
 fi
 if which dust &>/dev/null; then
 	alias du="$(which dust)"
@@ -386,7 +371,7 @@ fi
 
 # On macOS, use the original `open`, not my implementation from
 # <https://github.com/malte70/scripts> written for GNU/Linux and *BSD.
-if [[ $OS == "macOS" ]]; then
+if [[ $OS == "Mac OS X" ]]; then
 	alias open="/usr/bin/open"
 fi
 
@@ -413,6 +398,7 @@ google() {
 # Change terminal title
 # https://tldp.org/HOWTO/pdf/Xterm-Title.pdf
 set-xterm-title() {
+	[[ $TERM == "dump" ]] && return
 	print -Pn "\e]0;$1\a"
 }
 set-xterm-title "$USER@$HOST"
@@ -497,29 +483,56 @@ fi
 # ANSI Color Demo
 #
 ansicolordemo() {
+	_color_demo_figfont="mini"
+	_color_demo_title="ANSI Color Demo"
+	
 	clear
-	echo "\n\t${_ANSI_ATTR_BOLD}${_ANSI_ATTR_UNDERLINE}ANSI Color Demo\n\n${_ANSI_RESET}"
-	echo "  _ANSI_RESET"
-	echo "$_ANSI_ATTR_BOLD  _ANSI_ATTR_BOLD $_ANSI_RESET"
-	echo "$_ANSI_ATTR_ITALIC  _ANSI_ATTR_ITALIC $_ANSI_RESET"
-	echo "$_ANSI_ATTR_UNDERLINE  _ANSI_ATTR_UNDERLINE $_ANSI_RESET"
-	#echo "$_ANSI_COLOR_BLACK  _ANSI_COLOR_BLACK $_ANSI_RESET"
-	echo "$_ANSI_COLOR_GREY  _ANSI_COLOR_BLACK $_ANSI_RESET"
-	echo "$_ANSI_COLOR_RED  _ANSI_COLOR_RED $_ANSI_RESET"
-	echo "$_ANSI_COLOR_GREEN  _ANSI_COLOR_GREEN $_ANSI_RESET"
-	echo "$_ANSI_COLOR_YELLOW  _ANSI_COLOR_YELLOW $_ANSI_RESET"
-	echo "$_ANSI_COLOR_BLUE  _ANSI_COLOR_BLUE $_ANSI_RESET"
-	echo "$_ANSI_COLOR_DARK_MAGENTA  _ANSI_COLOR_DARK_MAGENTA $_ANSI_RESET"
-	echo "$_ANSI_COLOR_DARK_CYAN  _ANSI_COLOR_DARK_CYAN $_ANSI_RESET"
-	echo "$_ANSI_COLOR_GREY  _ANSI_COLOR_GREY $_ANSI_RESET"
-	echo "$_ANSI_COLOR_DARK_GREY  _ANSI_COLOR_DARK_GREY $_ANSI_RESET"
-	echo "$_ANSI_COLOR_LIGHT_RED  _ANSI_COLOR_LIGHT_RED $_ANSI_RESET"
-	echo "$_ANSI_COLOR_LIGHT_GREEN  _ANSI_COLOR_LIGHT_GREEN $_ANSI_RESET"
-	echo "$_ANSI_COLOR_LIGHT_YELLOW  _ANSI_COLOR_LIGHT_YELLOW $_ANSI_RESET"
-	echo "$_ANSI_COLOR_LIGHT_BLUE  _ANSI_COLOR_LIGHT_BLUE $_ANSI_RESET"
-	echo "$_ANSI_COLOR_MAGENTA  _ANSI_COLOR_MAGENTA $_ANSI_RESET"
-	echo "$_ANSI_COLOR_CYAN  _ANSI_COLOR_CYAN $_ANSI_RESET"
-	echo "$_ANSI_COLOR_WHITE  _ANSI_COLOR_WHITE $_ANSI_RESET"
+	if which figlet &>/dev/null
+	then
+		echo
+		figlet \
+			-f "${_color_demo_figfont}" \
+			"${_color_demo_title}"      \
+			| sed 's/^/	/'
+		
+	else
+		echo -n "\t${_ANSI_COLOR_WHITE}# "
+		echo -n "${_ANSI_ATTR_UNDERLINE}"
+		echo -n "${_color_demo_title}"
+		echo "${_ANSI_RESET}"
+		
+	fi
+	
+	echo; echo
+	echo "\t_ANSI_RESET"
+	echo "\t${_ANSI_ATTR_BOLD}_ANSI_ATTR_BOLD${_ANSI_RESET}                                       _ANSI_ATTR_BOLD_RESET"
+	echo "\t${_ANSI_ATTR_ITALIC}_ANSI_ATTR_ITALIC${_ANSI_RESET}                                   _ANSI_ATTR_ITALIC_RESET"
+	echo "\t${_ANSI_ATTR_UNDERLINE}_ANSI_ATTR_UNDERLINE${_ANSI_RESET}                             _ANSI_ATTR_UNDERLINE_RESET"
+	echo "\t${_ANSI_ATTR_STRIKETHROUGH}_ANSI_ATTR_STRIKETHROUGH${_ANSI_RESET}                     _ANSI_ATTR_STRIKETHROUGH_RESET"
+	echo "\t${_ANSI_ATTR_INVERSE}_ANSI_ATTR_INVERSE${_ANSI_RESET}                                 _ANSI_ATTR_INVERSE_RESET"
+	echo "\t${_ANSI_ATTR_BLINKING}_ANSI_ATTR_BLINKING${_ANSI_RESET}                               _ANSI_ATTR_BLINKING_RESET"
+	#echo "\t${_ANSI_ATTR_HIDDEN}_ANSI_ATTR_HIDDEN${_ANSI_RESET}                                   _ANSI_ATTR_HIDDEN_RESET"
+	echo "\t_ANSI_ATTR_CURSOR_VISIBLE                          _ANSI_ATTR_CURSOR_HIDDEN"
+	echo "\t_ANSI_ATTR_SCREEN_SAVE                            _ANSI_ATTR_SCREEN_RESTORE"
+	echo "\t_ANSI_ATTR_ALTERNATE_BUFFER_ENABLED    _ANSI_ATTR_ALTERNATE_BUFFER_DISABLED"
+	echo
+	echo "\t${_ANSI_COLOR_BLACK}_ANSI_COLOR_BLACK${_ANSI_RESET}"
+	echo "\t${_ANSI_COLOR_GREY}_ANSI_COLOR_BLACK${_ANSI_RESET}"
+	echo "\t${_ANSI_COLOR_RED}_ANSI_COLOR_RED${_ANSI_RESET}"
+	echo "\t${_ANSI_COLOR_GREEN}_ANSI_COLOR_GREEN${_ANSI_RESET}"
+	echo "\t${_ANSI_COLOR_YELLOW}_ANSI_COLOR_YELLOW${_ANSI_RESET}"
+	echo "\t${_ANSI_COLOR_BLUE}_ANSI_COLOR_BLUE${_ANSI_RESET}"
+	echo "\t${_ANSI_COLOR_DARK_MAGENTA}_ANSI_COLOR_DARK_MAGENTA${_ANSI_RESET}"
+	echo "\t${_ANSI_COLOR_DARK_CYAN}_ANSI_COLOR_DARK_CYAN${_ANSI_RESET}"
+	echo "\t${_ANSI_COLOR_GREY}_ANSI_COLOR_GREY${_ANSI_RESET}"
+	echo "\t${_ANSI_COLOR_DARK_GREY}_ANSI_COLOR_DARK_GREY${_ANSI_RESET}"
+	echo "\t${_ANSI_COLOR_LIGHT_RED}_ANSI_COLOR_LIGHT_RED${_ANSI_RESET}"
+	echo "\t${_ANSI_COLOR_LIGHT_GREEN}_ANSI_COLOR_LIGHT_GREEN${_ANSI_RESET}"
+	echo "\t${_ANSI_COLOR_LIGHT_YELLOW}_ANSI_COLOR_LIGHT_YELLOW${_ANSI_RESET}"
+	echo "\t${_ANSI_COLOR_LIGHT_BLUE}_ANSI_COLOR_LIGHT_BLUE${_ANSI_RESET}"
+	echo "\t${_ANSI_COLOR_MAGENTA}_ANSI_COLOR_MAGENTA${_ANSI_RESET}"
+	echo "\t${_ANSI_COLOR_CYAN}_ANSI_COLOR_CYAN${_ANSI_RESET}"
+	echo "\t${_ANSI_COLOR_WHITE}_ANSI_COLOR_WHITE${_ANSI_RESET}"
 	echo
 }
 

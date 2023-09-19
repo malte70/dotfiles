@@ -1,17 +1,16 @@
 "
-" .vimrc
-"  Part of malte70's dotfiles
-"  https://github.com/malte70/dotfiles
-"
-"  Copyright (c) 2012-2015 Malte Bublitz, http://malte-bublitz.de
-"  All rights reserved.
-"
-" Licensed under the terms of the 2-clause BSD license ("FreeBSD license"); see COPYING for details.
+" ~/.vimrc
+" 
+" Part of malte70's dotfiles <https://github.com/malte70/dotfiles>
 "
 " inspired by (inter alia):
 "  - http://www.youtube.com/watch?gl=DE&v=YhqsjUUHj6g
 "  - http://vim.wikia.com/wiki/Change_vimrc_with_auto_reload
 "  - https://github.com/yannicklm/vimconf
+"  - https://vim.fandom.com/wiki/Example_vimrc
+"  - https://gist.github.com/simonista/8703722
+"  - https://chrisyeh96.github.io/2017/12/18/vimrc.html
+"  - http://albertwu.org/cs61a/notes/vimrc.html
 "
 
 " do not operate in compatibility mode

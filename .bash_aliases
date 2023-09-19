@@ -1,5 +1,6 @@
+# vim: set ft=zsh:
 # 
-# .bash_aliases
+# ~/.bash_aliases
 # 
 # Some OS-independent bash aliases. For OS-specific
 # aliases see ´.bashrc´.
@@ -18,6 +19,7 @@ alias g-d="git d"
 alias g-ds="git ds"
 alias tree="tree -AC"
 alias mkdir="mkdir -p"
+alias bashrc-reload="source ~/.bashrc"
 
 
 
@@ -94,8 +96,8 @@ if which bat &>/dev/null; then
 	alias ccat="bat"
 fi
 if which duf &>/dev/null; then
-	alias df="$(which duf) -hide special"
-	alias duf="$(which duf) -hide special"
+	alias df="$(which duf) -hide special,binds"
+	alias duf="$(which duf) -hide special,binds"
 fi
 if which dust &>/dev/null; then
 	alias du="$(which dust)"
