@@ -1,3 +1,5 @@
+# vim: set ft=conkyrc:
+
 alignment top_right
 background yes
 border_width 0
