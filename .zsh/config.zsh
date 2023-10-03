@@ -46,6 +46,13 @@ unset DOMAIN ORG_DOMAIN
 
 
 # 
+# Optional features in my zsh configuration
+# 
+SHOW_NOTES="no"
+
+
+
+# 
 # History: 100,000 lines in ~/.zsh/histfile
 # 
 HISTFILE=~/.zsh/histfile

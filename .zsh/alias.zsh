@@ -2,12 +2,6 @@
 # .zsh/alias.zsh
 #     Alias definitions
 # 
-# Part of:
-#     malte70's dotfiles, https://github.com/malte70/dotfiles
-# 
-# Copyright (c) 2015-2016 Malte Bublitz, https://malte70.github.io
-# All rights reserved.
-# 
 
 # command aliases:
 if [[ "$OSVARIANT" == "Arch" ]]; then
@@ -340,8 +334,8 @@ else
 fi
 
 # Use alternative modern Unix utilities if available:
-#   ls   -> exa
-#   tree -> exa
+#   ls   -> eza/exa
+#   tree -> eza/exa
 #   cat  -> bat
 #   df   -> duf
 #   du   -> dust
@@ -350,6 +344,12 @@ if which exa &>/dev/null; then
 	alias l1="$(which exa) -1"
 	alias ll="ls --git --links"
 	alias tree="$(which exa) --long --header -T --icons"
+fi
+if which eza &>/dev/null; then
+	alias ls="$(which eza) --long --header --group --time-style=long-iso --icons --group-directories-first"
+	alias l1="$(which eza) -1"
+	alias ll="ls --git --links"
+	alias tree="$(which eza) --long --header -T --icons"
 fi
 if which bat &>/dev/null; then
 	alias bat="`print -n =bat` --paging=never"

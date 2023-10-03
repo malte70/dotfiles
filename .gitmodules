@@ -33,7 +33,7 @@
 [submodule ".vim/bundle/vim-toml"]
 	path = .vim/bundle/vim-toml
 	url = https://github.com/cespare/vim-toml
-	branch = master
+	branch = main
 
 [submodule ".config/cheat/cheatsheets/malte70"]
 	path = .config/cheat/cheatsheets/malte70
