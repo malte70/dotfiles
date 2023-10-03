@@ -537,3 +537,15 @@ ansicolordemo() {
 }
 
 
+# 
+# gpa: Open the key manager by default
+# 
+gpa() {
+	if [[ $# -eq 0 ]]; then
+		1="--keyring"
+	fi
+	=gpa $@
+}
+
+
+
