@@ -410,6 +410,11 @@ if which ffmpeg &>/dev/null; then
 	alias ffprobe="`print =ffprobe` -hide_banner"
 fi
 
+# Just
+if which just &>/dev/null; then
+	alias j="`print =just`"
+fi
+
 # 
 # Find a password store entry matching a string
 # 

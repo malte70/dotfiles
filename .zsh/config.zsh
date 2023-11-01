@@ -98,5 +98,7 @@ zmodload zsh/terminfo
 # Fails because run-help is an alias for man
 unalias run-help 2>/dev/null
 autoload run-help
+alias help=run-help
+alias get-help=run-help
 
 
