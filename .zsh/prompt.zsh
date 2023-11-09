@@ -41,6 +41,9 @@ prompt_get_host_icon() {
 	elif [[ $OSVARIANT == "Ubuntu" ]]; then
 		printf "\uf31b "
 		
+	elif [[ $OSVARIANT == "Debian" ]]; then
+	    printf "\uf306 "
+	    
 	elif [[ $OSVARIANT == "Raspbian" ]]; then
 		printf "\uf315 "
 		
