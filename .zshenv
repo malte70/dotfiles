@@ -43,6 +43,8 @@ elif [ -n "$DISPLAY" ] && which xed &>/dev/null; then
 	VISUAL==xed
 elif [ -n "$DISPLAY" ] && which medit &>/dev/null; then
 	VISUAL==medit
+elif [ -n "$DISPLAY" ] && which pluma &>/dev/null; then
+	VISUAL==pluma
 else
 	VISUAL=$EDITOR
 fi
