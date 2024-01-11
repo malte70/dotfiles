@@ -155,14 +155,18 @@ GPG_TTY=$(tty)
 export GPG_TTY
 
 # https://github.com/zsh-users/zsh-syntax-highlighting
+# ArchLinux
 [[ -d "/usr/share/zsh/plugins/zsh-syntax-highlighting" ]] && \
 	source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# Ubuntu
 [[ -d "/usr/share/zsh-syntax-highlighting" ]] && \
 	source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# macOS
 [[ -d "/opt/homebrew/share/zsh-syntax-highlighting" ]] && \
 	source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-[[ -d "/usr/local/share/zsh/plugins/zsh-syntax-highlighting" ]] && \
-	source /usr/local/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# FreeBSD
+[[ -d "/usr/local/share/zsh-syntax-highlighting" ]] && \
+	source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # git-extras
 [[ -f /usr/share/doc/git-extras/git-extras-completion.zsh ]] && \
