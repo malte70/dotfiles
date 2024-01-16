@@ -39,11 +39,19 @@
 	path = .config/cheat/cheatsheets/malte70
 	url = git@github.com:malte70/cheat-sheets.git
 	branch = main
+
 [submodule ".config/cheat/cheatsheets/community"]
 	path = .config/cheat/cheatsheets/community
 	url = https://github.com/cheat/cheatsheets
 	branch = master
+
 [submodule ".vim/bundle/vim-polyglot"]
 	path = .vim/bundle/vim-polyglot
 	url = https://github.com/sheerun/vim-polyglot
 	branch = master
+	
+[submodule "lightline.vim"]
+	path = .vim/bundle/lightline.vim
+	url = https://github.com/itchyny/lightline.vim
+	branch = master
+
