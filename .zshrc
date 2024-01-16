@@ -179,6 +179,9 @@ autoload -U _git-extras
 # -Ps<less>:           Set a custom prompt
 # 
 export LESS="--RAW-CONTROL-CHARS --tilde -Ps<less>"
+if which lesspipe.sh &>/dev/null; then
+	export LESSOPEN="|`print =lesspipe.sh` %s"
+fi
 
 # iTerm2 shell integration
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
