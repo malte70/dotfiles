@@ -47,3 +47,6 @@
 	path = .vim/bundle/vim-polyglot
 	url = https://github.com/sheerun/vim-polyglot
 	branch = master
+[submodule "lightline.vim"]
+	path = /home/malte70/.vim/bundle/lightline.vim
+	url = https://github.com/itchyny/lightline.vim

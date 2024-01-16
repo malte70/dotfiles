@@ -27,5 +27,7 @@ call pathogen#helptags()
 source ~/.vim/basic.vim
 
 set modeline
+" For lightline.vim
+set laststatus=2
 
 " vim: set ts=8 sw=8 et:
