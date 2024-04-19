@@ -355,6 +355,10 @@ if which bat &>/dev/null; then
 	alias bat="`print -n =bat` --paging=never"
 	alias cat="bat"
 	alias ccat="bat"
+elif which batcat &>/dev/null; then
+	alias bat="`print -n =batcat` --paging=never"
+	alias cat="batcat"
+	alias ccat="batcat"
 fi
 if which duf &>/dev/null; then
 	alias df="$(which duf) -hide special,binds"
