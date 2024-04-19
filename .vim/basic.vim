@@ -16,7 +16,7 @@ filetype plugin on
 filetype indent on
 
 " How many lines to remember in history
-set history=666
+set history=1000
 
 " Keep 5 lines around cursor
 set scrolloff=5
@@ -133,7 +133,7 @@ else
 	" On other systems, use the regular ctags.
 	let Tlist_Ctags_Cmd = "/usr/bin/ctags"
 endif
-let Tlist_WinWidth = 50
+let Tlist_WinWidth = 40
 let Tlist_Use_Right_Window = 1
 
 " Syntastic
@@ -152,7 +152,7 @@ au BufRead,BufNewFile *.py set noexpandtab tabstop=4 softtabstop=4
 au BufRead,BufNewFile *.sh set filetype=bash
 
 " Ignore some file types in NERDTree
-let NERDTreeIgnore = [ '\.o$', '\~$', '\.class$', '\.pyc$' ]
+let NERDTreeIgnore = [ '\.o$', '\~$', '\.class$', '\.pyc$', '^__pycache__$', '\.egg-info$', '^dist$', '^build$' ]
 
 " Printing
 map <C-F12> :TOhtml<cr>
