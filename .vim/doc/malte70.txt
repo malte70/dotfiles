@@ -1,0 +1,30 @@
+malte70's Vim config          *malte70*
+--------------------
+
+Help file for my Vim config.
+
+	:help idemode
+	:help malte70-plugins
+
+
+IDE mode keybindings          *idemode*
+--------------------
+
+F4		Toggle IDE mode
+F6		Load session
+F7		Save session
+F8		Run current file's shebang
+
+
+Installed plugins             *malte70-plugins*
+-----------------
+
+editorconfig-vim - Apply settings from .editorconfig
+goyo - Distraction-free writing
+html5.vim - Expand the html filetype with new HTML5 features
+lightline.vim - A great minimal status line
+nerdtree - Directory navigator pane
+taglist.vim - ctags browser pane
+vim-ps1 - Syntax support for PowerShell scripts
+vim-toml - Syntax support for Tom's Obvious Minimal Language (TOML)
+vim-polyglot - Many, many features!
