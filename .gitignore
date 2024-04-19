@@ -6,6 +6,7 @@
 !.config/uzbl/**
 !.config/cheat/**
 !.gitconfig
+!.gitconfig.delta
 !.gitignore
 !.ncmpcpp/config
 !.vimrc

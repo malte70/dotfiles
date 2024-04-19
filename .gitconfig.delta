@@ -1,0 +1,32 @@
+# vim: set ft=gitconfig:
+# 
+# ~/.gitconfig.delta
+# 
+# Git config for delta pager
+# 
+# Add this to .gitconfig.local:
+# 
+#     [include]
+#         path = .gitconfig.delta
+# 
+
+# https://github.com/dandavison/delta
+[core]
+	pager = delta
+[interactive]
+	diffFilter = delta --color-only
+[add.interactive]
+	useBuiltin = false # required for git 2.37.0
+[delta]
+	navigate = true    # use n and N to move between diff sections
+	light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+	line-numbers = true
+	# https://dandavison.github.io/delta/side-by-side-view.html
+	#side-by-side = true
+	#line-numbers-left-format = ""
+	#line-numbers-right-format = "│ "
+[merge]
+	conflictstyle = diff3
+[diff]
+	colorMoved = default
+
