@@ -339,32 +339,32 @@ fi
 #   cat  -> bat
 #   df   -> duf
 #   du   -> dust
-if which exa &>/dev/null; then
+if =which exa &>/dev/null; then
 	alias ls="$(which exa) --long --header --group --time-style=long-iso --icons --group-directories-first"
 	alias l1="$(which exa) -1"
 	alias ll="ls --git --links"
 	alias tree="$(which exa) --long --header -T --icons"
 fi
-if which eza &>/dev/null; then
+if =which eza &>/dev/null; then
 	alias ls="$(which eza) --long --header --group --time-style=long-iso --icons --group-directories-first"
 	alias l1="$(which eza) -1"
 	alias ll="ls --git --links"
 	alias tree="$(which eza) --long --header -T --icons"
 fi
-if which bat &>/dev/null; then
-	alias bat="`print -n =bat` --paging=never"
-	alias cat="bat"
-	alias ccat="bat"
-elif which batcat &>/dev/null; then
-	alias bat="`print -n =batcat` --paging=never"
+if =which batcat &>/dev/null; then
+	alias bat="$(which batcat) --paging=never"
 	alias cat="batcat"
 	alias ccat="batcat"
+elif =which bat &>/dev/null; then
+	alias bat="$(which bat) --paging=never"
+	alias cat="bat"
+	alias ccat="bat"
 fi
-if which duf &>/dev/null; then
+if =which duf &>/dev/null; then
 	alias df="$(which duf) -hide special,binds"
 	alias duf="$(which duf) -hide special,binds"
 fi
-if which dust &>/dev/null; then
+if =which dust &>/dev/null; then
 	alias du="$(which dust)"
 fi
 
