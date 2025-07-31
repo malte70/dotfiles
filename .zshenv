@@ -14,6 +14,8 @@ source $HOME/.zsh/path.zsh
 # ANSI Color codes
 source $HOME/.zsh/ansi.zsh
 
+
+
 # 
 # Default applications (or their fallbacks if not installed)
 # 
@@ -32,12 +34,11 @@ export EDITOR
 
 # $VISUAL - Full-fledged editor
 if [[ $OS == "Mac OS X" ]]; then
-	if [[ -z $SSH_CLIENT ]]; then
-		if [[ -x "$HOME/.local/bin/CotEditor" ]]; then
-			VISUAL="$HOME/.local/bin/CotEditor"
-		else
-			VISUAL="/usr/bin/open -t"
-		fi
+	# Don't open a GUI editor from SSH sessions!
+	if [[ -z $SSH_CLIENT && -x "$HOME/.local/bin/CotEditor" ]]; then
+		VISUAL="$HOME/.local/bin/CotEditor"
+	else
+		VISUAL=$EDITOR
 	fi
 elif [ -n "$DISPLAY" ] && which xed &>/dev/null; then
 	VISUAL==xed
@@ -91,4 +92,27 @@ elif [[ $OS == "Mac OS X" ]]; then
 fi
 [ -n $BROWSER ] && export BROWSER
 
-[ -f $HOME/.zshenv.local ] && . $HOME/.zshenv.local; true
+
+
+# 
+# Additional local environment setup
+# 
+[ -f $HOME/.zshenv.local ] && . $HOME/.zshenv.local
+
+
+
+# 
+# Environment setup for Cargo, the Rust package manager
+# 
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+
+
+
+# 
+# Do not return a non-zero exit code if the test statement
+# above fails.
+# 
+true
+
+
+

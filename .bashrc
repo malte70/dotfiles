@@ -164,6 +164,7 @@ case $OS in
 		;;
 esac
 
+
 # 
 # OS independent aliases
 # 
@@ -182,4 +183,15 @@ if [[ $OSVERSION == *WSL* ]]; then
 	export LIBGL_ALWAYS_INDIRECT=1
 fi
 
+
+# 
+# Load additional initialization scripts if available
+# 
+
+# Local .bashrc additions that are not part of the Git repo
 [ -f $HOME/.bashrc.local ] && . $HOME/.bashrc.local; true
+
+# Cargo environment (package manager for Rust)
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"; true
+
+
