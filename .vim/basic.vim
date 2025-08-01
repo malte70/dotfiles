@@ -154,6 +154,11 @@ au BufRead,BufNewFile *.sh set filetype=bash
 " Ignore some file types in NERDTree
 let NERDTreeIgnore = [ '\.o$', '\~$', '\.class$', '\.pyc$', '^__pycache__$', '\.egg-info$', '^dist$', '^build$' ]
 
+" Fenced highlighting inside Markdown code blocks
+" https://vimtricks.com/p/highlight-syntax-inside-markdown/
+"let g:markdown_fenced_languages = ['html', 'python', 'ruby', 'vim']
+let g:markdown_fenced_languages = ['apache', 'arduino', 'bash', 'cpp', 'css', 'dosini', 'html', 'javascript', 'json', 'just', 'mysql', 'php', 'phtml', 'ps1', 'python', 'pymanifest', 'registry', 'requirements', 'sql', 'sshconfig', 'systemd', 'toml', 'vim', 'yaml']
+
 " Printing
 map <C-F12> :TOhtml<cr>
 
