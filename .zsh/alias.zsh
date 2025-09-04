@@ -391,7 +391,9 @@ ttyinfo() {
 # Uses ELinks if installed, and falls back to `open` from malte70/scripts
 google() {
 	q=$(echo -n $@ | python3 -c "import urllib.parse,sys;print(urllib.parse.quote(sys.stdin.read()))")
-	if which elinks &>/dev/null; then
+	if [[ -n "$BROWSER" ]]; then
+		env $BROWSER "http://www.google.com/search?hl=de&q=${q}"
+	elif which elinks &>/dev/null; then
 		elinks "http://www.google.com/search?hl=de&q=${q}"
 	else
 		open "http://www.google.com/search?hl=de&q=${q}"
