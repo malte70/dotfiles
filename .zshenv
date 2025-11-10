@@ -17,6 +17,18 @@ source $HOME/.zsh/ansi.zsh
 
 
 # 
+# Optional features
+#
+# These are the default values, overwrite them in .zshenv.local
+# if neccessary.
+#
+# 1 = Enabled, 0 = Disabled
+# 
+ZSHRC_FEATURE_RATIONALIZE_DOT=0
+
+
+
+# 
 # Default applications (or their fallbacks if not installed)
 # 
 # - https://wiki.archlinux.org/title/Environment_variables#Default_programs

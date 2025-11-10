@@ -107,15 +107,17 @@ WORDCHARS='*?_[]~=&;!#$%^(){}'
 WORDCHARS='${WORDCHARS:s@/@}'
 
 # just type 'cd ...' to get 'cd ../..'
-rationalise-dot() {
-  if [[ $LBUFFER == *.. ]] ; then
-    LBUFFER+=/..
-  else
-    LBUFFER+=.
-  fi
-}
-zle -N rationalise-dot
-bindkey . rationalise-dot
+if [[ ${ZSHRC_FEATURE_RATIONALIZE_DOT} -eq 1 ]]
+	rationalise-dot() {
+	  if [[ $LBUFFER == *.. ]] ; then
+	    LBUFFER+=/..
+	  else
+	    LBUFFER+=.
+	  fi
+	}
+	zle -N rationalise-dot
+	bindkey . rationalise-dot
+fi
 
 # warning if file exists ('cat /dev/null > ~/.zshrc')
 setopt NO_clobber
