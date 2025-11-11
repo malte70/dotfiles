@@ -341,12 +341,14 @@ fi
 #   du   -> dust
 if =which exa &>/dev/null; then
 	alias ls="$(which exa) --long --header --group --time-style=long-iso --icons --group-directories-first"
+	alias la="$(which exa) --all --long --header --group --time-style=long-iso --icons --group-directories-first"
 	alias l1="$(which exa) -1"
 	alias ll="ls --git --links"
 	alias tree="$(which exa) --long --header -T --icons"
 fi
 if =which eza &>/dev/null; then
 	alias ls="$(which eza) --long --header --group --time-style=long-iso --icons --group-directories-first"
+	alias la="$(which eza) --all --long --header --group --time-style=long-iso --icons --group-directories-first"
 	alias l1="$(which eza) -1"
 	alias ll="ls --git --links"
 	alias tree="$(which eza) --long --header -T --icons"
