@@ -107,7 +107,7 @@ WORDCHARS='*?_[]~=&;!#$%^(){}'
 WORDCHARS='${WORDCHARS:s@/@}'
 
 # just type 'cd ...' to get 'cd ../..'
-if [[ ${ZSHRC_FEATURE_RATIONALIZE_DOT} -eq 1 ]]
+if [[ ${ZSHRC_FEATURE_RATIONALIZE_DOT} -eq 1 ]]; then
 	rationalise-dot() {
 	  if [[ $LBUFFER == *.. ]] ; then
 	    LBUFFER+=/..
