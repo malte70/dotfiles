@@ -110,6 +110,13 @@ case $OS in
 		alias ll="/bin/ls -l -G -F -b -h"
 		alias df="/bin/df -h"
 		alias d='date "+%Y-%m-%dT%H:%M:%S%z"'
+		
+		# Support for Homebrew
+		if [ -x "/opt/homebrew/bin/brew" ]; then
+			eval "$(/opt/homebrew/bin/brew shellenv)"
+		elif [ -x "/usr/local/bin/brew" ]; then
+			eval "$(/usr/local/bin/brew shellenv)"
+		fi
 		;;
 		
 	"Msys")
