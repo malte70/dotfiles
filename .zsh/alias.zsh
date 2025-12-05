@@ -233,7 +233,11 @@ then
 	then
 		alias pbcopy="cat > /dev/clipboard"
 		alias pbpaste="cat /dev/clipboard"
-	elif which xsel &>/dev/null
+	elif [[ $XDG_SESSION_TYPE == "wayland" ]] && which wl-copy &>/dev/null
+	then
+		alias pbcopy='wl-copy'
+		alias pbpaste='wl-paste'
+	elif [[ $XDG_SESSION_TYPE == "x11" ]] && which xsel &>/dev/null
 	then
 		alias pbcopy='xsel --clipboard --input'
 		alias pbpaste='xsel --clipboard --output'
