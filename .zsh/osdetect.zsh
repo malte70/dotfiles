@@ -9,7 +9,7 @@
 OS=`uname -s`
 OSVERSION=`uname -r`
 if [[ "$OS" == "Darwin" ]]; then
-	OS="Mac OS X"
+	OS="macOS"
 	OSVARIANT=$OS
 	OSXVersion=`python3 -c 'import platform; print(platform.mac_ver()[0],end="")'`
 	OSVERSION=$OSXVersion

@@ -35,7 +35,7 @@ prompt_get_host_icon() {
 	elif [[ $HOST == "workstation.deepthought.rolltreppe3.de" ]]; then
 		printf "\uf233  "
 
-	elif [[ $OS == "Mac OS X" ]]; then
+	elif [[ $OS == "macOS" ]]; then
 		printf "\ue711 "
 		
 	elif [[ $OSVARIANT == "Ubuntu" ]]; then

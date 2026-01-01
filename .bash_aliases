@@ -44,7 +44,7 @@ elif [[ $OS == "FreeBSD" ]]; then
 	if which lsblk &>/dev/null; then
 		alias disks="$(which lsblk)"
 	fi
-elif [[ $OS == "Mac OS X" ]]; then
+elif [[ $OS == "macOS" ]]; then
 	alias disks="sudo diskutil list"
 fi
 

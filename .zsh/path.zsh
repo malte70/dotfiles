@@ -22,12 +22,12 @@ PATH=${HOME}/bin:  # allow me to overwrite scripts installed by packages
 [ -d "${HOME}/scripts" ] && PATH=${PATH}${HOME}/scripts: # on some hosts, ~/bin is not my github repository malte70/scripts, it is in ~/scripts.
 [ -d "${HOME}/.local/bin" ] && PATH=${PATH}${HOME}/.local/bin:
 # macOS: keg-only homebrew packages zip & unzip
-if [[ $OS == "Mac OS X" ]]; then
+if [[ $OS == "macOS" ]]; then
 	[ -d "${HOMEBREW_PREFIX}/opt/zip/bin" ] && export PATH="${HOMEBREW_PREFIX}/opt/zip/bin:$PATH"
 	[ -d "${HOMEBREW_PREFIX}/opt/unzip/bin" ] && export PATH="${HOMEBREW_PREFIX}/opt/unzip/bin:$PATH"
 fi
 # Python --user installs
-if [[ $OS == "Mac OS X" ]]; then
+if [[ $OS == "macOS" ]]; then
 	if ! which python3 &>/dev/null; then
 		alias python3="$HOMEBREW_PREFIX/bin/python3"
 	fi

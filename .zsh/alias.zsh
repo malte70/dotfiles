@@ -33,7 +33,7 @@ elif [[ "$OSVARIANT" == "Msys" ]]; then
 	alias y-Qo="yaourt -Qo"
 elif which pacapt &>/dev/null; then
 	# If pacapt is installed, add some aliases.
-	if [[ "$OS" == "Mac OS X" ]] && which brew &>/dev/null; then
+	if [[ "$OS" == "macOS" ]] && which brew &>/dev/null; then
 		# On OS X with Homebrew, no sudo is needed
 		alias yaourt==pacapt
 		alias y="pacapt"
@@ -49,7 +49,7 @@ elif which pacapt &>/dev/null; then
 		alias trizen="sudo pacapt"
 	fi
 fi
-if [[ $OS != "Mac OS X" && $OS != "FreeBSD" && $OS != "DragonFly BSD" ]]; then
+if [[ $OS != "macOS" && $OS != "FreeBSD" && $OS != "DragonFly BSD" ]]; then
 	alias ls="`print -n =ls` --color=auto --escape -l --file-type -h --time-style=long-iso"
 	alias la="`print -n =ls` --color=auto --escape -l --file-type -h --time-style=long-iso --almost-all"
 	alias l1="`print -n =ls` --color=auto --escape -1"
@@ -86,7 +86,7 @@ elif [[ $OS == "FreeBSD" ]]; then
 		alias disks="lsblk"
 	fi
 	
-elif [[ $OS == "Mac OS X" ]]; then
+elif [[ $OS == "macOS" ]]; then
 	alias disks="sudo diskutil list"
 	
 fi
@@ -183,7 +183,7 @@ then
 	alias alsaequal="alsamixer -D equal"
 fi
 
-if [[ $OS == "Mac OS X" ]]; then
+if [[ $OS == "macOS" ]]; then
 	show_desktop() {
 		doOrDont=$1
 		if [[ $doOrDont == "yes" ]]; then
@@ -196,12 +196,12 @@ if [[ $OS == "Mac OS X" ]]; then
 fi
 
 # GCC and G++ Wrapper with default options
-if [[ $OS == "GNU/Linux" || $OS == "Mac OS X" ]]; then
+if [[ $OS == "GNU/Linux" || $OS == "macOS" ]]; then
 	unalias gcc 2>/dev/null
 	unalias g++ 2>/dev/null
 	CC=$(which gcc)
 	CXX=$(which g++)
-	if [[ $OS == "Mac OS X" ]]; then
+	if [[ $OS == "macOS" ]]; then
 		# gcc is version 4 on my OS X 10.6 MacBook,
 		# and doesn't support all of the options of
 		# this alias, so use gcc 5 from Homebrew
@@ -227,7 +227,7 @@ start() {
 	$@ </dev/null &>/dev/null &|
 }
 
-if [[ $OS != "Mac OS X" ]]
+if [[ $OS != "macOS" ]]
 then
 	if [[ $OS == "Windows NT" ]] && [[ -e /dev/clipboard ]]
 	then
@@ -377,7 +377,7 @@ fi
 
 # On macOS, use the original `open`, not my implementation from
 # <https://github.com/malte70/scripts> written for GNU/Linux and *BSD.
-if [[ $OS == "Mac OS X" ]]; then
+if [[ $OS == "macOS" ]]; then
 	alias open="/usr/bin/open"
 fi
 

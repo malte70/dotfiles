@@ -45,7 +45,7 @@ fi
 export EDITOR
 
 # $VISUAL - Full-fledged editor
-if [[ $OS == "Mac OS X" ]]; then
+if [[ $OS == "macOS" ]]; then
 	# Don't open a GUI editor from SSH sessions!
 	if [[ -z $SSH_CLIENT && -x "$HOME/.local/bin/CotEditor" ]]; then
 		VISUAL="$HOME/.local/bin/CotEditor"
@@ -78,7 +78,7 @@ then
 	# always set if no GUI browsers are available
 	BROWSER==elinks
 fi
-if [[ -n $DISPLAY ]] && [[ $OS != "Mac OS X" ]]
+if [[ -n $DISPLAY ]] && [[ $OS != "macOS" ]]
 then
 	# X11 available (Either locally on a desktop or remote via VNC)
 	# Check for a preferred browser (priority low → high)
@@ -98,7 +98,7 @@ then
 	then
 		BROWSER==xdg-open
 	fi
-elif [[ $OS == "Mac OS X" ]]; then
+elif [[ $OS == "macOS" ]]; then
 	# On OS X, open <URL> always launches the user's default browser of choice.
 	BROWSER="/usr/bin/open"
 fi
