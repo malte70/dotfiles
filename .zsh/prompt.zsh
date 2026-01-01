@@ -50,6 +50,9 @@ prompt_get_host_icon() {
 	elif [[ $OSVARIANT == "Arch" ]]; then
 		printf "\uf303 "
 		
+	elif [[ $OSVARIANT == "Fedora Linux" ]]; then
+		printf "\ue7d9 "
+		
 	elif [[ $OS == "GNU/Linux" ]]; then
 		printf "\ue712 "
 		
