@@ -5,13 +5,24 @@
 # 
 # Does epic things.
 # 
-# Copyright (c) 2015 Malte Bublitz, http://malte-bublitz.de
-# All rights reserved.
+# Copyright (c) 2026 Malte Bublitz, https://malte70.de
+# SPDX-License-Identifier: MIT
 # 
 
-SCRIPT_NAME="foobar.sh"
-SCRIPT_VERSION="0.20150802"
 
+
+# 
+# Script meta data
+# 
+SCRIPT_NAME="foobar.sh"
+#SCRIPT_VERSION="0.20260119"
+SCRIPT_VERSION="0.1"
+
+
+
+# 
+# Variables containing some useful ANSI escape codes
+# 
 _ANSI_ESCAPE=$(printf "\e")
 _ANSI_RESET="${_ANSI_ESCAPE}[0m"
 _ANSI_ATTR_BOLD="${_ANSI_ESCAPE}[1m"
@@ -33,6 +44,11 @@ _ANSI_COLOR_MAGENTA="${_ANSI_ESCAPE}[1;35m"
 _ANSI_COLOR_CYAN="${_ANSI_ESCAPE}[1;36m"
 _ANSI_COLOR_WHITE="${_ANSI_ESCAPE}[1;37m"
 
+
+
+# 
+# Helper functions
+# 
 _print() {
 	printf $@
 }
@@ -51,12 +67,19 @@ _println_term() {
 	fi
 }
 
+
+
+# 
+# Display messages on the terminal
+# 
+# Info message
 message() {
 	_print_term $_ANSI_COLOR_GREEN
 	_print "[${SCRIPT_NAME}] "
 	_print_term $_ANSI_RESET
 	_println $@
 }
+# Error message
 message_error() {
 	(
 		_print_term $_ANSI_COLOR_RED
@@ -66,6 +89,12 @@ message_error() {
 	) >&2
 }
 
+
+
+# 
+# Functions for showing script meta info and
+# usage help
+# 
 version() {
 	echo "$SCRIPT_NAME $SCRIPT_VERSION"
 }
@@ -75,23 +104,36 @@ usage() {
 	echo "	$SCRIPT_NAME [--switch]"
 	echo
 	echo "Options:"
-	echo "	--version -V  Show the version and exit"
-	echo "	--help -h     Show the help and exit"
-	echo "	--switch  An epic switch"
+	echo -e "\t-V --version   Show the version and exit"
+	echo -e "\t-h --help      Show the help and exit"
+	echo -e "\t   --switch    An epic switch"
 	echo
 }
 
+
+
+# 
+# Parse command line arguments
+# 
 if [[ "$1" == "--version" || "$1" == "-V" ]]; then
 	version
 	exit 0
+	
 elif [[ "$1" == "--help" || "$1" == "-h" ]]; then
 	version
 	usage
 	exit 0
+	
 fi
 
+
+
+# 
 # do some stuff
+# 
 _print_term $_ANSI_COLOR_GREEN
 echo "Doing epic shit..."
 _print_term $_ANSI_RESET
+
+
 

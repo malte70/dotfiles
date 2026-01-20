@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2026 Malte Bublitz, https://malte70.de
+
 #include <stdio.h>
 #include <string.h>
 
