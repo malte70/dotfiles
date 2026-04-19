@@ -197,19 +197,21 @@ fi
 
 # GCC and G++ Wrapper with default options
 if [[ $OS == "GNU/Linux" || $OS == "macOS" ]]; then
-	unalias gcc 2>/dev/null
-	unalias g++ 2>/dev/null
-	CC=$(which gcc)
-	CXX=$(which g++)
-	if [[ $OS == "macOS" ]]; then
-		# gcc is version 4 on my OS X 10.6 MacBook,
-		# and doesn't support all of the options of
-		# this alias, so use gcc 5 from Homebrew
-		which gcc-5 &>/dev/null && CC=$(which gcc-5)
-		which gcc-5 &>/dev/null && CXX=$(which g++-5)
+	if command -v gcc &>/dev/null && command -v g++ &>/dev/null; then
+		unalias gcc 2>/dev/null
+		unalias g++ 2>/dev/null
+		CC=$(which gcc)
+		CXX=$(which g++)
+		if [[ $OS == "macOS" ]]; then
+			# gcc is version 4 on my OS X 10.6 MacBook,
+			# and doesn't support all of the options of
+			# this alias, so use gcc 5 from Homebrew
+			which gcc-5 &>/dev/null && CC=$(which gcc-5)
+			which gcc-5 &>/dev/null && CXX=$(which g++-5)
+		fi
+		alias gcc="$CC -std=c11 -D_POSIX_C_SOURCE=200809L -Wall -Wextra -pedantic-errors -march=native -O3"
+		alias g++="$CXX -std=c++11 -D_POSIX_C_SOURCE=200809L -Wall -Wextra -pedantic-errors -march=native -O3"
 	fi
-	alias gcc="$CC -std=c11 -D_POSIX_C_SOURCE=200809L -Wall -Wextra -pedantic-errors -march=native -O3"
-	alias g++="$CXX -std=c++11 -D_POSIX_C_SOURCE=200809L -Wall -Wextra -pedantic-errors -march=native -O3"
 fi
 alias firefox-list-profiles="$(which find) ~/.mozilla/firefox/ -type d -mindepth 1 -maxdepth 1 2>/dev/null | cut -d. -f3"
 
